@@ -218,3 +218,42 @@ up on somebody's face.
 
 Push to a Git host and import into Vercel. No environment variables are needed.
 Point the domain at Vercel and set `site.url` to match.
+
+## Deploying
+
+The site is a static export. `npm run build` writes plain HTML, CSS, JS and
+artwork into `out/`, and that folder is the whole website.
+
+### Automatic, on every push
+
+`.github/workflows/deploy.yml` builds on GitHub and uploads `out/` to Hostinger
+over FTP whenever `main` moves. Push, wait about two minutes, and the live site
+has the change. The workflow file carries the one time setup at the top: three
+secrets for the FTP account and two variables for the site URL.
+
+Hostinger's own Git integration deliberately is not used. It copies a repository
+into `public_html` without running a build, and shared hosting has no Node
+process to build with, so it would serve the TypeScript source rather than a
+website.
+
+### By hand
+
+If the FTP account is ever unavailable:
+
+```bash
+npm run build            # or npm run build:preview while on the temp subdomain
+cd out && zip -rq ../site.zip .
+```
+
+Then upload `site.zip` in hPanel, File Manager, into `public_html`, and extract
+it there. `.htaccess` is a hidden file, so turn on "Show hidden files" in the
+File Manager settings to confirm it arrived.
+
+### Moving to the real domain
+
+`site.url` reads `NEXT_PUBLIC_SITE_URL`, and `robots.ts` shuts the site to
+crawlers while `NEXT_PUBLIC_NOINDEX` is set. On the temporary
+`hostingersite.com` subdomain both are set, so nothing gets indexed on an
+address that will not last. Once `joumanasaad.com` points at the hosting, set
+the `SITE_URL` variable to `https://www.joumanasaad.com`, delete the `NOINDEX`
+variable, and push. No code changes.

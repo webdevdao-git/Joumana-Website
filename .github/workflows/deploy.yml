@@ -1,0 +1,85 @@
+# Push to main, and the live site updates.
+#
+# Hostinger shared hosting runs no Node process, so its own Git integration is
+# no use here: it would copy the source across and serve a folder of TypeScript.
+# Instead GitHub builds the static export and sends the finished files over FTP.
+#
+# One time setup, all of it in this repository's Settings:
+#
+#   Secrets and variables > Actions > Secrets
+#     FTP_SERVER     the host from hPanel > Files > FTP Accounts
+#     FTP_USERNAME   the FTP user from that same page
+#     FTP_PASSWORD   that user's password
+#
+#   Secrets and variables > Actions > Variables
+#     SITE_URL       https://seashell-dog-863923.hostingersite.com
+#     NOINDEX        1
+#
+# When the real domain is connected, change SITE_URL to
+# https://www.joumanasaad.com and delete the NOINDEX variable. Nothing in the
+# code has to change, and the next push publishes it.
+
+name: Deploy to Hostinger
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      # a broken build should never reach the server
+      - run: npx tsc --noEmit
+      - run: npx eslint src --ext .ts,.tsx
+
+      - name: Build the static export
+        env:
+          NEXT_PUBLIC_SITE_URL: ${{ vars.SITE_URL }}
+          NEXT_PUBLIC_NOINDEX: ${{ vars.NOINDEX }}
+        run: npm run build
+
+      # the export is only ever a few hundred files, but a missing index.html
+      # would happily deploy as an empty site, so it is checked first
+      - name: Check the export looks right
+        run: |
+          test -f out/index.html
+          test -f out/.htaccess
+          test -f out/services/index.html
+          test -f out/work/index.html
+          test -f out/journal/index.html
+          test -f out/contact/index.html
+          echo "$(find out -type f | wc -l) files ready"
+
+      - name: Upload to public_html
+        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
+        with:
+          server: ${{ secrets.FTP_SERVER }}
+          username: ${{ secrets.FTP_USERNAME }}
+          password: ${{ secrets.FTP_PASSWORD }}
+          protocol: ftps
+          local-dir: ./out/
+          server-dir: ./public_html/
+          # only what changed goes up, so a deploy is seconds rather than
+          # the whole 23MB every time
+          state-name: .ftp-deploy-sync-state.json
+          exclude: |
+            **/.git*
+            **/.git*/**
+            **/node_modules/**
+            **/.DS_Store
