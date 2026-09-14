@@ -1,26 +1,374 @@
 @import "tailwindcss";
 
+/* ==================================================================
+   Joumana Saad — built to the Figma design, file iZM4Fg3So5YM2FodkNzZYl
+   Values below are taken from the design, not approximated.
+================================================================== */
+
+/* ------------------------------------------------------------ fonts
+   IvyPresto Text was supplied as OTF and converted to woff2.
+   The design also calls for Oakes Grotesk Medium and Mikea Demo.
+   Those files have not been supplied yet, so both fall back for now.
+   Dropping the real files into public/fonts and adding a @font-face
+   here is the only change needed to finish them. */
+
+@font-face {
+  font-family: "IvyPresto Text";
+  src: url("/fonts/IvyPrestoText-Thin.woff2") format("woff2");
+  font-weight: 100;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IvyPresto Text";
+  src: url("/fonts/IvyPrestoText-Light.woff2") format("woff2");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IvyPresto Text";
+  src: url("/fonts/IvyPrestoText-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+/* the design specifies Bold; Semi-Bold is the heaviest weight supplied,
+   so it stands in for both until the Bold file arrives */
+@font-face {
+  font-family: "IvyPresto Text";
+  src: url("/fonts/IvyPrestoText-SemiBold.woff2") format("woff2");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "IvyPresto Text";
+  src: url("/fonts/IvyPrestoText-SemiBold.woff2") format("woff2");
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Priestacy";
+  src: url("/fonts/Priestacy.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  /* the four swatches on the brand sheet */
+  --oxblood: #48110c;
+  --brown: #56483b;
+  --cream: #e8e4db;
+  --white: #ffffff;
+
+  /* ------------------------------------------------------------------
+     Two contexts, so two sets of text colours.
+
+     Text sitting directly on the oxblood page needs cream. Text inside the
+     light cards and panels stays as the design drew it, oxblood and black.
+     Keeping them separate is what lets the base go dark without touching
+     anything inside a card.
+  ------------------------------------------------------------------- */
+
+  --page: var(--oxblood);
+
+  /* on the page */
+  --heading: var(--cream);
+  --body: var(--cream);
+  --body-soft: color-mix(in srgb, var(--cream) 68%, var(--oxblood));
+
+  /* inside the light cards and panels, unchanged from the design */
+  --card: #f6f4f1;
+  --card-heading: var(--oxblood);
+  --card-body: #000000;
+  --card-body-soft: rgba(0, 0, 0, 0.62);
+  --rule: rgba(0, 0, 0, 0.15);
+
+  /* the band now sits on the same oxblood, so it reads as one surface */
+  --band: var(--page);
+  --on-band: var(--cream);
+
+  --ink: var(--body);
+  --ink-soft: var(--body-soft);
+
+  --nav-h: 52px;
+
+  --font-display: "IvyPresto Text", "Iowan Old Style", Georgia, serif;
+  --font-sans: var(--font-oakes), "Archivo", system-ui, sans-serif;
+  --font-script: "Priestacy", "Snell Roundhand", cursive;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@media (min-width: 1280px) {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --nav-h: 60px;
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+@theme inline {
+  --color-oxblood: var(--oxblood);
+  --color-brown: var(--brown);
+  --color-cream: var(--cream);
+  --color-page: var(--page);
+  --color-card: var(--card);
+  --color-card-heading: var(--card-heading);
+  --color-card-body: var(--card-body);
+  --color-card-body-soft: var(--card-body-soft);
+  --color-heading: var(--heading);
+  --color-body: var(--body);
+  --color-body-soft: var(--body-soft);
+  --color-rule: var(--rule);
+  --color-band: var(--band);
+  --color-on-band: var(--on-band);
+  --color-ink: var(--ink);
+  --color-ink-soft: var(--ink-soft);
+
+  --font-display: var(--font-display);
+  --font-sans: var(--font-sans);
+  --font-script: var(--font-script);
+}
+
+@layer base {
+  html {
+    -webkit-font-smoothing: antialiased;
+  }
+
+  html.lenis,
+  html.lenis body {
+    height: auto;
+  }
+
+  .lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+  }
+
+  body {
+    background-color: var(--page);
+    color: var(--ink);
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.5;
+  }
+
+  ::selection {
+    background-color: var(--oxblood);
+    color: var(--white);
+  }
+}
+
+@layer components {
+  /* the design lays every section out on a 1728 frame with 80px gutters */
+  .nav-bar {
+    height: var(--nav-h);
+  }
+
+  /* the hero takes the rest of the first screen and nothing more, so the band
+     underneath never peeks in */
+  .hero-fill {
+    min-height: calc(100svh - var(--nav-h));
+  }
+
+  /* A cutout that ends mid body reads as a mistake. Dissolving the last
+     stretch of it into the panel makes the crop look intended. */
+  .fade-into-panel {
+    -webkit-mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 74%,
+      rgba(0, 0, 0, 0.55) 88%,
+      transparent 100%
+    );
+    mask-image: linear-gradient(
+      to bottom,
+      #000 0%,
+      #000 74%,
+      rgba(0, 0, 0, 0.55) 88%,
+      transparent 100%
+    );
+  }
+
+  /* --------------------------------------------------------- flip cards
+     Both faces sit on top of each other and the shell rotates. The hidden
+     face is turned away rather than removed, so the card keeps its height
+     and nothing reflows mid turn. */
+  .flip-scene {
+    perspective: 1400px;
+  }
+
+  .flip-inner {
+    position: relative;
+    height: 100%;
+    transform-style: preserve-3d;
+    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .flip-inner[data-flipped="true"] {
+    transform: rotateY(180deg);
+  }
+
+  .flip-face {
+    position: absolute;
+    inset: 0;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+  }
+
+  .flip-back {
+    transform: rotateY(180deg);
+  }
+
+  .frame {
+    width: 100%;
+    padding-inline: 24px;
+  }
+
+  @media (min-width: 768px) {
+    .frame {
+      padding-inline: 48px;
+    }
+  }
+
+  @media (min-width: 1280px) {
+    .frame {
+      padding-inline: 80px;
+    }
+  }
+
+  /* 64px display, letter-spacing 3.2px, line-height 1.19 */
+  /* Hero and section headings share one size, so nothing reads louder than
+     anything else. The design sets both at 64px; this is pulled back. */
+  .t-display {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.625rem, 2.8vw, 2.875rem);
+    line-height: 1.19;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+  }
+
+  .t-display b,
+  .t-display strong {
+    font-weight: 700;
+  }
+
+  /* section headings, 64px, line-height 1.09 */
+  .t-section {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.625rem, 2.8vw, 2.875rem);
+    line-height: 1.09;
+    text-transform: uppercase;
+  }
+
+  .t-nav {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: 14px;
+    letter-spacing: 0.04em;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  @media (min-width: 1280px) {
+    .t-nav {
+      font-size: 15px;
+    }
+  }
+
+  /* The nav wordmark is set in Mikea Demo in the design, which has not been
+     supplied. IvyPresto in wide caps is the closest of the faces we have. */
+  .t-wordmark {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1rem, 1.5vw, 1.5rem);
+    letter-spacing: 0.18em;
+    line-height: normal;
+    text-transform: uppercase;
+  }
+
+  /* the script name in the Meet Joumana block */
+  .t-script {
+    font-family: var(--font-script);
+    font-weight: 400;
+    line-height: 1.09;
+  }
+
+  /* The design frames run 980 to 2139px tall. Those are cut back here so each
+     section lands near a viewport, which is what was asked for. Proportions,
+     type sizes and radii are unchanged; only the vertical air is reduced. */
+  .sec {
+    padding-block: 40px;
+  }
+
+  @media (min-width: 1280px) {
+    .sec {
+      padding-block: 56px;
+    }
+  }
+
+  .t-body {
+    font-family: var(--font-sans);
+    font-size: 18px;
+    line-height: 1.55;
+  }
+}
+
+@keyframes marquee-run {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
+.marquee-run {
+  animation: marquee-run var(--marquee-duration, 38s) linear infinite;
+  will-change: transform;
+}
+
+.marquee-run[data-paused="true"] {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .flip-inner {
+    transition: none;
+  }
+
+  .flip-inner[data-flipped="true"] {
+    transform: none;
+  }
+
+  .flip-inner[data-flipped="true"] .flip-front {
+    visibility: hidden;
+  }
+
+  .flip-back {
+    transform: none;
+    visibility: hidden;
+  }
+
+  .flip-inner[data-flipped="true"] .flip-back {
+    visibility: visible;
+  }
+
+  .marquee-run {
+    animation: none !important;
+  }
+
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+  }
 }
