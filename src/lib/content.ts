@@ -203,7 +203,7 @@ export const services = [
   {
     slug: "pr-and-communications",
     short: "Media relations from the inside",
-    image: "/images/event-panel.png",
+    image: "/images/event-panel.jpg",
     index: "04",
     title: "PR and Communications",
     summary:
@@ -481,17 +481,17 @@ export const hosting = [
   {
     title: "Escada Dubai Launch",
     detail: "Host for the boutique launch alongside celebrity brand ambassador Yara.",
-    image: "/images/event-escada-launch.png",
+    image: "/images/event-escada-launch.jpg",
   },
   {
     title: "Dubai One Television",
     detail: "Studio appearance and on air presenting.",
-    image: "/images/event-dubai-one-tv.png",
+    image: "/images/event-dubai-one-tv.jpg",
   },
   {
     title: "SME Advisor Summit and Awards",
     detail: "Master of ceremonies for the annual summit and awards ceremony.",
-    image: "/images/event-panel.png",
+    image: "/images/event-panel.jpg",
   },
 ] as const;
 
@@ -708,7 +708,7 @@ export const journal = [
     category: "Interviewing",
     date: "2026-06-18",
     minutes: 7,
-    image: "/images/event-panel.png",
+    image: "/images/event-panel.jpg",
     body: [
       {
         type: "p",
@@ -781,7 +781,7 @@ export const journal = [
     category: "Stage",
     date: "2026-04-09",
     minutes: 5,
-    image: "/images/event-escada-launch.png",
+    image: "/images/event-escada-launch.jpg",
     body: [
       {
         type: "p",

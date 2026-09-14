@@ -66,7 +66,7 @@ export function FeaturedArticles() {
               >
                 <span className="relative block w-[104px] shrink-0 self-stretch overflow-hidden rounded-[16px] xl:w-[150px]">
                   <Image
-                    src="/brand/conversation-placeholder.png"
+                    src="/brand/conversation-placeholder.jpg"
                     alt=""
                     fill
                     sizes="132px"
