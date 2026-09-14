@@ -3,7 +3,7 @@ import type { Metadata } from "next";
 import { Reveal } from "@/components/reveal";
 import { Card, CtaBand, PageHero, Rule, SectionHead } from "@/components/page-kit";
 import { BreadcrumbSchema } from "@/components/schema";
-import { pageCopy, process, services } from "@/lib/content";
+import { pageCopy, services, workflow } from "@/lib/content";
 
 export const metadata: Metadata = {
   title: { absolute: "Services | Content, Editorial, Hosting and PR in Dubai" },
@@ -110,7 +110,7 @@ export default function ServicesPage() {
           />
 
           <ol className="grid w-full gap-4 md:grid-cols-2 xl:grid-cols-4">
-            {process.map((step, i) => (
+            {workflow.map((step, i) => (
               <Reveal as="li" key={step.step} delay={i * 0.06}>
                 <Card className="flex h-full flex-col gap-4 p-6 xl:p-8">
                   <span className="font-display text-[40px] font-light leading-none text-card-heading xl:text-[56px]">

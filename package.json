@@ -6,7 +6,8 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "eslint",
+    "build:preview": "NEXT_PUBLIC_SITE_URL=https://seashell-dog-863923.hostingersite.com NEXT_PUBLIC_NOINDEX=1 next build"
   },
   "dependencies": {
     "lenis": "^1.3.26",

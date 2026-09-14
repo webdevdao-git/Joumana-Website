@@ -13,7 +13,10 @@ export const site = {
   region: "Dubai",
   country: "United Arab Emirates",
   email: "joumanasaad@gmail.com",
-  url: "https://www.joumanasaad.com",
+  // The real home. A preview build on a temporary Hostinger subdomain sets
+  // NEXT_PUBLIC_SITE_URL so canonicals, the sitemap and the social images do
+  // not all point at a domain that is not serving the site yet.
+  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.joumanasaad.com",
   // CONFIRM: start of career taken as 2007 (Forbes, New York)
   careerStart: 2007,
   socials: [
@@ -225,7 +228,7 @@ export const services = [
   },
 ] as const;
 
-export const process = [
+export const workflow = [
   {
     step: "01",
     title: "Brief",
