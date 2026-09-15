@@ -4,23 +4,20 @@ import { useState } from "react";
 import { site } from "@/lib/content";
 
 /**
- * Node 125:3165, the block that closes every page.
+ * Node 45:1471. Soft panel, heading and copy on the left, a white card holding
+ * the form on the right. Underlined fields, a pill submit.
  *
- * On the 1728 by 828 section the design puts the heading block at x80, 783
- * wide, with the heading at y278 and the copy at y458, and a white card at
- * x943, 705 by 628 with a 24 radius. Inside the card the fields sit on a 625
- * column at 40 in from its edges: a label at y140, 246, 356 and 466 with a
- * rule under each, and a 170 by 56 pill at y632.
+ * The design labels "Your name" in Oakes Grotesk and the other three in Aeonik.
+ * That reads like a slip rather than an intent, so all four use one face here.
  *
- * Those are the numbers below, as percentages of the section.
- *
- * No endpoint has been chosen, so this composes an email and hands it to the
- * visitor's mail client. Every field name is already shaped for a real POST.
+ * No endpoint has been chosen yet, so this composes an email and hands it to
+ * the visitor's mail client. Swap the body of handleSubmit for a POST when the
+ * endpoint is decided; the field names are already shaped for it.
  */
 const FIELDS = [
-  { name: "name", label: "Your name", type: "text", autoComplete: "name" },
-  { name: "phone", label: "Contact Number", type: "tel", autoComplete: "tel" },
-  { name: "email", label: "Email Address", type: "email", autoComplete: "email" },
+  { name: "name", label: "Your name", type: "text", required: true },
+  { name: "phone", label: "Contact Number", type: "tel", required: false },
+  { name: "email", label: "Email Address", type: "email", required: true },
 ] as const;
 
 export function ContactBlock() {
@@ -46,75 +43,73 @@ export function ContactBlock() {
   }
 
   const field =
-    "s-body w-full border-0 border-b border-black/20 bg-transparent pb-3 text-card-body outline-none transition-colors placeholder:text-card-body focus:border-card-heading";
+    "w-full border-0 border-b border-rule bg-transparent pb-3 text-[18px] text-card-body outline-none transition-colors placeholder:text-card-body-soft focus:border-heading xl:text-[20px]";
 
   return (
-    <section className="bg-card">
-      <div className="mx-auto w-full max-w-[1728px] px-6 py-12 md:px-10 lg:aspect-[1728/828] lg:px-0 lg:py-0">
-        <div className="relative h-full lg:mx-[4.63%]">
-          {/* the heading block, sitting low in its column as the design has it */}
-          <div className="lg:absolute lg:left-0 lg:top-[33.6%] lg:w-[49.9%]">
-            <h2 className="s-title text-card-heading">
-              <span className="block">Tell Me What</span>
-              <span className="block">You&rsquo;re Working On</span>
-            </h2>
-            <p className="s-body mt-5 max-w-[52ch] text-card-body lg:mt-[4.8%]">
-              Whether you&rsquo;re planning an event, looking for a presenter or
-              moderator, developing content, or exploring a communications
-              project, I&rsquo;d love to hear more.
-            </p>
-          </div>
+    <section className="sec bg-card">
+      <div className="frame grid items-center gap-8 lg:grid-cols-2 xl:gap-16">
+        <div className="flex flex-col gap-6 xl:gap-10">
+          <h2 className="t-section text-card-heading">
+            <span className="block">Tell Me What</span>
+            <span className="block">You&rsquo;re Working On</span>
+          </h2>
+          <p className="max-w-xl text-[17px] leading-[1.3] text-card-body xl:text-[24px]">
+            Whether you&rsquo;re planning an event, looking for a presenter or
+            moderator, developing content, or exploring a communications project,
+            I&rsquo;d love to hear more.
+          </p>
+        </div>
 
-          {/* the white card */}
-          <div className="mt-10 rounded-[24px] bg-white p-7 lg:absolute lg:right-0 lg:top-[12.1%] lg:mt-0 lg:h-[75.8%] lg:w-[44.9%] lg:p-[3.6%]">
-            <form onSubmit={handleSubmit} className="flex h-full flex-col">
-              {FIELDS.map((f) => (
-                <div key={f.name} className="mb-7 lg:mb-[4.4%]">
-                  <label htmlFor={f.name} className="sr-only">
-                    {f.label}
-                  </label>
-                  <input
-                    id={f.name}
-                    name={f.name}
-                    type={f.type}
-                    required={f.name !== "phone"}
-                    placeholder={f.label}
-                    autoComplete={f.autoComplete}
-                    className={field}
-                  />
-                </div>
-              ))}
-
-              <div className="mb-7 lg:mb-[4.4%]">
-                <label htmlFor="message" className="sr-only">
-                  Message
+        <div className="rounded-[24px] bg-card p-6 xl:p-8">
+          <form onSubmit={handleSubmit} className="flex flex-col gap-6 xl:gap-7">
+            {FIELDS.map((f) => (
+              <div key={f.name}>
+                <label htmlFor={f.name} className="sr-only">
+                  {f.label}
                 </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  rows={3}
-                  required
-                  placeholder="Message"
-                  className={`${field} resize-none`}
+                <input
+                  id={f.name}
+                  name={f.name}
+                  type={f.type}
+                  required={f.required}
+                  placeholder={f.label}
+                  autoComplete={
+                    f.name === "name" ? "name" : f.name === "email" ? "email" : "tel"
+                  }
+                  className={field}
                 />
               </div>
+            ))}
 
-              <div className="mt-auto flex flex-wrap items-center gap-5">
-                <button
-                  type="submit"
-                  className="s-button inline-flex h-14 w-[170px] items-center justify-center gap-2 rounded-full bg-brown text-white transition-opacity duration-300 hover:opacity-90"
-                >
-                  Submit
-                  <span aria-hidden="true">&rarr;</span>
-                </button>
-                {sent ? (
-                  <p role="status" className="text-[13px] text-card-body-soft">
-                    Your mail app should have opened with the message filled in.
-                  </p>
-                ) : null}
-              </div>
-            </form>
-          </div>
+            <div>
+              <label htmlFor="message" className="sr-only">
+                Message
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows={3}
+                required
+                placeholder="Message"
+                className={`${field} resize-none`}
+              />
+            </div>
+
+            <div className="flex flex-wrap items-center gap-5">
+              <button
+                type="submit"
+                className="inline-flex h-14 w-[170px] items-center justify-center gap-1.5 rounded-full bg-brown text-[16px] font-semibold uppercase text-white transition-opacity duration-300 hover:opacity-90 xl:text-[18px]"
+              >
+                Submit
+                <span aria-hidden="true">&rarr;</span>
+              </button>
+              {sent ? (
+                <p role="status" className="text-[14px] text-card-body-soft">
+                  Your mail app should have opened with the message filled in.
+                </p>
+              ) : null}
+            </div>
+          </form>
         </div>
       </div>
     </section>

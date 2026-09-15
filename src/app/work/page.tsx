@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ContactBlock } from "@/components/contact-block";
+import { ContactPanel } from "@/components/contact-panel";
 import { OutletBand } from "@/components/outlet-band";
 import { Reveal } from "@/components/reveal";
 import { BreadcrumbSchema } from "@/components/schema";
@@ -322,7 +322,7 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <ContactBlock />
+      <ContactPanel />
     </>
   );
 }

@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
-import { ContactBlock } from "@/components/contact-block";
+import { ContactPanel } from "@/components/contact-panel";
 import { Reveal } from "@/components/reveal";
 import { BreadcrumbSchema } from "@/components/schema";
 import { servicesPage } from "@/lib/content";
@@ -358,9 +358,8 @@ export default function ServicesPage() {
         </section>
       ))}
 
-      {/* the design closes on Tell Me What You're Working On, which is the
-          same block the home page already carries */}
-      <ContactBlock />
+      {/* the design closes on Tell Me What You're Working On */}
+      <ContactPanel />
     </>
   );
 }
