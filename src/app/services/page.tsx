@@ -71,38 +71,57 @@ export default function ServicesPage() {
       <BreadcrumbSchema items={[{ name: "Services", href: "/services" }]} />
 
       {/* ------------------------------------------------------------ hero
-          On the 1728 by 981 frame: Expertise centred at y196, With and Purpose
-          on the line below with 273px between them, the portrait rising into
-          that gap from the bottom edge where the section crops her, the lede at
-          65.5 percent across, the button at the lower left. Held as
-          percentages so the composition scales as one. */}
+          Placed from the frame, in the frame's own numbers. On 1728 by 981:
+
+            headline block   top 58              5.91%
+            With / Purpose   465..707, 980..1392, so 273px apart   15.8%
+            portrait         x218 y68, 1247 x 1870                 the section
+                                                                   crops it
+            lede             x1277 y693 w394     73.9% / 70.6% / 22.8%
+            button           x80 y877 327 x 64   4.6% / 89.4%
+
+          The portrait box is nearly twice the height of the section, which is
+          why only her head and shoulders show. Scaling her to fit, which is
+          what the first attempts did, makes her a third of the size.
+
+          It also sits above the headline in the design's own layer order, so
+          it does here. */}
       <section className="relative overflow-hidden bg-card">
         <div className="relative mx-auto w-full max-w-[1728px] lg:aspect-[1728/981]">
           <div className="hidden lg:block">
-            <h1 className="s-display absolute left-0 top-[16%] w-full text-center text-card-body">
-              <span className="block">{hero.lines[0]}</span>
-              <span className="mt-1 flex items-baseline justify-center gap-[15.8%]">
-                <span>{hero.lines[1]}</span>
-                <span>{hero.lines[2]}</span>
+            {/* Each word is pinned to its own x. Centring the pair and
+                spacing them apart looked right until it was measured: the
+                design's With and Purpose sit 64px right of the frame centre,
+                and any difference between the design's font metrics and ours
+                moved them again. Pinned, neither can drift. */}
+            <h1 className="s-display absolute inset-0 text-card-body">
+              <span className="absolute left-[35.76%] top-[5.91%]">
+                {hero.lines[0]}
+              </span>
+              <span className="absolute left-[26.91%] top-[16.62%]">
+                {hero.lines[1]}
+              </span>
+              <span className="absolute left-[56.71%] top-[16.62%]">
+                {hero.lines[2]}
               </span>
             </h1>
 
-            <div className="absolute bottom-0 left-[46.6%] h-[79%] w-[33%] -translate-x-1/2">
+            <div className="absolute left-[12.6%] top-[6.9%] h-[190.6%] w-[72.2%]">
               <Image
                 src="/brand/services-hero.webp"
                 alt="Joumana Saad, journalist, presenter and communications specialist in Dubai"
                 fill
                 priority
-                sizes="34vw"
-                className="object-contain object-bottom"
+                sizes="73vw"
+                className="object-contain object-top"
               />
             </div>
 
-            <p className="s-body absolute left-[65.5%] top-[72%] w-[23%] text-card-body">
+            <p className="s-body absolute left-[73.9%] top-[70.6%] w-[22.8%] text-card-body">
               {hero.lede}
             </p>
 
-            <div className="absolute bottom-[4.5%] left-[4.6%]">
+            <div className="absolute left-[4.6%] top-[89.4%]">
               <Pill label={hero.cta.label} href={hero.cta.href} tone="oxblood" />
             </div>
           </div>
@@ -117,14 +136,14 @@ export default function ServicesPage() {
               </span>
             </h1>
 
-            <div className="relative mt-2 h-[330px] w-[78%] max-w-[330px]">
+            <div className="relative -mt-2 h-[360px] w-full max-w-[420px] overflow-hidden">
               <Image
                 src="/brand/services-hero.webp"
                 alt=""
                 fill
                 priority
-                sizes="78vw"
-                className="object-contain object-bottom"
+                sizes="100vw"
+                className="object-cover object-top"
               />
             </div>
 
@@ -138,7 +157,7 @@ export default function ServicesPage() {
       </section>
 
       {/* ------------------------------------------------------- what I bring */}
-      <section className="bg-page py-14 xl:py-[6.2vw]">
+      <section className="bg-page py-12 xl:py-[3.4vw]">
         <div className="frame flex flex-col items-center">
           <Reveal>
             <p className="s-script text-center text-white">{bring.script}</p>
@@ -154,10 +173,17 @@ export default function ServicesPage() {
             </h2>
           </Reveal>
 
-          <div className="mt-12 grid w-full max-w-[1363px] items-end gap-10 lg:grid-cols-[644fr_639fr] xl:mt-[4vw] xl:gap-[5vw]">
-            {/* 517 by 711 with a 291 by 258 plate overlapping it from below */}
-            <Reveal className="relative">
-              <div className="relative ml-auto aspect-[517/711] w-[80.3%]">
+          <div className="mt-10 grid w-full max-w-[1363px] items-end gap-10 lg:grid-cols-[644fr_639fr] xl:mt-[3vw] xl:gap-[5vw]">
+            {/* 517 by 711, with the 291 by 258 plate overlapping it from below
+                and 127px further left.
+
+                The plate is sized by height rather than width so the section
+                can never grow taller than the screen. At the design's own
+                proportions it is 711 on a 1728 frame, which is 41.15vw; on a
+                short window the viewport cap takes over and the whole section
+                still lands in one screen. */}
+            <Reveal className="relative ml-auto w-fit">
+              <div className="relative aspect-[517/711] h-[min(41.15vw,52svh)]">
                 <Image
                   src="/brand/services-plate.webp"
                   alt=""
@@ -166,7 +192,7 @@ export default function ServicesPage() {
                   className="object-cover"
                 />
               </div>
-              <div className="absolute bottom-0 left-0 aspect-[291/258] w-[45.2%]">
+              <div className="absolute bottom-0 left-[-24.6%] h-[36.3%] w-[56.3%]">
                 <Image
                   src="/brand/services-columns.webp"
                   alt=""
