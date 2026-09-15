@@ -23,7 +23,9 @@ import { site } from "@/lib/content";
  * hands it to the visitor's mail client.
  */
 const SEEN_KEY = "js-enquiry-seen";
-const DELAY = 12000;
+/* Long enough that it does not interrupt the hero landing, short enough
+   that the visitor is still on the first screen when it arrives. */
+const DELAY = 4000;
 
 function remember() {
   try {
