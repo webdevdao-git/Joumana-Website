@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { Hanken_Grotesk, Parisienne } from "next/font/google";
 import { SiteHeader } from "@/components/site-header";
 import { SiteFooter } from "@/components/site-footer";
+import { EnquiryPopover } from "@/components/enquiry-popover";
 import { PersonSchema } from "@/components/schema";
 import { SmoothScroll } from "@/components/smooth-scroll";
 import { site } from "@/lib/content";
@@ -114,6 +115,7 @@ export default function RootLayout({
           </main>
           <SiteFooter />
         </SmoothScroll>
+        <EnquiryPopover />
         <PersonSchema />
       </body>
     </html>
