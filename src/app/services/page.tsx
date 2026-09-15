@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ContactPanel } from "@/components/contact-panel";
+import { DisciplineSection } from "@/components/discipline";
 import { Reveal } from "@/components/reveal";
 import { BreadcrumbSchema } from "@/components/schema";
 import { servicesPage } from "@/lib/content";
@@ -56,12 +57,6 @@ function Pill({
   );
 }
 
-/** The design sets the Includes chips two to a row, whatever their widths. */
-function pairs(items: readonly string[]) {
-  const out: string[][] = [];
-  for (let i = 0; i < items.length; i += 2) out.push(items.slice(i, i + 2));
-  return out;
-}
 
 export default function ServicesPage() {
   const { hero, bring, approach, disciplines } = servicesPage;
@@ -289,73 +284,16 @@ export default function ServicesPage() {
       </section>
 
       {/* ------------------------------------------------------ disciplines
-          Spacing read off the frame. Within the 1037 tall section: 100px of
-          air top and bottom, the label row at y100, the content row at y270,
-          and inside the left column a steady 40px between every block. The
-          content is 1498 wide, which on a 1728 frame leaves 115 either side.
-          Columns are 818 and 600 with 80 between them. */}
+          Spacing read off the frame: a 1037 tall section, 100 of air top and
+          bottom, the label row at y100, the content at y270, a steady 40
+          between every block in the left column, content 1498 wide leaving
+          115 either side, and columns of 818 and 600 with 80 between.
+
+          The motion that brings each one in lives in DisciplineSection. None
+          of it moves the layout: every animation resolves to exactly where
+          the frame puts the element. */}
       {disciplines.map((d) => (
-        <section key={d.index} className="bg-page py-12 xl:py-[5.79vw]">
-          <div className="mx-auto w-full max-w-[1498px] px-6 md:px-10 xl:px-0">
-            <Reveal className="flex items-start justify-between gap-6">
-              <h2 className="s-title text-white">{d.label}</h2>
-              <span className="s-title text-white">{d.index}</span>
-            </Reveal>
-
-            <div className="mt-8 grid gap-10 lg:grid-cols-[818fr_600fr] lg:gap-[4.63vw] xl:mt-[5.79vw]">
-              <Reveal className="flex flex-col">
-                <h3 className="s-head text-white">{d.head}</h3>
-
-                {d.body.map((para, i) => (
-                  <p
-                    key={para}
-                    className={`s-body text-white ${
-                      i === 0 ? "mt-6 xl:mt-[2.31vw]" : "mt-5 xl:mt-[1.81vw]"
-                    }`}
-                  >
-                    {para}
-                  </p>
-                ))}
-
-                <p className="s-head mt-8 text-white xl:mt-[2.31vw]">Includes</p>
-
-                <ul className="mt-6 flex flex-col gap-3 xl:mt-[2.31vw]">
-                  {pairs(d.includes).map((row, r) => (
-                    <li key={r}>
-                      <ul className="flex flex-wrap gap-3">
-                        {row.map((item, i) => (
-                          <li
-                            key={`${item}-${i}`}
-                            className="s-chip inline-flex h-[48px] items-center rounded-[32px] border border-white px-6 text-white xl:h-16 xl:px-8"
-                          >
-                            {item}
-                          </li>
-                        ))}
-                      </ul>
-                    </li>
-                  ))}
-                </ul>
-              </Reveal>
-
-              {/* the plate is 600 by 667, with the call to action sitting on
-                  its lower right corner */}
-              <Reveal delay={0.08} className="relative self-start">
-                <div className="relative aspect-[600/667] w-full">
-                  <Image
-                    src="/brand/services-columns.webp"
-                    alt=""
-                    fill
-                    sizes="(max-width: 1024px) 100vw, 600px"
-                    className="object-cover"
-                  />
-                </div>
-                <div className="mt-5 flex justify-end lg:absolute lg:bottom-0 lg:right-0 lg:mt-0">
-                  <Pill label={d.cta} href="/contact" tone="brown" />
-                </div>
-              </Reveal>
-            </div>
-          </div>
-        </section>
+        <DisciplineSection key={d.index} d={d} plate="/brand/services-columns.webp" />
       ))}
 
       {/* the design closes on Tell Me What You're Working On */}
