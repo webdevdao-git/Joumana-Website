@@ -99,7 +99,7 @@
   --ink: var(--body);
   --ink-soft: var(--body-soft);
 
-  --nav-h: 52px;
+  --nav-h: 60px;
 
   --font-display: "IvyPresto Text", "Iowan Old Style", Georgia, serif;
   --font-sans: var(--font-oakes), "Archivo", system-ui, sans-serif;
@@ -108,7 +108,7 @@
 
 @media (min-width: 1280px) {
   :root {
-    --nav-h: 60px;
+    --nav-h: 72px;
   }
 }
 

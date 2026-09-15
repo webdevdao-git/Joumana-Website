@@ -99,7 +99,7 @@ export default function ServicesPage() {
             {/* she is anchored to the bottom edge and cropped by it */}
             <div className="absolute bottom-0 left-[46.6%] h-[79%] w-[33%] -translate-x-1/2">
               <Image
-                src="/brand/portrait-cutout.webp"
+                src="/brand/services-hero.webp"
                 alt="Joumana Saad, journalist, presenter and communications specialist in Dubai"
                 fill
                 priority
@@ -130,7 +130,7 @@ export default function ServicesPage() {
 
             <div className="relative mt-2 h-[330px] w-[78%] max-w-[330px]">
               <Image
-                src="/brand/portrait-cutout.webp"
+                src="/brand/services-hero.webp"
                 alt=""
                 fill
                 priority

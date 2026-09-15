@@ -7,21 +7,24 @@ import { AnimatePresence, motion } from "motion/react";
 import { site } from "@/lib/content";
 
 /**
- * Node 45:1239. Oxblood bar, two links, the wordmark, two links.
+ * The bar as the design draws it: Home and Services at the left, the wordmark,
+ * then Work and Journal, and Contact as a white pill at the right edge.
  *
- * The three columns are laid out 1fr / auto / 1fr, so the wordmark lands on the
- * exact centre of the page whatever the labels either side of it weigh. The
- * links then hug the wordmark instead of being thrown out to the gutters.
+ * The three groups are spaced apart rather than sitting in equal columns. That
+ * is what the design does, and it is why the wordmark reads slightly left of
+ * the page centre: the pill makes the right group heavier than the left.
  */
 const LEFT = [
+  { label: "Home", href: "/" },
   { label: "Services", href: "/services" },
-  { label: "Work", href: "/work" },
 ];
 
 const RIGHT = [
+  { label: "Work", href: "/work" },
   { label: "Journal", href: "/journal" },
-  { label: "Contact", href: "/contact" },
 ];
+
+const CONTACT = { label: "Contact", href: "/contact" };
 
 export function SiteHeader() {
   const pathname = usePathname();
@@ -49,14 +52,14 @@ export function SiteHeader() {
     <>
       <header className="relative z-50 bg-oxblood">
         <div className="frame">
-          <div className="nav-bar grid grid-cols-[1fr_auto_1fr] items-center gap-10 xl:gap-20">
+          <div className="nav-bar flex items-center justify-between gap-6">
             <div className="flex items-center justify-start lg:justify-end">
-              {/* mirrors the menu button opposite, so the two outer columns
-                  weigh the same and the wordmark stays on the centre line */}
+              {/* mirrors the menu button opposite, so the wordmark keeps its
+                  place on a phone where both navs are hidden */}
               <span aria-hidden="true" className="-ml-2 h-11 w-11 lg:hidden" />
 
               <nav
-                className="hidden items-center gap-6 lg:flex"
+                className="hidden items-center gap-8 lg:flex"
                 aria-label="Primary"
               >
                 {LEFT.map(link)}
@@ -71,13 +74,22 @@ export function SiteHeader() {
               Joumana Saad
             </Link>
 
-            <div className="flex items-center justify-end lg:justify-start">
+            <div className="flex items-center justify-end gap-8">
               <nav
-                className="hidden items-center gap-6 lg:flex"
+                className="hidden items-center gap-8 lg:flex"
                 aria-label="Primary"
               >
                 {RIGHT.map(link)}
               </nav>
+
+              <Link
+                href={CONTACT.href}
+                aria-current={pathname === CONTACT.href ? "page" : undefined}
+                className="t-nav hidden h-10 items-center gap-2 rounded-full bg-white px-6 text-card-heading transition-opacity duration-300 hover:opacity-90 lg:inline-flex xl:h-11 xl:px-7"
+              >
+                {CONTACT.label}
+                <span aria-hidden="true">&rarr;</span>
+              </Link>
 
               <button
                 type="button"
@@ -119,7 +131,7 @@ export function SiteHeader() {
             className="fixed inset-0 z-40 bg-oxblood lg:hidden"
           >
             <div className="frame flex h-full flex-col justify-center gap-8">
-              {[...LEFT, ...RIGHT].map((item) => (
+              {[...LEFT, ...RIGHT, CONTACT].map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
