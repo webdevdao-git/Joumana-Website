@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useState } from "react";
+import { servicesPage } from "@/lib/content";
 
 /**
  * Node 45:1319, as cards that turn over.
@@ -71,12 +72,12 @@ function Megaphone() {
   );
 }
 
-function Report() {
+function Headphones() {
   return (
     <svg {...ICON_PROPS}>
-      <path d="M6 3h8l4 4v14H6V3Z" />
-      <path d="M14 3v4h4" />
-      <path d="M9.5 17v-3M12 17v-5M14.5 17v-2" />
+      <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
+      <rect x="2.5" y="13.5" width="4.5" height="7" rx="2.25" />
+      <rect x="17" y="13.5" width="4.5" height="7" rx="2.25" />
     </svg>
   );
 }
@@ -91,38 +92,20 @@ function Broadcast() {
   );
 }
 
-const CAPABILITIES = [
-  {
-    title: "Journalism & Editorial",
-    Icon: Newspaper,
-    body: "Research-driven journalism, editorial content and storytelling across business, finance, technology and current affairs.",
-  },
-  {
-    title: "Presenting & Moderation",
-    Icon: Microphone,
-    body: "Professional presenting, panel moderation and event hosting for corporate, media and high-profile industry events.",
-  },
-  {
-    title: "Content Strategy & Writing",
-    Icon: Pencil,
-    body: "Strategic content creation across digital, editorial and corporate channels, tailored to brands, audiences and objectives.",
-  },
-  {
-    title: "PR & Communications",
-    Icon: Megaphone,
-    body: "Strategic communications support spanning media relations, messaging, press materials and brand communication initiatives.",
-  },
-  {
-    title: "Corporate Content",
-    Icon: Report,
-    body: "Thought leadership, reports, speeches, newsletters and branded content designed to communicate ideas with clarity and impact.",
-  },
-  {
-    title: "Media & Events",
-    Icon: Broadcast,
-    body: "Experienced on-camera, on-air and live-event communication for organisations seeking an informed and engaging media presence.",
-  },
-] as const;
+/**
+ * The six the services page carries, drawn from the same data so the two can
+ * never drift apart. The face shows the discipline and its mark; the back
+ * shows the opening line of that discipline, which is the shortest true
+ * description of it in the file.
+ */
+const MARKS: Record<string, () => React.ReactElement> = {
+  "Branded Content": Pencil,
+  "Presenting & Moderation": Microphone,
+  Editorial: Newspaper,
+  Podcasts: Headphones,
+  "Media Training": Broadcast,
+  "PR & Corporate Communications": Megaphone,
+};
 
 function ArrowUpRight({ className = "" }: { className?: string }) {
   return (
@@ -202,9 +185,9 @@ export function Capabilities() {
         <h2 className="t-section text-center text-heading">Services</h2>
 
         <ul className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {CAPABILITIES.map((cap) => (
-            <li key={cap.title}>
-              <FlipCard {...cap} />
+          {servicesPage.disciplines.map((d) => (
+            <li key={d.label}>
+              <FlipCard title={d.label} body={d.body[0]} Icon={MARKS[d.label] ?? Newspaper} />
             </li>
           ))}
         </ul>

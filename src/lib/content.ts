@@ -949,7 +949,7 @@ export const servicesPage = {
       cta: "Enquire MORE About IT",
     },
     {
-      label: "Pr & Corporate Communications",
+      label: "PR & Corporate Communications",
       index: "06",
       head: "Communication with purpose",
       body: [
