@@ -111,7 +111,7 @@ export default async function JournalPostPage({
             <figure className="relative aspect-[16/9] w-full overflow-hidden rounded-[24px] bg-card">
               <Image
                 src={post.image}
-                alt=""
+                alt={post.title}
                 fill
                 priority
                 sizes="100vw"

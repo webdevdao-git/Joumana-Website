@@ -1,15 +1,27 @@
 # Static export of the Joumana Saad site, served by Apache or LiteSpeed.
+#
+# There is no database, no PHP and no admin login anywhere in this site, so the
+# usual ways a brochure site gets taken over do not apply. What is left to do is
+# force encryption and tell the browser what the page is allowed to do.
 
-ErrorDocument 404 /404.html
-
-# Send every request that is not a real file to the folder's index.html, so
-# /services reaches /services/index.html without a redirect chain.
-DirectoryIndex index.html
-
+# ------------------------------------------------------------------ https
 <IfModule mod_rewrite.c>
   RewriteEngine On
   RewriteBase /
 
+  # Hostinger terminates TLS in front of Apache, so the original scheme arrives
+  # in X-Forwarded-Proto. Checking HTTPS alone would loop forever.
+  RewriteCond %{HTTP:X-Forwarded-Proto} !https
+  RewriteCond %{HTTPS} !=on
+  RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [R=301,L]
+</IfModule>
+
+# ------------------------------------------------------------------ routing
+ErrorDocument 404 /404.html
+DirectoryIndex index.html
+Options -Indexes
+
+<IfModule mod_rewrite.c>
   # never rewrite something that exists
   RewriteCond %{REQUEST_FILENAME} -f [OR]
   RewriteCond %{REQUEST_FILENAME} -d
@@ -20,6 +32,35 @@ DirectoryIndex index.html
   RewriteRule ^(.+[^/])$ /$1/ [R=301,L]
 </IfModule>
 
+# nothing here should ever be fetched directly
+<FilesMatch "^\.(htaccess|htpasswd|env|git)">
+  Require all denied
+</FilesMatch>
+
+# ------------------------------------------------------------------ headers
+<IfModule mod_headers.c>
+  # Once the real domain is live and https is confirmed working, this tells
+  # browsers never to try http again. Leave it off until then: a wrong
+  # max-age is remembered by the browser and is painful to undo.
+  # Header always set Strict-Transport-Security "max-age=31536000; includeSubDomains"
+
+  Header always set X-Content-Type-Options "nosniff"
+  Header always set Referrer-Policy "strict-origin-when-cross-origin"
+  Header always set X-Frame-Options "SAMEORIGIN"
+  Header always set Permissions-Policy "camera=(), microphone=(), geolocation=(), interest-cohort=()"
+
+  # The page loads nothing from anywhere else. Next inlines a little script and
+  # Tailwind inlines a little style, so those two need unsafe-inline; every
+  # other source is shut off, which is what stops an injected script from
+  # calling home or an attacker framing the site.
+  Header always set Content-Security-Policy "default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data: blob:; media-src 'self'; font-src 'self'; connect-src 'self'; form-action 'self' mailto:; frame-ancestors 'self'; base-uri 'self'; object-src 'none'; upgrade-insecure-requests"
+
+  <FilesMatch "\.(woff2|jpg|jpeg|png|webp|svg|mp4)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+</IfModule>
+
+# ------------------------------------------------------------------ transfer
 <IfModule mod_deflate.c>
   AddOutputFilterByType DEFLATE text/html text/css text/plain text/xml
   AddOutputFilterByType DEFLATE application/javascript application/json
@@ -28,26 +69,13 @@ DirectoryIndex index.html
 
 <IfModule mod_expires.c>
   ExpiresActive On
-
-  # hashed build output can be held forever
-  ExpiresByType text/css                  "access plus 1 year"
-  ExpiresByType application/javascript    "access plus 1 year"
-  ExpiresByType font/woff2                "access plus 1 year"
-
-  # artwork keeps its own name across builds, so it gets a month
-  ExpiresByType image/jpeg                "access plus 1 month"
-  ExpiresByType image/png                 "access plus 1 month"
-  ExpiresByType image/webp                "access plus 1 month"
-  ExpiresByType video/mp4                 "access plus 1 month"
-
+  ExpiresByType text/css               "access plus 1 year"
+  ExpiresByType application/javascript "access plus 1 year"
+  ExpiresByType font/woff2             "access plus 1 year"
+  ExpiresByType image/jpeg             "access plus 1 month"
+  ExpiresByType image/png              "access plus 1 month"
+  ExpiresByType image/webp             "access plus 1 month"
+  ExpiresByType video/mp4              "access plus 1 month"
   # html must revalidate or a deploy never reaches anyone
-  ExpiresByType text/html                 "access plus 0 seconds"
-</IfModule>
-
-<IfModule mod_headers.c>
-  Header always set X-Content-Type-Options "nosniff"
-  Header always set Referrer-Policy "strict-origin-when-cross-origin"
-  <FilesMatch "\.(woff2|jpg|jpeg|png|webp|svg|mp4)$">
-    Header set Cache-Control "public, max-age=2592000"
-  </FilesMatch>
+  ExpiresByType text/html              "access plus 0 seconds"
 </IfModule>

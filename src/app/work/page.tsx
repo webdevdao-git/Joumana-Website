@@ -24,6 +24,7 @@ export const metadata: Metadata = {
     description:
       "Published journalism, broadcast reporting, bilingual hosting and corporate publications.",
     url: "/work",
+    images: [{ url: "/video/hero-loop.jpg", width: 1600, height: 900, alt: "Joumana Saad hosting in Dubai" }],
   },
 };
 
@@ -119,7 +120,7 @@ export default function WorkPage() {
                   <figure className="relative aspect-[4/3] w-full">
                     <Image
                       src={event.image}
-                      alt=""
+                      alt={`Joumana Saad hosting ${event.title}`}
                       fill
                       sizes="(max-width: 640px) 100vw, 25vw"
                       className="object-cover grayscale"
@@ -207,7 +208,7 @@ export default function WorkPage() {
                 <figure className="relative aspect-[4/3] w-full lg:aspect-auto lg:min-h-[440px]">
                   <Image
                     src={caseStudy.image}
-                    alt=""
+                    alt={`Joumana Saad, ${caseStudy.title}`}
                     fill
                     sizes="(max-width: 1024px) 100vw, 460px"
                     className="object-cover grayscale"

@@ -18,6 +18,7 @@ const POSTER = "/video/hero-loop.jpg";
 export function Hero() {
   const reduced = useReducedMotion();
   const [playing, setPlaying] = useState(false);
+  const [wantsVideo, setWantsVideo] = useState(false);
   const video = useRef<HTMLVideoElement>(null);
   const section = useRef<HTMLElement>(null);
 
@@ -27,6 +28,27 @@ export function Hero() {
   });
   const mediaY = useTransform(scrollYProgress, [0, 1], ["0%", "12%"]);
   const copyOpacity = useTransform(scrollYProgress, [0, 0.8], [1, 0]);
+
+  /**
+   * The film is 2.6MB. On a phone that is most of the page weight, spent on
+   * something the visitor did not ask for, so narrow screens and anyone on a
+   * metered connection keep the poster frame instead. Decided in an effect
+   * rather than during render, because the server has no viewport to measure
+   * and guessing one produces a hydration mismatch.
+   */
+  useEffect(() => {
+    if (reduced) return;
+
+    const wide = window.matchMedia("(min-width: 768px)");
+    const saveData =
+      (navigator as Navigator & { connection?: { saveData?: boolean } })
+        .connection?.saveData === true;
+
+    const decide = () => setWantsVideo(wide.matches && !saveData);
+    decide();
+    wide.addEventListener("change", decide);
+    return () => wide.removeEventListener("change", decide);
+  }, [reduced]);
 
   useEffect(() => {
     const el = video.current;
@@ -40,7 +62,7 @@ export function Hero() {
     if (el.readyState >= 3) play();
     else el.addEventListener("canplay", play, { once: true });
     return () => el.removeEventListener("canplay", play);
-  }, [reduced]);
+  }, [reduced, wantsVideo]);
 
   return (
     <section
@@ -60,7 +82,7 @@ export function Hero() {
           className="object-cover object-center"
         />
 
-        {!reduced && (
+        {!reduced && wantsVideo && (
           <video
             ref={video}
             className={`absolute inset-0 h-full w-full object-cover object-center transition-opacity duration-1000 ${

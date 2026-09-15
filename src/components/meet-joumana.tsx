@@ -44,7 +44,7 @@ export function MeetJoumana() {
           <div className="fade-into-panel relative -mt-10 h-[380px] self-end lg:-mt-14 lg:h-[560px] xl:-mt-[74px] xl:h-[640px]">
             <Image
               src="/brand/portrait-cutout.webp"
-              alt="Joumana Saad"
+              alt="Joumana Saad, journalist, presenter and moderator based in Dubai"
               fill
               sizes="(max-width: 1024px) 100vw, 703px"
               className="object-contain object-bottom"

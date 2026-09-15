@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     description:
       "Send the brief, the audience and the deadline. Most enquiries get a reply within one working day.",
     url: "/contact",
+    images: [{ url: "/images/headshot-wide.jpg", width: 1700, height: 850, alt: "Joumana Saad, Dubai" }],
   },
 };
 

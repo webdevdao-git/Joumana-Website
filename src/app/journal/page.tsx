@@ -17,6 +17,7 @@ export const metadata: Metadata = {
     description:
       "Notes from the newsroom and the stage: craft, interviewing and the Gulf business story.",
     url: "/journal",
+    images: [{ url: "/images/portrait-studio.jpg", width: 800, height: 1200, alt: "Joumana Saad, Dubai" }],
   },
 };
 

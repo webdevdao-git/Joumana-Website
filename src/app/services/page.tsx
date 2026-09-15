@@ -15,6 +15,7 @@ export const metadata: Metadata = {
     description:
       "Four disciplines built on newsroom habits: content, editorial, hosting and communications.",
     url: "/services",
+    images: [{ url: "/images/portrait-studio.jpg", width: 800, height: 1200, alt: "Joumana Saad, Dubai" }],
   },
 };
 
@@ -36,7 +37,7 @@ function Service({
           <figure className="relative aspect-[4/3] w-full lg:aspect-auto lg:min-h-[420px]">
             <Image
               src={service.image}
-              alt=""
+              alt={`Joumana Saad, ${service.title.toLowerCase()} in Dubai`}
               fill
               sizes="(max-width: 1024px) 100vw, 420px"
               className="object-cover grayscale"
@@ -48,9 +49,9 @@ function Service({
               {service.index} &nbsp;/&nbsp; {service.short}
             </p>
 
-            <h3 className="font-display text-[24px] font-semibold uppercase leading-[1.15] text-card-heading xl:text-[34px]">
+            <h2 className="font-display text-[24px] font-semibold uppercase leading-[1.15] text-card-heading xl:text-[34px]">
               {service.title}
-            </h3>
+            </h2>
 
             <p className="max-w-[46ch] text-[17px] leading-[1.4] text-card-body xl:text-[21px]">
               {service.summary}
