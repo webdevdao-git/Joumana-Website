@@ -851,3 +851,97 @@ export const journal = [
     ],
   },
 ] as const;
+
+/* --------------------------------------------------- the services page
+   Node 125:1680, transcribed from the design. Every line below is the
+   designer's own wording. Two things in the file are left as they were
+   found and flagged rather than quietly fixed:
+
+     - Editorial lists "Special Reports" twice
+     - the fifth call to action reads "Enquire MORE About IT"
+
+   Both are almost certainly slips. They are kept verbatim so the page
+   matches the design, and they are the first thing to correct once
+   Joumana has read it. */
+
+export const servicesPage = {
+  hero: {
+    lines: ["Expertise", "With", "Purpose"],
+    lede: "From strategic communications and branded content to editorial storytelling, podcasts and media, Joumana brings together journalism, communications and content expertise to help organisations communicate with clarity and impact.",
+    cta: { label: "Start a Conversation", href: "/contact" },
+  },
+
+  bring: {
+    script: "What I Bring",
+    heading: ["Strategy, storytelling, and a", "voice that"],
+    headingAccent: "connects",
+    // CONFIRM: the design says fifteen years. The home page says 13+ and
+    // the Work page says nineteen. One number has to win.
+    body: [
+      "With more than 15 years across journalism, media and strategic communications, Joumana works at the intersection of content, communications and public engagement.",
+      "Her experience spans international media, government and business organisations, from editorial and broadcast journalism to corporate communications, international media relations and high-profile content projects.",
+    ],
+  },
+
+  approach: {
+    heading: ["Built Around", "What Needs To Be Said", "And How It Should", "Be Heard."],
+    body: "Whether the goal is to shape a brand story, create meaningful content, prepare a spokesperson, or bring a conversation to life, each engagement starts with the audience, the message and the purpose behind it.",
+  },
+
+  disciplines: [
+    {
+      label: "Branded Content",
+      index: "01",
+      head: "Make the message matter",
+      lede: "The strongest branded content doesn't feel like advertising. It tells a story, offers a point of view and gives an audience a reason to pay attention.",
+      body: "Joumana brings a journalist's perspective to branded storytelling combining research, editorial judgement and strategic thinking to turn complex ideas into clear, engaging content. From thought leadership and corporate storytelling to digital campaigns and executive communications, the focus is always on finding the story behind the message and shaping it for the right audience.",
+      includes: ["Thought Leadership", "Executive Communications", "Corporate Content", "Digital Content"],
+      cta: "Discuss a Content Project",
+    },
+    {
+      label: "Presenting & Moderation",
+      index: "02",
+      head: "The right voice for the room",
+      lede: "Great moderation is more than keeping a conversation moving. It is about asking the right questions, understanding the subject and creating space for meaningful discussion.",
+      body: "With extensive experience across corporate events, conferences, panels, interviews and broadcast, Joumana brings an informed and engaging presence to every stage. Her background in journalism allows her to research quickly, understand complex subjects and connect speakers, audiences and ideas naturally.",
+      includes: ["Event Hosting", "Panel Moderation", "Interviews", "On-Air Presenting"],
+      cta: "Enquire About Presenting",
+    },
+    {
+      label: "Editorial",
+      index: "03",
+      head: "Stories grounded in substance",
+      lede: "Good editorial work starts with curiosity, research and the ability to find the story within the subject.",
+      body: "Joumana's journalism background spans business, finance, technology, current affairs, interviews, features and special reports. Her experience across Forbes, Arabian Radio Network, Argaam and other business publications has shaped an approach that is rigorous without losing the human story.",
+      includes: ["Feature Writing", "Business & Finance", "Special Reports", "Special Reports"],
+      cta: "Explore Editorial Work",
+    },
+    {
+      label: "Podcasts",
+      index: "04",
+      head: "Conversations worth staying for",
+      lede: "Podcasts create space for deeper conversations, the kind that move beyond headlines and give ideas, people and perspectives room to breathe.",
+      body: "Joumana brings her journalism and interviewing background to podcast conversations, helping shape thoughtful discussions around people, businesses, ideas and the stories behind them.",
+      includes: ["Hosting", "Interviewing", "Editorial Development", "Content Support"],
+      cta: "Discuss a Podcast",
+    },
+    {
+      label: "Media Training",
+      index: "05",
+      head: "Be ready for the question",
+      lede: "Media moments can shape how an organisation, leader or brand is understood. Preparation makes the difference.",
+      body: "Media training helps executives and spokespeople communicate with clarity, confidence and control, whether preparing for an interview, press conference, broadcast appearance or high-profile media engagement.",
+      includes: ["Interview Preparation", "Key Messaging", "Question Handling", "On-Camera Confidence"],
+      cta: "Enquire MORE About IT",
+    },
+    {
+      label: "PR & Corporate Communications",
+      index: "06",
+      head: "Communication with purpose",
+      lede: "Reputation is built through every story, statement, conversation and connection.",
+      body: "Joumana's communications experience spans PR strategy, corporate communications, media relations, editorial content and stakeholder engagement across major organisations in Dubai. Her current work at Dubai Department of Economy and Tourism includes communications strategy across international markets, media relations, editorial content and high-profile projects and partnerships.",
+      includes: ["Communications Strategy", "Media Relations", "PR & Editorial", "Corporate Communications", "Executive Messaging"],
+      cta: "START A Project",
+    },
+  ],
+} as const;
