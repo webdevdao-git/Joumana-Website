@@ -175,10 +175,11 @@ export default function ServicesPage() {
                 The plate is sized by height rather than width so the section
                 can never grow taller than the screen. At the design's own
                 proportions it is 711 on a 1728 frame, which is 41.15vw; on a
-                short window the viewport cap takes over and the whole section
-                still lands in one screen. */}
+                short window the viewport cap takes over. 57svh is as far as it
+                goes and still leave the section inside one screen at 1440 by
+                820, which is the shortest window worth designing for. */}
             <Reveal className="relative ml-auto w-fit">
-              <div className="relative aspect-[517/711] h-[min(41.15vw,52svh)]">
+              <div className="relative aspect-[517/711] h-[min(41.15vw,57svh)]">
                 <Image
                   src="/brand/services-plate.webp"
                   alt=""
