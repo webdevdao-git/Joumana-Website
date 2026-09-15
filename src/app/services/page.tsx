@@ -215,67 +215,111 @@ export default function ServicesPage() {
       </section>
 
       {/* --------------------------------------------------------- approach
-          A full bleed plate with a 495 by 607 portrait and the brown panel
-          laid over it. */}
-      <section className="relative overflow-hidden bg-card py-12 xl:py-[3.5vw]">
+          Section 1728 x 796 on white, with the columns plate across it. A
+          brown band sits at x331 y100, 1066 x 607, holding a 495 wide portrait
+          on its left and a 411 wide text column at x906, which is 80px clear
+          of the portrait and 80px clear of the band's right edge. The heading
+          starts 85px down, the copy 64px under it.
+
+          Everything below is those numbers as percentages. */}
+      <section className="relative overflow-hidden bg-white">
         <div aria-hidden="true" className="absolute inset-0">
           <Image
-            src="/brand/services-wide.webp"
+            src="/brand/services-columns.webp"
             alt=""
             fill
             sizes="100vw"
             className="object-cover"
           />
+          {/* the design lays white over the plate at 69 percent, which is what
+              washes it back far enough for the band to read */}
+          <span className="absolute inset-0 bg-white/[0.69]" />
         </div>
 
-        <div className="frame relative">
-          <div className="mx-auto flex max-w-[1180px] flex-col items-stretch lg:flex-row lg:items-center">
-            <Reveal className="relative aspect-[495/607] w-full max-w-[340px] shrink-0 self-center lg:self-auto xl:max-w-[28vw]">
+        <div className="relative mx-auto w-full max-w-[1728px] lg:aspect-[1728/796]">
+          {/* ---------------------------------------------- large screens */}
+          <div className="absolute left-[19.15%] top-[12.56%] hidden h-[76.26%] w-[61.69%] bg-brown lg:block">
+            <div className="absolute inset-y-0 left-0 w-[46.44%]">
               <Image
                 src="/brand/services-approach.webp"
-                alt=""
+                alt="Joumana Saad at work in Dubai"
                 fill
-                sizes="(max-width: 1024px) 80vw, 28vw"
+                sizes="29vw"
                 className="object-cover"
               />
-            </Reveal>
+            </div>
 
-            <Reveal
-              delay={0.08}
-              className="w-full bg-brown p-8 text-white lg:-ml-10 lg:max-w-[540px] xl:p-[2.8vw]"
-            >
-              <h2 className="s-subhead uppercase">
+            <div className="absolute left-[53.94%] top-[14%] w-[38.56%]">
+              <h2 className="s-subhead text-white">
                 {approach.heading.map((line) => (
                   <span key={line} className="block">
                     {line}
                   </span>
                 ))}
               </h2>
-              <p className="s-body mt-6 text-white">{approach.body}</p>
-            </Reveal>
+              <p className="s-body mt-[15%] text-white">{approach.body}</p>
+            </div>
+          </div>
+
+          {/* ---------------------------------------------- small screens */}
+          <div className="relative px-6 py-12 lg:hidden">
+            <div className="mx-auto max-w-[520px] bg-brown">
+              <div className="relative aspect-[495/607] w-full">
+                <Image
+                  src="/brand/services-approach.webp"
+                  alt="Joumana Saad at work in Dubai"
+                  fill
+                  sizes="100vw"
+                  className="object-cover"
+                />
+              </div>
+              <div className="p-7">
+                <h2 className="s-subhead text-white">
+                  {approach.heading.map((line) => (
+                    <span key={line} className="block">
+                      {line}
+                    </span>
+                  ))}
+                </h2>
+                <p className="s-body mt-5 text-white">{approach.body}</p>
+              </div>
+            </div>
           </div>
         </div>
       </section>
 
-      {/* ------------------------------------------------------ disciplines */}
+      {/* ------------------------------------------------------ disciplines
+          Spacing read off the frame. Within the 1037 tall section: 100px of
+          air top and bottom, the label row at y100, the content row at y270,
+          and inside the left column a steady 40px between every block. The
+          content is 1498 wide, which on a 1728 frame leaves 115 either side.
+          Columns are 818 and 600 with 80 between them. */}
       {disciplines.map((d) => (
-        <section key={d.index} className="bg-page py-12 xl:py-[3.2vw]">
-          <div className="frame mx-auto max-w-[1728px]">
+        <section key={d.index} className="bg-page py-12 xl:py-[5.79vw]">
+          <div className="mx-auto w-full max-w-[1498px] px-6 md:px-10 xl:px-0">
             <Reveal className="flex items-start justify-between gap-6">
               <h2 className="s-title text-white">{d.label}</h2>
               <span className="s-title text-white">{d.index}</span>
             </Reveal>
 
-            <div className="mt-8 grid gap-10 lg:grid-cols-[818fr_600fr] lg:gap-[5.2vw] xl:mt-[2.2vw]">
+            <div className="mt-8 grid gap-10 lg:grid-cols-[818fr_600fr] lg:gap-[4.63vw] xl:mt-[5.79vw]">
               <Reveal className="flex flex-col">
                 <h3 className="s-head text-white">{d.head}</h3>
 
-                <p className="s-body mt-6 text-white">{d.lede}</p>
-                <p className="s-body mt-6 text-white">{d.body}</p>
+                {d.body.map((para, i) => (
+                  <p
+                    key={para}
+                    className={`s-body text-white ${
+                      i === 0 ? "mt-6 xl:mt-[2.31vw]" : "mt-5 xl:mt-[1.81vw]"
+                    }`}
+                  >
+                    {para}
+                  </p>
+                ))}
 
-                <p className="s-head mt-10 text-white xl:mt-[2.8vw]">Includes</p>
+                <p className="s-head mt-8 text-white xl:mt-[2.31vw]">Includes</p>
 
-                <ul className="mt-6 flex flex-col gap-3">
+                <ul className="mt-6 flex flex-col gap-3 xl:mt-[2.31vw]">
                   {pairs(d.includes).map((row, r) => (
                     <li key={r}>
                       <ul className="flex flex-wrap gap-3">
@@ -293,8 +337,8 @@ export default function ServicesPage() {
                 </ul>
               </Reveal>
 
-              {/* the plate is 600 by 667, with the call to action on its lower
-                  right edge */}
+              {/* the plate is 600 by 667, with the call to action sitting on
+                  its lower right corner */}
               <Reveal delay={0.08} className="relative self-start">
                 <div className="relative aspect-[600/667] w-full">
                   <Image
