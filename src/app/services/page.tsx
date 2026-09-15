@@ -48,10 +48,14 @@ function ArrowPill({
 }: {
   label: string;
   href: string;
-  tone?: "brown" | "light";
+  tone?: "brown" | "oxblood" | "light";
 }) {
   const skin =
-    tone === "brown" ? "bg-brown text-white" : "bg-card text-card-heading";
+    tone === "oxblood"
+      ? "bg-oxblood text-white"
+      : tone === "light"
+        ? "bg-card text-card-heading"
+        : "bg-brown text-white";
   return (
     <Link
       href={href}
@@ -71,42 +75,79 @@ export default function ServicesPage() {
       <BreadcrumbSchema items={[{ name: "Services", href: "/services" }]} />
 
       {/* ------------------------------------------------------------ hero
-          The three words are set around the portrait rather than above it:
-          Expertise across the top, then With and Purpose either side of her. */}
-      <section className="relative overflow-hidden bg-card pb-10 pt-12 xl:pb-16 xl:pt-16">
-        <div className="frame">
-          <div className="relative mx-auto flex max-w-[1240px] flex-col items-center">
-            <h1 className="t-display w-full text-center text-[clamp(2.25rem,5.1vw,5.5rem)] leading-[1.06] text-card-heading">
+          Laid out to the frame rather than approximated. On the 1728 by 981
+          frame the design puts Expertise centred at y196, With and Purpose on
+          the line below with 273px between them, and the portrait rising into
+          that gap from the bottom edge, where the section crops her.
+
+          Those four positions are held as percentages of the frame, so the
+          whole composition scales as one. Below lg it falls back to a plain
+          stack, because absolute placement at phone width only ever breaks. */}
+      <section className="relative overflow-hidden bg-card">
+        <div className="relative mx-auto w-full max-w-[1728px] lg:aspect-[1728/981]">
+
+          {/* -------------------------------------------------- large screens */}
+          <div className="hidden lg:block">
+            <h1 className="absolute left-0 top-[16%] w-full text-center font-display text-[clamp(2.5rem,5.05vw,5.4rem)] font-light uppercase leading-[1.12] tracking-[0.02em] text-card-body">
               <span className="block">{hero.lines[0]}</span>
-              {/* the gap is the 273px the design leaves between the two words,
-                  held as a share of the frame so it scales with the type */}
-              <span className="mt-1 flex items-baseline justify-center gap-[17%]">
+              <span className="mt-1 flex items-baseline justify-center gap-[15.8%]">
                 <span>{hero.lines[1]}</span>
                 <span>{hero.lines[2]}</span>
               </span>
             </h1>
 
-            {/* the portrait sits between the two lower words and overlaps them */}
-            <div className="pointer-events-none relative -mt-[7vw] h-[340px] w-full max-w-[400px] sm:h-[430px] xl:-mt-[74px] xl:h-[540px] xl:max-w-[470px]">
+            {/* she is anchored to the bottom edge and cropped by it */}
+            <div className="absolute bottom-0 left-[46.6%] h-[79%] w-[33%] -translate-x-1/2">
               <Image
                 src="/brand/portrait-cutout.webp"
                 alt="Joumana Saad, journalist, presenter and communications specialist in Dubai"
                 fill
                 priority
-                sizes="(max-width: 1280px) 60vw, 500px"
+                sizes="34vw"
                 className="object-contain object-bottom"
               />
             </div>
 
-            <div className="mt-8 flex w-full flex-col items-start gap-8 lg:flex-row lg:items-start lg:justify-between xl:-mt-16">
-              <div className="order-2 pt-4 lg:order-1 lg:pt-16">
-                <ArrowPill label={hero.cta.label} href={hero.cta.href} />
-              </div>
-              <p className="order-1 max-w-[400px] lg:order-2 text-[14px] leading-[1.5] text-card-body lg:text-right xl:text-[15px]">
-                {hero.lede}
-              </p>
+            <p className="absolute left-[65.5%] top-[74%] w-[19.5%] text-[clamp(0.8rem,1.06vw,1.15rem)] leading-[1.45] text-card-body">
+              {hero.lede}
+            </p>
+
+            <div className="absolute bottom-[4.5%] left-[4.6%]">
+              <ArrowPill label={hero.cta.label} href={hero.cta.href} tone="oxblood" />
             </div>
           </div>
+
+          {/* -------------------------------------------------- small screens */}
+          <div className="flex flex-col items-center px-6 pt-10 lg:hidden">
+            {/* the words close up on a phone: there is no room to hold her
+                head between them without pushing Purpose off the screen */}
+            <h1 className="text-center font-display text-[clamp(1.9rem,8.4vw,2.75rem)] font-light uppercase leading-[1.12] tracking-[0.02em] text-card-body">
+              <span className="block">{hero.lines[0]}</span>
+              <span className="block">
+                {hero.lines[1]} {hero.lines[2]}
+              </span>
+            </h1>
+
+            <div className="relative mt-2 h-[330px] w-[78%] max-w-[330px]">
+              <Image
+                src="/brand/portrait-cutout.webp"
+                alt=""
+                fill
+                priority
+                sizes="74vw"
+                className="object-contain object-bottom"
+              />
+            </div>
+
+            <p className="mt-6 max-w-[42ch] text-[15px] leading-[1.5] text-card-body">
+              {hero.lede}
+            </p>
+
+            <div className="mb-10 mt-8 self-start">
+              <ArrowPill label={hero.cta.label} href={hero.cta.href} tone="oxblood" />
+            </div>
+          </div>
+
         </div>
       </section>
 
