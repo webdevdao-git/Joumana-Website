@@ -313,6 +313,31 @@
     }
   }
 
+
+  /* ------------------------------------------------- the enquiry tab glow
+     The card collapses to this button rather than disappearing, so there is
+     always a way back to it. The ring expands and fades on a slow cycle, which
+     reads as a quiet invitation rather than a notification badge. */
+  .tab-glow {
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
+  }
+
+  .tab-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 9999px;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cream) 60%, transparent);
+    animation: tab-glow 2.8s ease-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .tab-glow::after {
+      animation: none;
+      box-shadow: 0 0 0 4px color-mix(in srgb, var(--cream) 22%, transparent);
+    }
+  }
+
   .t-body {
     font-family: var(--font-sans);
     font-size: 18px;
@@ -370,5 +395,17 @@
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes tab-glow {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cream) 55%, transparent);
+  }
+  70% {
+    box-shadow: 0 0 0 16px color-mix(in srgb, var(--cream) 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cream) 0%, transparent);
   }
 }
