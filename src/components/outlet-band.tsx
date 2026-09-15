@@ -21,7 +21,7 @@ const LOGOS = [
   { src: "/brand/logo-dubai-economy.png", alt: "Dubai Economy" },
 ];
 
-function Row() {
+function Row({ full = false }: { full?: boolean }) {
   // doubled so the -50% loop meets itself with no seam
   const run = [...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS];
   return (
@@ -29,7 +29,11 @@ function Row() {
       {run.map((logo, i) => (
         <span
           key={`${logo.src}-${i}`}
-          className="relative mx-6 h-[42px] w-[125px] shrink-0 xl:mx-9 xl:h-[56px] xl:w-[170px]"
+          className={
+            full
+              ? "relative mx-5 h-[86px] w-[150px] shrink-0 xl:mx-[0.7vw] xl:h-[8.62vw] xl:w-[15.05vw]"
+              : "relative mx-6 h-[42px] w-[125px] shrink-0 xl:mx-9 xl:h-[56px] xl:w-[170px]"
+          }
         >
           <Image
             src={logo.src}
@@ -44,20 +48,34 @@ function Row() {
   );
 }
 
-export function OutletBand() {
+export function OutletBand({
+  heading = "Worked with",
+  size = "compact",
+}: {
+  heading?: string;
+  /** compact is the home page's cut down band, full is the design's 483. */
+  size?: "compact" | "full";
+}) {
+  const full = size === "full";
   return (
     <section
       aria-label="Publications and organisations Joumana Saad has worked with"
-      className="relative overflow-hidden bg-band py-7 xl:py-9"
+      className={`relative overflow-hidden bg-band ${full ? "py-10 xl:py-[5.79vw]" : "py-7 xl:py-9"}`}
     >
       <div className="frame">
-        <h2 className="t-section text-center text-[clamp(1.125rem,1.7vw,1.75rem)] text-on-band">
-          Worked with
+        <h2
+          className={
+            full
+              ? "s-title text-center text-white"
+              : "t-section text-center text-[clamp(1.125rem,1.7vw,1.75rem)] text-on-band"
+          }
+        >
+          {heading}
         </h2>
       </div>
 
-      <div className="mt-5 overflow-hidden xl:mt-6">
-        <Row />
+      <div className={full ? "mt-8 overflow-hidden xl:mt-[3.1vw]" : "mt-5 overflow-hidden xl:mt-6"}>
+        <Row full={full} />
       </div>
 
       {/* the real list, for crawlers and screen readers */}

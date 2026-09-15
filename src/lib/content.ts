@@ -962,3 +962,89 @@ export const servicesPage = {
     },
   ],
 } as const;
+
+/* ------------------------------------------------------- the work page
+   Node 125:2921, transcribed from the design. As with the services page
+   the wording is the designer's own, including "Submarines For The super
+   rich", where the casing is the file's. */
+
+export const workPage = {
+  hero: {
+    title: "Selected Work",
+    lede: "A selection of Joumana's work across strategic communications, editorial, media, branded content and broadcasting, from international media engagements to published journalism and on-camera work.",
+  },
+
+  seenWith: { heading: "As seen with" },
+
+  highlights: {
+    heading: "Top Highlights",
+    cta: "See more",
+    cards: [
+      {
+        title: "International Media & Communications",
+        body: "Leading communications across international markets, with a focus on media relations, editorial content, journalist engagement and high-profile business and tourism initiatives.",
+        org: "Dubai Department of Economy & Tourism",
+      },
+      {
+        title: "Building Connections Through Media",
+        body: "Representing Dubai in Mexico, connecting with industry leaders and influential media, and helping lay the groundwork for future collaboration between Dubai and Mexico.",
+        org: "Mexico",
+      },
+      {
+        title: "PR & Corporate Communications",
+        body: "Developing communications and media initiatives across UAE and international markets, supporting major events, business initiatives, press activity and stakeholder communications.",
+        org: "Dubai Chamber",
+      },
+      {
+        title: "Reporting Beyond the Headlines",
+        body: "A foundation in business journalism, multimedia storytelling and video production, covering markets, entrepreneurs, finance and global business stories.",
+        org: "Forbes",
+      },
+    ],
+  },
+
+  articles: {
+    heading: "Featured Articles",
+    // hrefs are matched to the live links already held in `clips`
+    items: [
+      { outlet: "Forbes", title: "Submarines For The super rich", meta: "Featured, 2010", href: "https://www.forbes.com/sites/face-to-face/2010/05/11/submarines-for-the-super-rich/" },
+      { outlet: "The Epoch Times", title: "New Retirement Visas Could Be A Game Changer For Expats In The UAE", meta: "News feature, 2018", href: "https://www.theepochtimes.com/new-retirement-visas-could-be-game-changer-for-expats-in-uae_2682211.html" },
+      { outlet: "Dubai Chamber of Commerce", title: "Dubai Chamber 2017 Highlights", meta: "Annual report, 2017", href: "http://www.dubaichamber.com/uploads/annualreports/2017/index.php" },
+      { outlet: "Arabian Business", title: "Latin America, Dubai's Final Frontier", meta: "Analysis, 2017", href: "https://www.arabianbusiness.com/politics-economics/420155-dubais-final-frontier" },
+      { outlet: "Forbes", title: "Excitement Returns To The Art Market", meta: "Featured, 2010", href: "https://www.forbes.com/sites/face-to-face/2010/05/14/excitement-returns-to-art-market/" },
+      { outlet: "Dubai Expo", title: "Say Yes To The Future, Expo Bid Book", meta: "Publication, 2013", href: "http://www.sayyestodubai.com/bid-book/" },
+    ],
+  },
+
+  people: {
+    heading: ["People Behind the", "Headlines"],
+    lede: "Over the years, Joumana has interviewed and spoken with influential voices across business, politics, finance, media and culture.",
+    cta: { label: "Start a Conversation", href: "/contact" },
+    // a six by four grid. Only eight tiles carry a face; the rest are the
+    // empty outlined tiles the design leaves between them, and the copy sits
+    // over the bottom left corner where four of them are.
+    grid: [
+      [null, null, "richard-branson", null, "george-soros", null],
+      [null, "nouriel-roubini", null, "jack-bogle", null, "barbara-corcoran"],
+      [null, null, null, null, "ralph-nader", null],
+      [null, null, null, "christiane-amanpour", null, "bill-clinton"],
+    ],
+    names: {
+      "richard-branson": "Sir Richard Branson",
+      "george-soros": "George Soros",
+      "nouriel-roubini": "Nouriel Roubini",
+      "jack-bogle": "Jack Bogle",
+      "barbara-corcoran": "Barbara Corcoran",
+      "ralph-nader": "Ralph Nader",
+      "christiane-amanpour": "Christiane Amanpour",
+      "bill-clinton": "Bill Clinton",
+    },
+  },
+
+  published: {
+    heading: "Published Work",
+    // CONFIRM: the design shows five plates with no captions. Publication
+    // covers would replace the placeholder.
+    count: 5,
+  },
+} as const;
