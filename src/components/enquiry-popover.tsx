@@ -15,10 +15,14 @@ import { site } from "@/lib/content";
  * only thing held is an explicit close, and only until the page is reloaded,
  * so scrolling back up does not reopen something the visitor just shut.
  *
- * Two rules it does keep:
+ * Three rules it does keep:
  *
  *  - it never appears on the contact page, which is a longer version of the
  *    same form
+ *  - on the pages built from the Figma file it stays out of the opening screen
+ *    entirely and only appears as the button once the visitor scrolls on,
+ *    because those heroes are composed to the pixel and a card in the corner
+ *    lands on top of the composition
  *  - it never appears below 768px. A popup that covers the content on a phone
  *    is an intrusive interstitial, and Google marks a site down for it.
  *
@@ -26,6 +30,9 @@ import { site } from "@/lib/content";
  * hands it to the visitor's mail client.
  */
 type Mode = "hidden" | "open" | "tab";
+
+/** Pages whose opening screen is laid out to the frame and must stay clear. */
+const NO_CARD_IN_HERO = ["/services", "/work"];
 
 function MailIcon() {
   return (
@@ -63,6 +70,7 @@ export function EnquiryPopover() {
   // shortcut to.
   const route = pathname.replace(/\/+$/, "") || "/";
   const muted = route === "/contact";
+  const heroIsOffLimits = NO_CARD_IN_HERO.includes(route);
 
   const collapse = useCallback(() => {
     closed.current = true;
@@ -89,14 +97,20 @@ export function EnquiryPopover() {
 
     const observer = new IntersectionObserver(
       ([entry]) => {
-        setMode(entry.isIntersecting && !closed.current ? "open" : "tab");
+        if (!entry.isIntersecting) {
+          setMode("tab");
+          return;
+        }
+        // in the opening screen: nothing at all on the two figma pages,
+        // the card on the rest, and the button if it was closed
+        setMode(heroIsOffLimits ? "hidden" : closed.current ? "tab" : "open");
       },
       { threshold: 0.35 },
     );
 
     observer.observe(hero);
     return () => observer.disconnect();
-  }, [muted]);
+  }, [muted, heroIsOffLimits]);
 
   useEffect(() => {
     if (mode !== "open") return;
