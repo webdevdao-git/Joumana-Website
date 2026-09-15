@@ -6,47 +6,26 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { site } from "@/lib/content";
 
 /**
- * A small card that opens in the corner while the visitor is still on the
- * opening screen, then folds away into a glowing button once they scroll on or
- * close it. The button stays for the rest of the visit, so the form is never
- * more than one click away and nothing has to interrupt them twice.
+ * The card sits in the bottom right for as long as the opening screen is in
+ * view. Scroll past it and it folds into a small glowing button in the same
+ * corner, which opens it again.
  *
- * Three rules it follows, because a popup that ignores them is worse than no
- * popup at all:
+ * No timer and nothing remembered between visits: on the opening screen the
+ * card is simply there, and from the second section down the button is. The
+ * only thing held is an explicit close, and only until the page is reloaded,
+ * so scrolling back up does not reopen something the visitor just shut.
+ *
+ * Two rules it does keep:
  *
  *  - it never appears on the contact page, which is a longer version of the
  *    same form
- *  - it opens on its own only once. After that the button is the way in.
- *  - it only appears from 768px up. A popup that covers the content on a phone
+ *  - it never appears below 768px. A popup that covers the content on a phone
  *    is an intrusive interstitial, and Google marks a site down for it.
  *
  * Like the other forms here there is no backend, so this composes an email and
  * hands it to the visitor's mail client.
  */
 type Mode = "hidden" | "open" | "tab";
-
-const OPENED_KEY = "js-enquiry-opened";
-
-/* Long enough to clear the hero landing, short enough that the visitor is
-   still looking at the first screen when it arrives. */
-const DELAY = 4000;
-
-function remember() {
-  try {
-    window.localStorage.setItem(OPENED_KEY, "1");
-  } catch {
-    // private windows and blocked storage both throw. The card simply opens
-    // again next visit, which is not worth breaking the page over.
-  }
-}
-
-function alreadyOpened() {
-  try {
-    return window.localStorage.getItem(OPENED_KEY) === "1";
-  } catch {
-    return false;
-  }
-}
 
 function MailIcon() {
   return (
@@ -76,7 +55,8 @@ export function EnquiryPopover() {
   const reduced = useReducedMotion();
   const [mode, setMode] = useState<Mode>("hidden");
   const [sent, setSent] = useState(false);
-  const inHero = useRef(true);
+  // an explicit close, held for this page load only
+  const closed = useRef(false);
 
   // trailingSlash is on, so the contact page arrives as "/contact/". Matching
   // the bare path alone let the card open on top of the very form it is a
@@ -85,14 +65,15 @@ export function EnquiryPopover() {
   const muted = route === "/contact";
 
   const collapse = useCallback(() => {
+    closed.current = true;
     setMode("tab");
-    remember();
   }, []);
 
   /**
-   * The card belongs to the opening screen. The first section of the page is
-   * the hero on the home page and the page head everywhere else, so watching
-   * that one element keeps the behaviour the same across the site.
+   * The opening screen is the hero on the home page and the page head
+   * everywhere else, so watching the first section keeps the behaviour the
+   * same across the site. The observer reports straight away on observe, which
+   * is what puts the card on screen without a timer.
    */
   useEffect(() => {
     if (muted) return;
@@ -102,36 +83,19 @@ export function EnquiryPopover() {
       document.querySelector<HTMLElement>(".hero-fill") ??
       document.querySelector<HTMLElement>("main section");
 
-    let observer: IntersectionObserver | undefined;
+    // every page renders a section inside main, so this only fails if that
+    // stops being true, in which case staying hidden is the safe outcome
+    if (!hero) return;
 
-    if (hero) {
-      observer = new IntersectionObserver(
-        ([entry]) => {
-          inHero.current = entry.isIntersecting;
-          // scrolling on folds the card away rather than leaving it hanging
-          // over the middle of the page
-          if (!entry.isIntersecting) {
-            setMode((m) => (m === "open" ? "tab" : m));
-          }
-        },
-        { threshold: 0.35 },
-      );
-      observer.observe(hero);
-    }
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        setMode(entry.isIntersecting && !closed.current ? "open" : "tab");
+      },
+      { threshold: 0.35 },
+    );
 
-    const id = window.setTimeout(() => {
-      if (alreadyOpened()) {
-        setMode("tab");
-        return;
-      }
-      setMode(inHero.current ? "open" : "tab");
-      remember();
-    }, DELAY);
-
-    return () => {
-      window.clearTimeout(id);
-      observer?.disconnect();
-    };
+    observer.observe(hero);
+    return () => observer.disconnect();
   }, [muted]);
 
   useEffect(() => {
@@ -160,7 +124,7 @@ export function EnquiryPopover() {
     )}&body=${encodeURIComponent(body)}`;
 
     setSent(true);
-    remember();
+    closed.current = true;
     window.setTimeout(() => setMode("tab"), 3500);
   }
 
@@ -279,7 +243,10 @@ export function EnquiryPopover() {
         {mode === "tab" && (
           <motion.button
             type="button"
-            onClick={() => setMode("open")}
+            onClick={() => {
+              closed.current = false;
+              setMode("open");
+            }}
             aria-label="Open the enquiry form"
             initial={reduced ? { opacity: 0 } : { opacity: 0, scale: 0.7 }}
             animate={{ opacity: 1, scale: 1 }}
