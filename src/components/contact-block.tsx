@@ -43,16 +43,16 @@ export function ContactBlock() {
   }
 
   const field =
-    "w-full border-0 border-b border-rule bg-transparent pb-3 text-[18px] text-card-body outline-none transition-colors placeholder:text-card-body-soft focus:border-heading xl:text-[20px]";
+    "w-full border-0 border-b border-cream/30 bg-transparent pb-3 text-[18px] text-body outline-none transition-colors placeholder:text-body-soft focus:border-cream xl:text-[20px]";
 
   return (
-    <section className="sec bg-card">
+    <section className="sec bg-page">
       <div className="frame grid items-center gap-8 lg:grid-cols-2 xl:gap-16">
         <div className="flex flex-col gap-6 xl:gap-10">
-          <h2 className="t-section max-w-[16ch] text-card-heading">
+          <h2 className="t-section max-w-[16ch] text-heading">
             Have a Story to Tell?
           </h2>
-          <p className="max-w-xl text-[17px] leading-[1.3] text-card-body xl:text-[24px]">
+          <p className="max-w-xl text-[17px] leading-[1.3] text-body xl:text-[24px]">
             Whether it&rsquo;s an interview, feature, live discussion,
             documentary, or editorial collaboration, I&rsquo;m always interested
             in conversations that bring important stories and perspectives to the
@@ -60,7 +60,7 @@ export function ContactBlock() {
           </p>
         </div>
 
-        <div className="rounded-[24px] bg-card p-6 xl:p-8">
+        <div className="rounded-[24px] p-6 xl:p-8">
           <form onSubmit={handleSubmit} className="flex flex-col gap-6 xl:gap-7">
             {FIELDS.map((f) => (
               <div key={f.name}>
@@ -98,13 +98,13 @@ export function ContactBlock() {
             <div className="flex flex-wrap items-center gap-5">
               <button
                 type="submit"
-                className="inline-flex h-14 w-[170px] items-center justify-center gap-1.5 rounded-full bg-brown text-[16px] font-semibold uppercase text-white transition-opacity duration-300 hover:opacity-90 xl:text-[18px]"
+                className="inline-flex h-14 w-[170px] items-center justify-center gap-1.5 rounded-full bg-cream text-[16px] font-semibold uppercase text-oxblood transition-opacity duration-300 hover:opacity-90 xl:text-[18px]"
               >
                 Submit
                 <span aria-hidden="true">&rarr;</span>
               </button>
               {sent ? (
-                <p role="status" className="text-[14px] text-card-body-soft">
+                <p role="status" className="text-[14px] text-body-soft">
                   Your mail app should have opened with the message filled in.
                 </p>
               ) : null}

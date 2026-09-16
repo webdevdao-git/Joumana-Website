@@ -152,7 +152,7 @@ function FlipCard({
     >
       <span className="flip-inner block" data-flipped={flipped}>
         {/* face: the mark, then the discipline, then the way in */}
-        <span className="flip-face flip-front flex flex-col items-center justify-center gap-4 rounded-[24px] bg-card p-6 text-center xl:gap-5 xl:p-8">
+        <span className="flip-face flip-front flex flex-col items-center justify-center gap-4 rounded-[24px] bg-card p-6 text-center shadow-[0_14px_40px_-30px_rgba(0,0,0,0.45)] xl:gap-5 xl:p-8">
           <span className="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-oxblood/[0.07] text-card-heading ring-1 ring-oxblood/10">
             <Icon />
           </span>
@@ -180,9 +180,9 @@ function FlipCard({
 
 export function Capabilities() {
   return (
-    <section className="sec bg-page">
+    <section className="sec bg-cream">
       <div className="frame flex flex-col items-center gap-7 xl:gap-10">
-        <h2 className="t-section text-center text-heading">Services</h2>
+        <h2 className="t-section text-center text-card-heading">Services</h2>
 
         <ul className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-3">
           {servicesPage.disciplines.map((d) => (

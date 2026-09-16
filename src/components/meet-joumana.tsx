@@ -26,7 +26,7 @@ const COPY = [
 
 export function MeetJoumana() {
   return (
-    <section className="relative bg-card pb-14 xl:pb-20">
+    <section className="relative bg-cream pb-14 xl:pb-20">
       <div className="frame">
         {/* the design nests a 40px inset inside the 80px frame and sets a 40px
             gap between the copy and the portrait */}

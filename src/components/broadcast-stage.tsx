@@ -44,9 +44,9 @@ export function BroadcastStage() {
   const paused = hovered || playing !== null;
 
   return (
-    <section className="sec overflow-hidden bg-page">
+    <section className="sec overflow-hidden bg-cream">
       <div className="frame">
-        <h2 className="t-section text-center text-heading">
+        <h2 className="t-section text-center text-card-heading">
           From Broadcast to The Stage.
         </h2>
       </div>
@@ -109,10 +109,10 @@ export function BroadcastStage() {
                 </button>
 
                 <div className="flex flex-col gap-1" aria-hidden={i >= reels.length ? true : undefined}>
-                  <h3 className="text-[13px] font-semibold leading-tight text-heading xl:text-[15px]">
+                  <h3 className="text-[13px] font-semibold leading-tight text-card-heading xl:text-[15px]">
                     {reel.title}
                   </h3>
-                  <p className="text-[11px] leading-tight text-body-soft xl:text-[13px]">
+                  <p className="text-[11px] leading-tight text-card-body-soft xl:text-[13px]">
                     {reel.note} &middot; {reel.lang}
                   </p>
                 </div>
