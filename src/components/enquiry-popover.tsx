@@ -19,7 +19,7 @@ import { site } from "@/lib/content";
  *
  *  - it never appears on the contact page, which is a longer version of the
  *    same form
- *  - on the pages built from the Figma file it stays out of the opening screen
+ *  - on every page but the home page it stays out of the opening screen
  *    entirely and only appears as the button once the visitor scrolls on,
  *    because those heroes are composed to the pixel and a card in the corner
  *    lands on top of the composition
@@ -30,9 +30,6 @@ import { site } from "@/lib/content";
  * hands it to the visitor's mail client.
  */
 type Mode = "hidden" | "open" | "tab";
-
-/** Pages whose opening screen is laid out to the frame and must stay clear. */
-const NO_CARD_IN_HERO = ["/services", "/work"];
 
 function MailIcon() {
   return (
@@ -70,7 +67,12 @@ export function EnquiryPopover() {
   // shortcut to.
   const route = pathname.replace(/\/+$/, "") || "/";
   const muted = route === "/contact";
-  const heroIsOffLimits = NO_CARD_IN_HERO.includes(route);
+  /* The home page opens on a photograph with the words low and left, and the
+     card has room in the corner. Every other opening screen is composed to the
+     frame, so the card lands on top of the composition. It was a list of the
+     two pages that existed when the rule was written, which left the journal
+     pages out when they arrived; the rule is the page, not the list. */
+  const heroIsOffLimits = route !== "/";
 
   const collapse = useCallback(() => {
     closed.current = true;
@@ -101,7 +103,7 @@ export function EnquiryPopover() {
           setMode("tab");
           return;
         }
-        // in the opening screen: nothing at all on the two figma pages,
+        // in the opening screen: nothing at all anywhere but home,
         // the card on the rest, and the button if it was closed
         setMode(heroIsOffLimits ? "hidden" : closed.current ? "tab" : "open");
       },
