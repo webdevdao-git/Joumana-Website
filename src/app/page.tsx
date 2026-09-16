@@ -25,8 +25,8 @@ export default function HomePage() {
       <Hero />
       <OutletBand />
       <MeetJoumana />
-      <AcrossTheYears />
       <Capabilities />
+      <AcrossTheYears />
       <FeaturedArticles />
       <BroadcastStage />
       <ContactBlock />

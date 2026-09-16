@@ -279,11 +279,11 @@ function ServiceCard({
 
 export function Capabilities() {
   return (
-    <section className="flex min-h-[100svh] items-center bg-cream py-14 xl:py-20">
+    <section className="flex min-h-[100svh] items-center bg-page py-14 xl:py-20">
       <div className="frame flex w-full flex-col items-center gap-7 xl:gap-9">
         <div className="flex flex-col items-center gap-4">
-          <h2 className="t-section text-center text-card-heading">Services</h2>
-          <p className="max-w-[62ch] text-center text-[15px] leading-[1.5] text-card-body-soft xl:text-[18px]">
+          <h2 className="t-section text-center text-heading">Services</h2>
+          <p className="max-w-[62ch] text-center text-[15px] leading-[1.5] text-body-soft xl:text-[18px]">
             {servicesPage.hero.lede}
           </p>
         </div>

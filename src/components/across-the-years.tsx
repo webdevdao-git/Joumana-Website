@@ -139,9 +139,9 @@ export function AcrossTheYears() {
   const current = ROLES[active];
 
   return (
-    <section className="bg-page py-10 xl:py-14">
+    <section className="bg-cream py-10 xl:py-14">
       <div className="frame flex flex-col items-center gap-7 xl:gap-10">
-        <h2 className="t-section text-center text-heading">Across the Years</h2>
+        <h2 className="t-section text-center text-card-heading">Across the Years</h2>
 
         <div ref={rail} className="relative w-full">
           <div className="lg:grid lg:grid-cols-[minmax(0,300px)_1fr] lg:gap-12">
@@ -153,7 +153,7 @@ export function AcrossTheYears() {
                     <motion.span
                       key={r.year}
                       aria-hidden={i !== active}
-                      className="absolute inset-x-0 top-0 block font-display text-[68px] font-light leading-none text-heading xl:text-[92px]"
+                      className="absolute inset-x-0 top-0 block font-display text-[68px] font-light leading-none text-card-heading xl:text-[92px]"
                       initial={false}
                       animate={
                         i === active
@@ -169,7 +169,7 @@ export function AcrossTheYears() {
 
                 <motion.p
                   key={current.span}
-                  className="mt-2 text-[13px] font-semibold uppercase tracking-[0.16em] text-body-soft"
+                  className="mt-2 text-[13px] font-semibold uppercase tracking-[0.16em] text-card-body-soft"
                   initial={reduced ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.4 }}
@@ -184,7 +184,7 @@ export function AcrossTheYears() {
                       key={r.year}
                       aria-hidden="true"
                       className={`block h-[3px] rounded-full transition-all duration-500 ${
-                        i === active ? "w-9 bg-heading" : "w-4 bg-heading/25"
+                        i === active ? "w-9 bg-card-heading" : "w-4 bg-card-heading/25"
                       }`}
                     />
                   ))}
@@ -195,10 +195,10 @@ export function AcrossTheYears() {
             {/* ----------------------------------------------- the entries */}
             <div className="relative">
               {/* the rail, and the line that draws down it */}
-              <div className="absolute bottom-0 left-[7px] top-2 hidden w-px bg-heading/20 lg:block">
+              <div className="absolute bottom-0 left-[7px] top-2 hidden w-px bg-card-heading/20 lg:block">
                 {!reduced && (
                   <motion.span
-                    className="absolute inset-x-0 top-0 block bg-heading"
+                    className="absolute inset-x-0 top-0 block bg-card-heading"
                     style={{ height: fill }}
                   />
                 )}
@@ -218,14 +218,14 @@ export function AcrossTheYears() {
                     {/* the marker sitting on the rail */}
                     <span
                       aria-hidden="true"
-                      className={`absolute left-0 top-7 hidden rounded-full border-2 border-heading bg-page transition-all duration-500 lg:block ${
-                        i === active ? "h-[19px] w-[19px] bg-heading" : "h-[15px] w-[15px]"
+                      className={`absolute left-0 top-7 hidden rounded-full border-2 border-card-heading bg-cream transition-all duration-500 lg:block ${
+                        i === active ? "h-[19px] w-[19px] bg-card-heading" : "h-[15px] w-[15px]"
                       }`}
                       style={i === active ? { left: -2 } : undefined}
                     />
 
                     <article
-                      className={`group rounded-[24px] bg-card p-5 transition-all duration-500 xl:p-7 ${
+                      className={`group rounded-[24px] bg-card p-5 shadow-[0_14px_40px_-30px_rgba(0,0,0,0.45)] transition-all duration-500 xl:p-7 ${
                         i === active
                           ? "shadow-[0_24px_60px_-34px_rgba(0,0,0,0.6)] lg:-translate-y-0.5"
                           : "lg:opacity-[0.94]"
