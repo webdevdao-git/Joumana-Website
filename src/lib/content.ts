@@ -951,3 +951,78 @@ export const workPage = {
     count: 5,
   },
 } as const;
+
+/**
+ * Nodes 168:864 (Journal) and 176:1377 (Single Journal page).
+ *
+ * Every string below is the design's own, read through the Figma API rather
+ * than retyped from a screenshot, so the two pages carry exactly what was
+ * drawn. The only edits are typographic: the design's em dash is set as an
+ * en-spaced comma clause, because dashes are kept out of the copy on this
+ * site.
+ */
+export const journalPage = {
+  hero: {
+    heading: ["Words, ideas", "& everything in between"],
+    body: [
+      "A collection of stories, observations, conversations and perspectives from a career spent asking questions, finding the story and making it matter.",
+      "From journalism and business to media, communications, people and places, this is where Joumana shares what catches her attention.",
+    ],
+    portrait: {
+      src: "/images/journal/podcast.webp",
+      alt: "Joumana Saad recording a podcast interview in Dubai",
+    },
+    inset: {
+      src: "/images/journal/podium.webp",
+      alt: "Joumana Saad speaking at a Dubai Chamber podium",
+    },
+  },
+
+  marquee: ["Journal", "Stories", "Ideas", "Conversations", "Perspectives"],
+
+  why: {
+    heading: ["Some stories are assigned", "Others find you"],
+    mark: {
+      src: "/images/journal/newsprint.webp",
+      alt: "A folded stack of newspapers",
+    },
+    left: [
+      "For Joumana, writing has always been about more than putting words on a page.",
+      "It is about asking better questions, getting beneath the obvious and finding the detail that makes a story worth telling.",
+    ],
+    right: [
+      "The Journal brings together her published work, observations, conversations and perspectives across business, finance, technology, media, communications and life in a constantly changing world.",
+      "Some are stories. Some are ideas. Some are simply things worth thinking about.",
+    ],
+  },
+
+  from: {
+    kicker: "From the Journal",
+    heading: "A space for stories, ideas & perspective",
+    image: {
+      src: "/images/journal/corridor.webp",
+      alt: "A colonnade in raking light",
+    },
+    body: [
+      "A collection of articles, observations and conversations covering communications, media, business, current affairs and the ideas shaping the world around us.",
+      "From industry insights and practical communications thoughts to personal observations and stories worth sharing, this is where I'll document what I'm learning, noticing and thinking about along the way.",
+      "New perspectives, whenever there's something worth saying.",
+    ],
+    cta: { label: "Explore the Journal", href: "/journal/all" },
+  },
+
+  /** Node 176:1377, the page the Explore button opens. */
+  all: {
+    hero: {
+      heading: "The Journal",
+      image: {
+        src: "/images/journal/newsstand.webp",
+        alt: "Newspapers spread across a table",
+      },
+    },
+    kicker: "Coming Soon",
+    heading: "The Journal is just getting started",
+    body: "This space is being built as an evolving collection of Joumana's writing, observations and conversations. New pieces will be added soon.",
+    cta: { label: "Until then, explore the work", href: "/work" },
+  },
+} as const;
