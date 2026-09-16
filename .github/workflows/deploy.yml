@@ -1,37 +1,56 @@
 # Push to main, and the live site updates.
 #
-# Hostinger shared hosting runs no Node process, so its own Git integration is
-# no use here: it would copy the source across and serve a folder of TypeScript.
-# Instead GitHub builds the static export and sends the finished files over FTP.
+# Hostinger shared hosting runs no Node process, so it cannot build anything:
+# point its Git integration at this repository's `main` and it would serve a
+# folder of TypeScript. So GitHub does the build, and commits the finished
+# static site to a branch of its own called `deploy`. That branch holds
+# index.html, the pages, _next, the artwork and .htaccess at its root, and
+# nothing else. Hostinger clones exactly that into public_html.
 #
-# One time setup, all of it in this repository's Settings:
+# One time setup:
 #
-#   Secrets and variables > Actions > Secrets
-#     FTP_SERVER     the host from hPanel > Files > FTP Accounts
-#     FTP_USERNAME   the FTP user from that same page
-#     FTP_PASSWORD   that user's password
+#   1. hPanel > your website > Advanced > GIT
+#        Repository   git@github.com:webdevdao-git/Joumana-Website.git
+#        Branch       deploy
+#        Directory    public_html
+#      It will show an SSH key. Copy it.
 #
-#   Secrets and variables > Actions > Variables
-#     SITE_URL       https://seashell-dog-863923.hostingersite.com
-#     NOINDEX        1
+#   2. GitHub > this repo > Settings > Deploy keys > Add deploy key
+#      Paste the key. Leave "Allow write access" unticked: Hostinger only
+#      ever reads.
+#
+#   3. Back in hPanel, finish the Git setup, then open Auto deployment and
+#      copy the webhook URL it gives you.
+#
+#   4. GitHub > Settings > Webhooks > Add webhook
+#        Payload URL   the one hPanel gave you
+#        Content type  application/json
+#        Events        Just the push event
+#
+#   5. GitHub > Settings > Secrets and variables > Actions > Variables
+#        SITE_URL   https://seashell-dog-863923.hostingersite.com
+#        NOINDEX    1
 #
 # When the real domain is connected, change SITE_URL to
-# https://www.joumanasaad.com and delete the NOINDEX variable. Nothing in the
-# code has to change, and the next push publishes it.
+# https://www.joumanasaad.com and delete NOINDEX. No code changes.
 
-name: Deploy to Hostinger
+name: Build and publish
 
 on:
   push:
     branches: [main]
   workflow_dispatch:
 
+# the job commits the build to the deploy branch, so it needs write
+permissions:
+  contents: write
+
 concurrency:
   group: deploy
   cancel-in-progress: true
 
 jobs:
-  deploy:
+  publish:
     runs-on: ubuntu-latest
 
     steps:
@@ -54,32 +73,28 @@ jobs:
           NEXT_PUBLIC_NOINDEX: ${{ vars.NOINDEX }}
         run: npm run build
 
-      # the export is only ever a few hundred files, but a missing index.html
-      # would happily deploy as an empty site, so it is checked first
+      # an empty out/ would publish as an empty site, so it is checked first
       - name: Check the export looks right
         run: |
           test -f out/index.html
           test -f out/.htaccess
-          test -f out/services/index.html
-          test -f out/work/index.html
-          test -f out/journal/index.html
-          test -f out/contact/index.html
+          for page in services work journal contact; do
+            test -f "out/$page/index.html"
+          done
           echo "$(find out -type f | wc -l) files ready"
 
-      - name: Upload to public_html
-        uses: SamKirkland/FTP-Deploy-Action@v4.3.5
-        with:
-          server: ${{ secrets.FTP_SERVER }}
-          username: ${{ secrets.FTP_USERNAME }}
-          password: ${{ secrets.FTP_PASSWORD }}
-          protocol: ftps
-          local-dir: ./out/
-          server-dir: ./public_html/
-          # only what changed goes up, so a deploy is seconds rather than
-          # the whole 23MB every time
-          state-name: .ftp-deploy-sync-state.json
-          exclude: |
-            **/.git*
-            **/.git*/**
-            **/node_modules/**
-            **/.DS_Store
+      - name: Commit the build to the deploy branch
+        run: |
+          cd out
+          # a .DS_Store can ride in from public/ on a mac checkout
+          find . -name ".DS_Store" -delete
+          git init -q
+          git checkout -q -b deploy
+          git config user.name "github-actions"
+          git config user.email "github-actions@users.noreply.github.com"
+          git add -A
+          git commit -qm "Build of ${GITHUB_SHA::7}"
+          git push -qf \
+            "https://x-access-token:${{ github.token }}@github.com/${{ github.repository }}.git" \
+            deploy
+          echo "pushed $(git rev-parse --short HEAD) to deploy"
