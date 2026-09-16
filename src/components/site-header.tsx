@@ -10,9 +10,14 @@ import { site } from "@/lib/content";
  * The bar as the design draws it: Home and Services at the left, the wordmark,
  * then Work and Journal, and Contact as a white pill at the right edge.
  *
- * The three groups are spaced apart rather than sitting in equal columns. That
- * is what the design does, and it is why the wordmark reads slightly left of
- * the page centre: the pill makes the right group heavier than the left.
+ * The three columns are 1fr / auto / 1fr, so the wordmark lands on the exact
+ * centre of the page whatever the labels either side of it weigh. Spacing the
+ * groups apart instead, which is what the design does on its 1728 frame, threw
+ * the wordmark 91px left of centre, because the pill makes the right group
+ * heavier than the left.
+ *
+ * The links then sit close to the wordmark rather than being pushed out to the
+ * gutters, and Contact keeps its pill at the end of them.
  */
 const LEFT = [
   { label: "Home", href: "/" },
@@ -52,10 +57,10 @@ export function SiteHeader() {
     <>
       <header className="relative z-50 bg-oxblood">
         <div className="frame">
-          <div className="nav-bar flex items-center justify-between gap-6">
+          <div className="nav-bar grid grid-cols-[1fr_auto_1fr] items-center gap-10 xl:gap-14">
             <div className="flex items-center justify-start lg:justify-end">
-              {/* mirrors the menu button opposite, so the wordmark keeps its
-                  place on a phone where both navs are hidden */}
+              {/* mirrors the menu button opposite, so the two outer columns
+                  weigh the same and the wordmark stays on the centre line */}
               <span aria-hidden="true" className="-ml-2 h-11 w-11 lg:hidden" />
 
               <nav
@@ -74,7 +79,7 @@ export function SiteHeader() {
               Joumana Saad
             </Link>
 
-            <div className="flex items-center justify-end gap-8">
+            <div className="flex items-center justify-end lg:justify-start">
               <nav
                 className="hidden items-center gap-8 lg:flex"
                 aria-label="Primary"
@@ -85,7 +90,7 @@ export function SiteHeader() {
               <Link
                 href={CONTACT.href}
                 aria-current={pathname === CONTACT.href ? "page" : undefined}
-                className="t-nav hidden h-10 items-center gap-2 rounded-full bg-white px-6 text-card-heading transition-opacity duration-300 hover:opacity-90 lg:inline-flex xl:h-11 xl:px-7"
+                className="t-nav ml-8 hidden h-10 items-center gap-2 rounded-full bg-white px-6 text-card-heading transition-opacity duration-300 hover:opacity-90 lg:inline-flex xl:h-11 xl:px-7"
               >
                 {CONTACT.label}
                 <span aria-hidden="true">&rarr;</span>

@@ -55,6 +55,14 @@
 }
 
 @font-face {
+  font-family: "Mikea Demo";
+  src: url("/fonts/Mikea-Regular.woff2") format("woff2");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
   font-family: "Priestacy";
   src: url("/fonts/Priestacy.woff2") format("woff2");
   font-weight: 400;
@@ -102,6 +110,7 @@
   --nav-h: 60px;
 
   --font-display: "IvyPresto Text", "Iowan Old Style", Georgia, serif;
+  --font-wordmark: "Mikea Demo", "IvyPresto Text", Georgia, serif;
   --font-sans: var(--font-oakes), "Archivo", system-ui, sans-serif;
   --font-script: "Priestacy", "Snell Roundhand", cursive;
 }
@@ -131,6 +140,7 @@
   --color-ink-soft: var(--ink-soft);
 
   --font-display: var(--font-display);
+  --font-wordmark: var(--font-wordmark);
   --font-sans: var(--font-sans);
   --font-script: var(--font-script);
 }
@@ -252,13 +262,14 @@
     }
   }
 
-  /* The nav wordmark is set in Mikea Demo in the design, which has not been
-     supplied. IvyPresto in wide caps is the closest of the faces we have. */
+  /* Mikea Demo, which is what the design sets the wordmark in. It stood in as
+     IvyPresto in wide caps until the file arrived. Mikea carries its own
+     width, so the tracking comes back down from 0.18em. */
   .t-wordmark {
-    font-family: var(--font-display);
-    font-weight: 300;
-    font-size: clamp(1rem, 1.5vw, 1.5rem);
-    letter-spacing: 0.18em;
+    font-family: var(--font-wordmark);
+    font-weight: 400;
+    font-size: clamp(1.125rem, 1.75vw, 1.75rem);
+    letter-spacing: 0.06em;
     line-height: normal;
     text-transform: uppercase;
   }
