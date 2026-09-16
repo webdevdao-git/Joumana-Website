@@ -60,7 +60,7 @@ export function OutletBand({
   return (
     <section
       aria-label="Publications and organisations Joumana Saad has worked with"
-      className={`relative overflow-hidden bg-band ${full ? "py-10 xl:py-[5.79vw]" : "py-7 xl:py-9"}`}
+      className={`relative overflow-hidden bg-band ${full ? "py-10 xl:py-[5.79vw]" : "py-10 xl:py-14"}`}
     >
       <div className="frame">
         <h2
@@ -74,7 +74,7 @@ export function OutletBand({
         </h2>
       </div>
 
-      <div className={full ? "mt-8 overflow-hidden xl:mt-[3.1vw]" : "mt-5 overflow-hidden xl:mt-6"}>
+      <div className={full ? "mt-8 overflow-hidden xl:mt-[3.1vw]" : "mt-7 overflow-hidden xl:mt-9"}>
         <Row full={full} />
       </div>
 
