@@ -108,12 +108,12 @@ export default function ContactPage() {
 
           <div className="relative -mx-6 aspect-[700/620] md:-mx-10 lg:mx-0 lg:aspect-auto lg:h-full">
             <Image
-              src="/images/portrait-studio.jpg"
+              src="/images/contact-portrait.webp"
               alt="Joumana Saad, journalist, presenter and communications specialist in Dubai"
               fill
               priority
               sizes="(max-width: 1024px) 100vw, 41vw"
-              className="object-cover object-[center_18%]"
+              className="object-cover object-[center_16%]"
             />
           </div>
         </div>
