@@ -49,14 +49,14 @@ export function ContactBlock() {
     <section className="sec bg-card">
       <div className="frame grid items-center gap-8 lg:grid-cols-2 xl:gap-16">
         <div className="flex flex-col gap-6 xl:gap-10">
-          <h2 className="t-section text-card-heading">
-            <span className="block">Tell Me What</span>
-            <span className="block">You&rsquo;re Working On</span>
+          <h2 className="t-section max-w-[16ch] text-card-heading">
+            Have a Story to Tell?
           </h2>
           <p className="max-w-xl text-[17px] leading-[1.3] text-card-body xl:text-[24px]">
-            Whether you&rsquo;re planning an event, looking for a presenter or
-            moderator, developing content, or exploring a communications project,
-            I&rsquo;d love to hear more.
+            Whether it&rsquo;s an interview, feature, live discussion,
+            documentary, or editorial collaboration, I&rsquo;m always interested
+            in conversations that bring important stories and perspectives to the
+            surface.
           </p>
         </div>
 
