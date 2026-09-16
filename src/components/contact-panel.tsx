@@ -26,7 +26,9 @@ const FIELDS = [
   { name: "email", label: "Email Address", type: "email", autoComplete: "email" },
 ] as const;
 
-export function ContactPanel() {
+export function ContactPanel({ tone = "light" }: { tone?: "dark" | "light" }) {
+  const dark = tone === "dark";
+
   const [sent, setSent] = useState(false);
 
   function handleSubmit(event: React.FormEvent<HTMLFormElement>) {
@@ -52,16 +54,16 @@ export function ContactPanel() {
     "s-body w-full border-0 border-b border-black/20 bg-transparent pb-3 text-card-body outline-none transition-colors placeholder:text-card-body focus:border-card-heading";
 
   return (
-    <section className="bg-card">
+    <section className={dark ? "bg-page" : "bg-cream"}>
       <div className="mx-auto w-full max-w-[1728px] px-6 py-12 md:px-10 lg:aspect-[1728/828] lg:px-0 lg:py-0">
         <div className="relative h-full lg:mx-[4.63%]">
           {/* the heading block, sitting low in its column as the design has it */}
           <div className="lg:absolute lg:left-0 lg:top-[33.6%] lg:w-[49.9%]">
-            <h2 className="s-title text-card-heading">
+            <h2 className={`s-title ${dark ? "text-heading" : "text-card-heading"}`}>
               <span className="block">Tell Me What</span>
               <span className="block">You&rsquo;re Working On</span>
             </h2>
-            <p className="s-body mt-5 max-w-[52ch] text-card-body lg:mt-[4.8%]">
+            <p className={`s-body mt-5 max-w-[52ch] lg:mt-[4.8%] ${dark ? "text-body" : "text-card-body"}`}>
               Whether you&rsquo;re planning an event, looking for a presenter or
               moderator, developing content, or exploring a communications
               project, I&rsquo;d love to hear more.

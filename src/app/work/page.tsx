@@ -38,7 +38,7 @@ const PLATE = "/brand/services-columns.webp";
 
 function ArrowCircle() {
   return (
-    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-white text-oxblood">
+    <span className="flex h-8 w-8 items-center justify-center rounded-full bg-oxblood text-cream">
       <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true">
         <path
           d="M12 5v14M12 19l-6-6M12 19l6-6"
@@ -101,7 +101,7 @@ export default function WorkPage() {
           1728 x 981 on the light ground. A 377 x 408 plate centred at the top,
           the title at 140px in oxblood, the lede under it, and a circled
           arrow pointing into the page. */}
-      <section className="bg-card">
+      <section className="bg-cream">
         <div className="mx-auto flex w-full max-w-[1728px] flex-col items-center px-6 py-12 lg:aspect-[1728/981] lg:justify-center lg:px-0 lg:py-0">
           <div className="relative aspect-[377/408] w-[52%] max-w-[240px] lg:w-[21.8%] lg:max-w-none">
             <Image
@@ -147,10 +147,10 @@ export default function WorkPage() {
           Label row at y100 with the pill at the right, then a two by two grid
           of 772 x 655 cards on white at six percent. Each card holds a 724 x
           380 plate, a title, a paragraph, a rule and the organisation. */}
-      <section className="bg-page py-12 xl:py-[5.79vw]">
-        <div className="mx-auto w-full max-w-[1498px] px-6 md:px-10 xl:px-0">
+      <section className="bg-cream py-12 xl:py-[5.79vw]">
+        <div className="mx-auto w-full max-w-[1658px] px-6 md:px-10 xl:px-20">
           <Reveal className="flex flex-wrap items-center justify-between gap-6">
-            <h2 className="s-title text-white">{highlights.heading}</h2>
+            <h2 className="s-title text-card-heading">{highlights.heading}</h2>
             <Link
               href="/contact"
               className="s-button inline-flex h-[52px] items-center gap-3 rounded-[32px] bg-brown px-7 text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:px-8"
@@ -163,7 +163,7 @@ export default function WorkPage() {
           <ul className="mt-8 grid gap-6 lg:grid-cols-2 xl:mt-[5.79vw] xl:gap-[1.39vw]">
             {highlights.cards.map((card, i) => (
               <Reveal as="li" key={card.title} delay={(i % 2) * 0.06}>
-                <article className="flex h-full flex-col bg-white/[0.06] p-5 xl:p-[1.39vw]">
+                <article className="flex h-full flex-col bg-card p-5 xl:p-[1.39vw]">
                   <div className="relative aspect-[724/380] w-full">
                     <Image
                       src={PLATE}
@@ -174,21 +174,21 @@ export default function WorkPage() {
                     />
                   </div>
 
-                  <h3 className="s-card-title mt-6 text-white xl:mt-[1.39vw]">
+                  <h3 className="s-card-title mt-6 text-card-heading xl:mt-[1.39vw]">
                     {card.title}
                   </h3>
 
-                  <p className="s-card-body mt-4 text-white xl:mt-[1.39vw]">
+                  <p className="s-card-body mt-4 text-card-body xl:mt-[1.39vw]">
                     {card.body}
                   </p>
 
                   <span
                     aria-hidden="true"
-                    className="mt-auto block h-px w-full bg-white/25 pt-0 xl:mt-[1.85vw]"
+                    className="mt-auto block h-px w-full bg-rule pt-0 xl:mt-[1.85vw]"
                   />
 
                   <div className="mt-5 flex items-center justify-between gap-4 xl:mt-[1.39vw]">
-                    <span className="s-card-meta text-white">{card.org}</span>
+                    <span className="s-card-meta text-card-body-soft">{card.org}</span>
                     <ArrowCircle />
                   </div>
                 </article>
@@ -249,7 +249,7 @@ export default function WorkPage() {
           A six by four grid of 251 x 245 tiles on white. Eight carry a face;
           the rest are the outlined empties the design leaves between them,
           and the copy sits over the bottom left where four of them are. */}
-      <section className="bg-white py-12 xl:py-0">
+      <section className="bg-cream py-12 xl:py-0">
         <div className="mx-auto w-full max-w-[1728px] px-6 md:px-10 xl:px-[4.63%] xl:py-[5.79vw]">
           <div className="relative">
             <ul className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6 xl:gap-[0.69vw]">

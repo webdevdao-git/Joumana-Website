@@ -81,7 +81,7 @@ export default function ServicesPage() {
 
           It also sits above the headline in the design's own layer order, so
           it does here. */}
-      <section className="relative overflow-hidden bg-card">
+      <section className="relative overflow-hidden bg-cream">
         <div className="relative mx-auto w-full max-w-[1728px] lg:aspect-[1728/981]">
           <div className="hidden lg:block">
             {/* Each word is pinned to its own x. Centring the pair and
@@ -295,12 +295,20 @@ export default function ServicesPage() {
           The motion that brings each one in lives in DisciplineSection. None
           of it moves the layout: every animation resolves to exactly where
           the frame puts the element. */}
-      {disciplines.map((d) => (
-        <DisciplineSection key={d.index} d={d} plate="/brand/services-columns.webp" />
+      {/* the page alternates the two brand grounds, so every other discipline
+          sits on the cream rather than the oxblood the design draws for all
+          six. CONFIRM: this is a departure from the file. */}
+      {disciplines.map((d, i) => (
+        <DisciplineSection
+          key={d.index}
+          d={d}
+          plate="/brand/services-columns.webp"
+          tone={i % 2 === 0 ? "dark" : "light"}
+        />
       ))}
 
       {/* the design closes on Tell Me What You're Working On */}
-      <ContactPanel />
+      <ContactPanel tone="dark" />
     </>
   );
 }
