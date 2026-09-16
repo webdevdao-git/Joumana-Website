@@ -4,6 +4,7 @@ import Image from "next/image";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import { motion, useReducedMotion, useScroll, useTransform } from "motion/react";
+import { yearsIn } from "@/lib/years";
 
 /**
  * The career, as a timeline you travel down rather than a list you read.
@@ -141,7 +142,9 @@ export function AcrossTheYears() {
   return (
     <section className="bg-cream py-10 xl:py-14">
       <div className="frame flex flex-col items-center gap-7 xl:gap-10">
-        <h2 className="t-section text-center text-card-heading">Across the Years</h2>
+        <h2 className="t-section text-center text-card-heading">
+          {yearsIn()} Years In
+        </h2>
 
         <div ref={rail} className="relative w-full">
           <div className="lg:grid lg:grid-cols-[minmax(0,300px)_1fr] lg:gap-12">
