@@ -194,36 +194,6 @@
     );
   }
 
-  /* --------------------------------------------------------- flip cards
-     Both faces sit on top of each other and the shell rotates. The hidden
-     face is turned away rather than removed, so the card keeps its height
-     and nothing reflows mid turn. */
-  .flip-scene {
-    perspective: 1400px;
-  }
-
-  .flip-inner {
-    position: relative;
-    height: 100%;
-    transform-style: preserve-3d;
-    transition: transform 0.7s cubic-bezier(0.22, 1, 0.36, 1);
-  }
-
-  .flip-inner[data-flipped="true"] {
-    transform: rotateY(180deg);
-  }
-
-  .flip-face {
-    position: absolute;
-    inset: 0;
-    backface-visibility: hidden;
-    -webkit-backface-visibility: hidden;
-  }
-
-  .flip-back {
-    transform: rotateY(180deg);
-  }
-
   .frame {
     width: 100%;
     padding-inline: 24px;
@@ -485,27 +455,6 @@
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .flip-inner {
-    transition: none;
-  }
-
-  .flip-inner[data-flipped="true"] {
-    transform: none;
-  }
-
-  .flip-inner[data-flipped="true"] .flip-front {
-    visibility: hidden;
-  }
-
-  .flip-back {
-    transform: none;
-    visibility: hidden;
-  }
-
-  .flip-inner[data-flipped="true"] .flip-back {
-    visibility: visible;
-  }
-
   .marquee-run {
     animation: none !important;
   }
