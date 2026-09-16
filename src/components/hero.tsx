@@ -17,38 +17,49 @@ import { site } from "@/lib/content";
  *
  * Seven frames, crossfading, each drifting slowly as it holds.
  *
- * The pictures are 2:3 portraits. Stretched across a band that is close to
- * 16:9 they lose about two thirds of their height, so what survives is a
- * fragment of a portrait blown up past the size the file can carry: a face
- * with no room around it, soft at the edges. That was tried four ways and it
- * is the shape of the crop that is wrong, not the crop line.
+ * Three things were making these read badly and all three are composition
+ * rather than content:
  *
- * So on a wide screen the picture is given a column of its own instead. It
- * bleeds to the top, bottom and right edge of the section, at a proportion
- * close to its own, which leaves about three quarters of each photograph
- * standing and draws 700-odd pixels out of a 1706px file rather than pulling
- * 853 across 1500. Downsampling instead of stretching is most of why it reads
- * as a photograph again. Its left edge dissolves into the oxblood so the two
- * halves are one composition rather than a seam.
+ * The headline sat dead centre, and every one of these photographs puts her
+ * dead centre too, so the type landed across her face or her chest in all
+ * seven. It now sits in the lower left, the way a cover line does, and the
+ * pictures are left to be pictures.
  *
- * A phone is the one place the old treatment was right: a tall screen and a
- * tall picture are the same shape, so below lg the frame still fills the
- * screen and the words sit over it.
+ * The wash was a flat black 45% over the whole frame, which takes the contrast
+ * out of a photograph without making the type any easier to read. It is now
+ * directional: deep in the lower left under the words, clearing away toward
+ * the upper right where her face is. The photograph gets its own light back.
  *
- * CONFIRM: the files came off WhatsApp at 853px. They are upscaled 2x with
- * Lanczos and a light unsharp pass so the browser always has more pixels than
- * it needs. The camera originals would still be a real step up.
+ * The crop lines were cutting the top of her head off in several frames. They
+ * are set from where her head actually starts in each file: the visible band
+ * is about 485 of the 1280 rows, so the window is placed to open a little
+ * above her and run down to roughly her waist.
+ *
+ * The seven were also shot in different light and one of them is black and
+ * white, so they did not read as a set. A single low oxblood multiply over all
+ * of them ties the b&w frame to the colour ones.
+ *
+ * CONFIRM: the files came off WhatsApp at 853px wide, which is under half the
+ * width this band is drawn at. They are now upscaled 2x with Lanczos and a
+ * light unsharp pass, so the browser downsamples instead of stretching, and
+ * that is the whole of what can be done from here. The camera originals would
+ * still be a real step up.
  *
  * Reduced motion holds the first frame and nothing moves.
  */
+/**
+ * Ordered, not numbered. The band is widest and the eye is freshest on the
+ * first frame, so the one with the most room around her leads and the two
+ * desk frames, which are the same setup in the same outfit, are kept apart.
+ */
 const SLIDES = [
-  { src: "/images/hero-slide-3.webp", at: "50% 22%", alt: "Joumana Saad in Dubai" },
-  { src: "/images/hero-slide-1.webp", at: "50% 12%", alt: "Joumana Saad, communications specialist and journalist in Dubai" },
-  { src: "/images/hero-slide-5.webp", at: "50% 20%", alt: "Joumana Saad" },
-  { src: "/images/hero-slide-6.webp", at: "50% 26%", alt: "Joumana Saad at work" },
-  { src: "/images/hero-slide-4.webp", at: "50% 20%", alt: "Joumana Saad" },
-  { src: "/images/hero-slide-2.webp", at: "50% 10%", alt: "Joumana Saad" },
-  { src: "/images/hero-slide-7.webp", at: "50% 22%", alt: "Joumana Saad at work in Dubai" },
+  { src: "/images/hero-slide-3.webp", at: "50% 31%", alt: "Joumana Saad in Dubai" },
+  { src: "/images/hero-slide-1.webp", at: "50% 15%", alt: "Joumana Saad, communications specialist and journalist in Dubai" },
+  { src: "/images/hero-slide-5.webp", at: "50% 29%", alt: "Joumana Saad" },
+  { src: "/images/hero-slide-6.webp", at: "50% 34%", alt: "Joumana Saad at work" },
+  { src: "/images/hero-slide-4.webp", at: "50% 29%", alt: "Joumana Saad" },
+  { src: "/images/hero-slide-2.webp", at: "50% 12%", alt: "Joumana Saad" },
+  { src: "/images/hero-slide-7.webp", at: "50% 31%", alt: "Joumana Saad at work in Dubai" },
 ] as const;
 
 const HOLD = 5200;
@@ -83,11 +94,10 @@ export function Hero() {
   return (
     <section
       ref={section}
-      className="hero-fill relative flex items-end overflow-hidden bg-oxblood lg:items-center"
+      className="hero-fill relative flex items-end overflow-hidden bg-black"
     >
-      {/* the picture: the whole band on a phone, its own column from lg up */}
       <motion.div
-        className="absolute inset-0 overflow-hidden lg:left-auto lg:w-[52%]"
+        className="absolute inset-0"
         style={reduced ? undefined : { y: mediaY }}
       >
         <AnimatePresence initial={false}>
@@ -99,11 +109,12 @@ export function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1.4, ease: "easeInOut" }}
           >
-            {/* drifting as it holds: across as well as in, so the movement
-                has a direction rather than being a plain zoom */}
+            {/* the frame, filling the band, drifting as it holds. It drifts
+                across as well as in, so the movement has a direction rather
+                than being a plain zoom. */}
             <motion.div
               className="absolute inset-0"
-              initial={reduced ? { scale: 1, x: 0 } : { scale: 1.06, x: 8 }}
+              initial={reduced ? { scale: 1, x: 0 } : { scale: 1.07, x: 10 }}
               animate={{ scale: 1, x: 0 }}
               transition={{ duration: HOLD / 1000 + 3, ease: "linear" }}
             >
@@ -112,91 +123,87 @@ export function Hero() {
                 alt={slide.alt}
                 fill
                 priority={active === 0}
-                sizes="(max-width: 1024px) 100vw, 52vw"
+                sizes="100vw"
                 className="object-cover"
                 style={{ objectPosition: slide.at }}
               />
             </motion.div>
           </motion.div>
         </AnimatePresence>
-
-        {/* one light grade over all seven, so they read as a set */}
-        <div className="absolute inset-0 bg-oxblood/[0.1] mix-blend-multiply" />
-
-        {/* on a phone the words sit on the picture, so they need a floor:
-            deep in the lower left, gone by the upper right */}
-        <div className="absolute inset-0 bg-[linear-gradient(to_top_right,rgba(20,5,4,0.86)_0%,rgba(20,5,4,0.6)_28%,rgba(20,5,4,0.2)_56%,rgba(20,5,4,0)_78%)] lg:hidden" />
-        <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/45 lg:hidden" />
-
-        {/* from lg the words are beside the picture, not on it, so all it
-            needs is for its left edge to dissolve into the oxblood */}
-        <div className="absolute inset-y-0 left-0 hidden w-[15%] bg-gradient-to-r from-oxblood via-oxblood/40 to-transparent lg:block" />
-        <div className="absolute inset-x-0 top-0 hidden h-24 bg-gradient-to-b from-oxblood/60 to-transparent lg:block" />
       </motion.div>
 
+      {/* one grade over all seven, kept light: the tying together is done in
+          the files themselves, and a heavy multiply here only drains them */}
+      <div className="absolute inset-0 bg-oxblood/[0.12] mix-blend-multiply" />
+
+      {/* the scrim that carries the headline: deep under the words in the
+          lower left, gone by the upper right */}
+      <div className="absolute inset-0 bg-[linear-gradient(to_top_right,rgba(20,5,4,0.86)_0%,rgba(20,5,4,0.62)_26%,rgba(20,5,4,0.22)_54%,rgba(20,5,4,0)_78%)]" />
+      {/* a floor along the bottom edge and a little weight under the nav, so
+          white type has something to sit on wherever a frame runs bright */}
+      <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-transparent to-black/45" />
+
       <motion.div
-        className="relative w-full pb-14 pt-24 lg:py-0"
+        className="relative w-full pb-14 pt-24 xl:pb-20"
         style={reduced ? undefined : { opacity: copyOpacity }}
       >
-        <div className="frame">
-          <div className="flex flex-col items-start gap-6 lg:max-w-[min(620px,38vw)] xl:gap-8">
-            <motion.p
-              className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70 xl:text-[13px]"
-              initial={reduced ? { opacity: 1 } : { opacity: 0, y: 12 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
-            >
-              {site.role}
-            </motion.p>
+        <div className="frame flex flex-col items-start gap-6 xl:gap-8">
+          <motion.p
+            className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70 xl:text-[13px]"
+            initial={reduced ? { opacity: 1 } : { opacity: 0, y: 12 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}
+          >
+            {site.role}
+          </motion.p>
 
-            <h1 className="t-display text-left text-white">
-              <span className="block overflow-hidden">
-                <motion.span
-                  className="inline-block"
-                  initial={reduced ? { opacity: 1 } : { opacity: 0, y: 28 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.95, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  Stories worth <b>telling</b>
-                </motion.span>
-              </span>
-              <span className="block overflow-hidden">
-                <motion.span
-                  className="inline-block"
-                  initial={reduced ? { opacity: 1 } : { opacity: 0, y: 28 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.95, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                >
-                  Voices worth <b>hearing</b>
-                </motion.span>
-              </span>
-            </h1>
+          <h1 className="t-display text-left text-white">
+            <span className="block overflow-hidden">
+              <motion.span
+                className="inline-block"
+                initial={reduced ? { opacity: 1 } : { opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.95, delay: 0.14, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Stories worth <b>telling</b>
+              </motion.span>
+            </span>
+            <span className="block overflow-hidden">
+              <motion.span
+                className="inline-block"
+                initial={reduced ? { opacity: 1 } : { opacity: 0, y: 28 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.95, delay: 0.28, ease: [0.22, 1, 0.36, 1] }}
+              >
+                Voices worth <b>hearing</b>
+              </motion.span>
+            </span>
+          </h1>
 
-            {/* which frame is showing, and a way to step through them */}
-            <motion.div
-              className="flex items-center gap-2.5"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.7, delay: 0.6 }}
-            >
-              {SLIDES.map((s, i) => (
-                <button
-                  key={s.src}
-                  type="button"
-                  onClick={() => go(i)}
-                  aria-label={`Show frame ${i + 1} of ${SLIDES.length}`}
-                  aria-current={i === active}
-                  className="py-2"
-                >
-                  <span
-                    className={`block h-[3px] rounded-full transition-all duration-500 ${
-                      i === active ? "w-10 bg-white" : "w-5 bg-white/40 hover:bg-white/70"
-                    }`}
-                  />
-                </button>
-              ))}
-            </motion.div>
-          </div>
+          {/* which frame is showing, and a way to step through them */}
+          <motion.div
+            className="flex items-center gap-2.5"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.7, delay: 0.6 }}
+          >
+            {SLIDES.map((s, i) => (
+              <button
+                key={s.src}
+                type="button"
+                onClick={() => go(i)}
+                aria-label={`Show frame ${i + 1} of ${SLIDES.length}`}
+                aria-current={i === active}
+                className="py-2"
+              >
+                <span
+                  className={`block h-[3px] rounded-full transition-all duration-500 ${
+                    i === active ? "w-10 bg-white" : "w-5 bg-white/40 hover:bg-white/70"
+                  }`}
+                />
+              </button>
+            ))}
+          </motion.div>
         </div>
       </motion.div>
     </section>
