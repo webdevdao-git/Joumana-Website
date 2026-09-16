@@ -9,19 +9,19 @@ import Image from "next/image";
  * Written from her LinkedIn record, which Priya supplied, so every role, date
  * and remit below is verifiable.
  *
- * It is also all third person. The block used to open "Joumana Saad is a
- * Dubai-based journalist" and then switch to "For more than 13 years, I've
- * worked", which read as two people. Third person is what the services and
- * work pages use, so the site now holds one voice throughout.
+ * First person, because this is her site and she is the one talking. It used
+ * to read "Joumana Saad is a Dubai-based journalist", which is how a press
+ * release describes someone, not how someone introduces themselves. The
+ * heading above it says Meet Joumana Saad; what follows should be her.
  *
  * The figure is a date rather than a count. "13+ years" sat on the home page
  * against "nineteen years" on the work page and "more than 15 years" in the
  * services design. She began at Forbes in 2007, and a date cannot drift.
  */
 const COPY = [
-  "Joumana Saad is a communications specialist, journalist and presenter based in Dubai. She is Senior Communications Manager at the Dubai Department of Economy and Tourism, where she leads public relations and communications strategy across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
-  "She has worked in newsrooms since 2007, beginning at Forbes in New York, where she ran the magazine's video network and reported on air. In Dubai she reported for Arabian Radio Network across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live and producing features for Business Breakfast and Drive Live, edited SME Advisor magazine for CPI, and was Deputy Editor at Argaam, covering financial markets in the UAE, Saudi Arabia and Egypt.",
-  "Six years at Dubai Chamber of Commerce followed, running media plans, press activity and corporate communications. That is the combination behind the work today: a reporter's instinct for the story, applied inside organisations that need to be understood.",
+  "I am a communications specialist, journalist and presenter based in Dubai. Today I lead public relations and communications strategy for the Dubai Department of Economy and Tourism, across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
+  "I started in newsrooms in 2007, at Forbes in New York, running the video network and reporting on air. In Dubai I reported for Arabian Radio Network across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live and producing features for Business Breakfast and Drive Live. I edited SME Advisor magazine, and covered financial markets in the UAE, Saudi Arabia and Egypt as Deputy Editor at Argaam.",
+  "Six years at Dubai Chamber of Commerce taught me what a reporter's instinct is worth inside a large organisation. Newsroom, boardroom or stage, the job has never changed: understand the subject, find what actually matters in it, and say it so people listen.",
 ];
 
 export function MeetJoumana() {
