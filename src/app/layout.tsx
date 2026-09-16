@@ -31,18 +31,18 @@ export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
     default:
-      "Joumana Saad | Freelance Journalist, Editor and Content Specialist in Dubai",
+      "Joumana Saad | Communications Specialist, Journalist and Presenter in Dubai",
     template: "%s | Joumana Saad",
   },
   description:
-    "Joumana Saad is an American freelance journalist, editor and bilingual MC based in Dubai. Business and finance reporting, content strategy, editorial services and PR for clients across the Gulf.",
+    "Joumana Saad is a communications specialist, journalist and presenter in Dubai. Senior Communications Manager at the Dubai Department of Economy and Tourism, with a newsroom career that began at Forbes in New York in 2007.",
   keywords: [
-    "freelance journalist Dubai",
+    "communications specialist Dubai",
     "content writer Dubai",
     "bilingual MC Dubai",
     "panel moderator UAE",
     "PR consultant Dubai",
-    "freelance editor Middle East",
+    "corporate communications Dubai",
     "Arabic English event host",
     "corporate report writer UAE",
     "media training Dubai",
@@ -58,21 +58,21 @@ export const metadata: Metadata = {
     url: site.url,
     siteName: site.legalName,
     title:
-      "Joumana Saad | Freelance Journalist, Editor and Content Specialist in Dubai",
+      "Joumana Saad | Communications Specialist, Journalist and Presenter in Dubai",
     description:
-      "Business and finance reporting, content strategy, editorial services and bilingual event hosting from a journalist with close to two decades in newsrooms in New York and Dubai.",
+      "Communications strategy, editorial and bilingual presenting from a journalist whose newsroom career began at Forbes in New York in 2007.",
     images: [
       {
         url: "/images/headshot-wide.jpg",
         width: 1700,
         height: 850,
-        alt: "Joumana Saad, freelance journalist and content specialist based in Dubai",
+        alt: "Joumana Saad, communications specialist, journalist and presenter in Dubai",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Joumana Saad | Freelance Journalist and Content Specialist, Dubai",
+    title: "Joumana Saad | Communications Specialist and Journalist, Dubai",
     description:
       "Business journalism, content strategy and bilingual event hosting in Dubai.",
     creator: "@joumanasaad",

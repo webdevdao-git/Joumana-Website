@@ -26,7 +26,7 @@ export function PersonSchema() {
             image: `${site.url}/images/headshot-wide.jpg`,
             jobTitle: site.role,
             description:
-              "American freelance journalist, editor, content specialist and bilingual master of ceremonies based in Dubai, specialising in financial news, business and technology.",
+              "Communications specialist, journalist and presenter in Dubai. Senior Communications Manager at the Dubai Department of Economy and Tourism, with a newsroom career that began at Forbes in New York in 2007.",
             email: `mailto:${site.email}`,
             nationality: { "@type": "Country", name: "United States" },
             knowsLanguage: ["en", "ar", "es"],

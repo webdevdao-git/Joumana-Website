@@ -5,10 +5,23 @@ import Image from "next/image";
  * right. "Meet" is IvyPresto Light in oxblood at 64px; the name sits over it
  * in the script face at 77px, offset the way the design places it.
  */
+/**
+ * Written from her LinkedIn record, which Priya supplied, so every role, date
+ * and remit below is verifiable.
+ *
+ * It is also all third person. The block used to open "Joumana Saad is a
+ * Dubai-based journalist" and then switch to "For more than 13 years, I've
+ * worked", which read as two people. Third person is what the services and
+ * work pages use, so the site now holds one voice throughout.
+ *
+ * The figure is a date rather than a count. "13+ years" sat on the home page
+ * against "nineteen years" on the work page and "more than 15 years" in the
+ * services design. She began at Forbes in 2007, and a date cannot drift.
+ */
 const COPY = [
-  "Joumana Saad is a Dubai-based journalist, presenter, moderator and content specialist with 13+ years of experience across media, business, technology and communications.",
-  "For more than 13 years, I've worked across journalism, broadcasting, public relations and content, covering business, finance, technology and the people shaping the region.",
-  "From interviewing global leaders and reporting for international publications to hosting corporate events and moderating high-profile conversations, my work sits at the intersection of storytelling, communication and connection.",
+  "Joumana Saad is a communications specialist, journalist and presenter based in Dubai. She is Senior Communications Manager at the Dubai Department of Economy and Tourism, where she leads public relations and communications strategy across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
+  "She has worked in newsrooms since 2007, beginning at Forbes in New York, where she ran the magazine's video network and reported on air. In Dubai she reported for Arabian Radio Network across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live and producing features for Business Breakfast and Drive Live, edited SME Advisor magazine for CPI, and was Deputy Editor at Argaam, covering financial markets in the UAE, Saudi Arabia and Egypt.",
+  "Six years at Dubai Chamber of Commerce followed, running media plans, press activity and corporate communications. That is the combination behind the work today: a reporter's instinct for the story, applied inside organisations that need to be understood.",
 ];
 
 export function MeetJoumana() {

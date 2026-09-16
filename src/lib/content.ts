@@ -7,8 +7,8 @@
 export const site = {
   name: "Joumana Saad",
   legalName: "Joumana Saad Media",
-  role: "Freelance Journalist, Editor and Content Specialist",
-  shortRole: "Journalist, Presenter and Content Specialist",
+  role: "Communications Specialist, Journalist and Presenter",
+  shortRole: "Communications Specialist, Journalist and Presenter",
   city: "Dubai",
   region: "Dubai",
   country: "United Arab Emirates",
@@ -17,7 +17,7 @@ export const site = {
   // NEXT_PUBLIC_SITE_URL so canonicals, the sitemap and the social images do
   // not all point at a domain that is not serving the site yet.
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.joumanasaad.com",
-  // CONFIRM: start of career taken as 2007 (Forbes, New York)
+  // Forbes, New York, June 2007
   careerStart: 2007,
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/joumana-saad-876b5144/" },

@@ -12,35 +12,46 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
  * the entries and draws itself as the section passes, with each entry arriving
  * in turn.
  *
- * CONFIRM: the Forbes dates are the design's own. The other two are marked
- * current in her CV, which was last updated in 2019.
+ * Dates and titles are from her LinkedIn record. The entries this replaces
+ * had Forbes starting in 2009 rather than 2007, had her still at Arabian Radio
+ * Network, and had her present role as a contributor at Dubai Chamber, which
+ * she left in January 2023.
  */
 const ROLES = [
   {
-    year: "2009",
-    span: "2009 — 2010",
+    year: "2007",
+    span: "2007 — 2010",
     org: "Forbes",
-    role: "Senior Producer / Reporter",
+    role: "Producer",
     place: "New York",
-    body: "Overseeing Forbes' video network, producing multimedia stories, editing copy and reporting on business, markets and major events.",
+    body: "Running the magazine's video network day to day, assigning and producing multimedia stories, editing copy for Forbes.com and reporting on air.",
     cta: "View Forbes Work",
   },
   {
-    year: "2013",
-    span: "2013 — Present",
+    year: "2012",
+    span: "2012 — 2015",
     org: "Arabian Radio Network",
-    role: "Reporter / News Presenter",
+    role: "Senior Reporter",
     place: "Dubai",
-    body: "Researching, developing and presenting news stories across Dubai Eye 103.8, Dubai 92 and Virgin Radio.",
+    body: "Reporting across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live from events and producing features for Business Breakfast and Drive Live.",
+    cta: "View Work",
+  },
+  {
+    year: "2016",
+    span: "2016 — 2023",
+    org: "Dubai Chamber of Commerce",
+    role: "Media & Corporate Communications",
+    place: "Dubai",
+    body: "Developing and running the Chamber's public relations programme, media plans and press activity across the UAE and international markets.",
     cta: "View Work",
   },
   {
     year: "Now",
-    span: "Current",
-    org: "Dubai Chamber",
-    role: "Contributor / Content",
+    span: "2022 — Present",
+    org: "Dubai Department of Economy and Tourism",
+    role: "Senior Communications Manager",
     place: "Dubai",
-    body: "Creating original features, interviews and content highlighting businesses and economic developments in the UAE.",
+    body: "Leading public relations and communications strategy across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
     cta: "View Work",
   },
 ] as const;
