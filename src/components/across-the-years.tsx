@@ -8,13 +8,19 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
 /**
  * The career, as a timeline you travel down rather than a list you read.
  *
+ * It runs backwards, from the desk she is at now to the newsroom she started
+ * in. What she does today is the thing a visitor came to find out; the route
+ * she took to get there is the supporting argument, and an argument goes after
+ * its claim.
+ *
  * The year is the fixed point: it sits in its own column, pinned while its
  * entry passes, and changes over as the next one arrives. So the eye keeps one
  * anchor and the cards move against it, which is what makes four stacked
  * blocks read as a span of years rather than four blocks.
  *
- * Each entry carries its organisation's own mark, set in an oxblood chip
- * because the files are white knockouts and would vanish on the card.
+ * Each entry carries its organisation's own mark, set in an oxblood panel on
+ * the right of the card, which is where the card had room going spare. The
+ * files are white knockouts, so they need a dark ground or they vanish.
  *
  * Dates and titles are from her LinkedIn record. The entries this replaces had
  * Forbes starting in 2009 rather than 2007, had her still at Arabian Radio
@@ -23,23 +29,13 @@ import { motion, useReducedMotion, useScroll, useTransform } from "motion/react"
  */
 const ROLES = [
   {
-    year: "2007",
-    span: "2007 — 2010",
-    org: "Forbes",
-    role: "Producer",
-    place: "New York",
-    logo: "/brand/logo-forbes.png",
-    body: "Running the magazine's video network day to day, assigning and producing multimedia stories, editing copy for Forbes.com and reporting on air.",
-    cta: "View Forbes Work",
-  },
-  {
-    year: "2012",
-    span: "2012 — 2015",
-    org: "Arabian Radio Network",
-    role: "Senior Reporter",
+    year: "Now",
+    span: "2022 — Present",
+    org: "Dubai Department of Economy and Tourism",
+    role: "Senior Communications Manager",
     place: "Dubai",
-    logo: "/brand/logo-arn.png",
-    body: "Reporting across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live from events and producing features for Business Breakfast and Drive Live.",
+    logo: "/brand/logo-dubai-economy-tourism.png",
+    body: "Leading public relations and communications strategy across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
     cta: "View Work",
   },
   {
@@ -53,14 +49,24 @@ const ROLES = [
     cta: "View Work",
   },
   {
-    year: "Now",
-    span: "2022 — Present",
-    org: "Dubai Department of Economy and Tourism",
-    role: "Senior Communications Manager",
+    year: "2012",
+    span: "2012 — 2015",
+    org: "Arabian Radio Network",
+    role: "Senior Reporter",
     place: "Dubai",
-    logo: "/brand/logo-dubai-economy-tourism.png",
-    body: "Leading public relations and communications strategy across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
+    logo: "/brand/logo-arn.png",
+    body: "Reporting across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live from events and producing features for Business Breakfast and Drive Live.",
     cta: "View Work",
+  },
+  {
+    year: "2007",
+    span: "2007 — 2010",
+    org: "Forbes",
+    role: "Producer",
+    place: "New York",
+    logo: "/brand/logo-forbes.png",
+    body: "Running the magazine's video network day to day, assigning and producing multimedia stories, editing copy for Forbes.com and reporting on air.",
+    cta: "View Forbes Work",
   },
 ] as const;
 
@@ -78,43 +84,76 @@ export function AcrossTheYears() {
   });
   const fill = useTransform(scrollYProgress, [0, 1], ["0%", "100%"]);
 
-  /* whichever entry is nearest the middle of the screen owns the big year */
+  /**
+   * Which entry owns the big year.
+   *
+   * An IntersectionObserver was watching a narrow band across the middle of
+   * the screen, and the cards are shorter than that band is tall: two of them
+   * would qualify at once, the winner decided on a ratio that flips as you
+   * scroll, and sometimes none qualified at all and the year stuck.
+   *
+   * Measuring is not ambiguous. On every frame that scroll produces, take the
+   * card whose centre is nearest a fixed line at 45 percent of the viewport.
+   * One card always wins and the answer only ever moves by one.
+   */
   useEffect(() => {
-    const cards = rail.current?.querySelectorAll("[data-entry]");
-    if (!cards?.length) return;
+    const host = rail.current;
+    if (!host) return;
 
-    const io = new IntersectionObserver(
-      (entries) => {
-        const seen = entries
-          .filter((e) => e.isIntersecting)
-          .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-        if (seen) setActive(Number((seen.target as HTMLElement).dataset.entry));
-      },
-      { rootMargin: "-38% 0px -38% 0px", threshold: [0, 0.25, 0.5, 1] },
-    );
+    let frame = 0;
+    const pick = () => {
+      frame = 0;
+      const cards = host.querySelectorAll<HTMLElement>("[data-entry]");
+      if (!cards.length) return;
 
-    cards.forEach((c) => io.observe(c));
-    return () => io.disconnect();
+      const line = window.innerHeight * 0.45;
+      let best = 0;
+      let bestGap = Infinity;
+
+      cards.forEach((card) => {
+        const box = card.getBoundingClientRect();
+        const gap = Math.abs(box.top + box.height / 2 - line);
+        if (gap < bestGap) {
+          bestGap = gap;
+          best = Number(card.dataset.entry);
+        }
+      });
+
+      setActive((was) => (was === best ? was : best));
+    };
+
+    const onScroll = () => {
+      if (!frame) frame = window.requestAnimationFrame(pick);
+    };
+
+    pick();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll);
+    return () => {
+      if (frame) window.cancelAnimationFrame(frame);
+      window.removeEventListener("scroll", onScroll);
+      window.removeEventListener("resize", onScroll);
+    };
   }, []);
 
   const current = ROLES[active];
 
   return (
-    <section className="sec bg-page">
-      <div className="frame flex flex-col items-center gap-9 xl:gap-14">
+    <section className="bg-page py-10 xl:py-14">
+      <div className="frame flex flex-col items-center gap-7 xl:gap-10">
         <h2 className="t-section text-center text-heading">Across the Years</h2>
 
         <div ref={rail} className="relative w-full">
-          <div className="lg:grid lg:grid-cols-[minmax(0,300px)_1fr] lg:gap-16">
+          <div className="lg:grid lg:grid-cols-[minmax(0,300px)_1fr] lg:gap-12">
             {/* ------------------------------------------------ the year */}
             <div className="hidden lg:block">
               <div className="sticky top-[38vh] pb-24">
-                <div className="relative h-[120px] xl:h-[150px]">
+                <div className="relative h-[92px] xl:h-[118px]">
                   {ROLES.map((r, i) => (
                     <motion.span
                       key={r.year}
                       aria-hidden={i !== active}
-                      className="absolute inset-x-0 top-0 block font-display text-[88px] font-light leading-none text-heading xl:text-[116px]"
+                      className="absolute inset-x-0 top-0 block font-display text-[68px] font-light leading-none text-heading xl:text-[92px]"
                       initial={false}
                       animate={
                         i === active
@@ -139,7 +178,7 @@ export function AcrossTheYears() {
                 </motion.p>
 
                 {/* how far down the span you are */}
-                <div className="mt-8 flex items-center gap-2">
+                <div className="mt-6 flex items-center gap-2">
                   {ROLES.map((r, i) => (
                     <span
                       key={r.year}
@@ -165,7 +204,7 @@ export function AcrossTheYears() {
                 )}
               </div>
 
-              <ol className="flex flex-col gap-4">
+              <ol className="flex flex-col gap-3">
                 {ROLES.map((r, i) => (
                   <motion.li
                     key={r.org}
@@ -179,71 +218,86 @@ export function AcrossTheYears() {
                     {/* the marker sitting on the rail */}
                     <span
                       aria-hidden="true"
-                      className={`absolute left-0 top-9 hidden rounded-full border-2 border-heading bg-page transition-all duration-500 lg:block ${
+                      className={`absolute left-0 top-7 hidden rounded-full border-2 border-heading bg-page transition-all duration-500 lg:block ${
                         i === active ? "h-[19px] w-[19px] bg-heading" : "h-[15px] w-[15px]"
                       }`}
                       style={i === active ? { left: -2 } : undefined}
                     />
 
                     <article
-                      className={`group rounded-[24px] bg-card p-6 transition-all duration-500 xl:p-9 ${
+                      className={`group rounded-[24px] bg-card p-5 transition-all duration-500 xl:p-7 ${
                         i === active
                           ? "shadow-[0_24px_60px_-34px_rgba(0,0,0,0.6)] lg:-translate-y-0.5"
                           : "lg:opacity-[0.94]"
                       }`}
                     >
-                      <div className="flex flex-col gap-5">
-                        <div className="flex flex-wrap items-center justify-between gap-4">
-                          {/* the organisation's own mark */}
-                          <span className="flex h-[52px] w-[124px] items-center justify-center rounded-[12px] bg-oxblood px-3 xl:h-[60px] xl:w-[148px]">
-                            <span className="relative block h-full w-full">
-                              <Image
-                                src={r.logo}
-                                alt=""
-                                fill
-                                sizes="148px"
-                                className="object-contain"
-                              />
+                      <div className="flex items-center gap-8">
+                        <div className="flex min-w-0 flex-1 flex-col gap-4">
+                          {/* on a phone there is no pinned column, so the year
+                              and the mark ride at the top of the card instead */}
+                          <div className="flex items-center justify-between gap-4 lg:hidden">
+                            <span className="flex h-[40px] w-[96px] shrink-0 items-center justify-center rounded-[10px] bg-oxblood px-2.5">
+                              <span className="relative block h-full w-full">
+                                <Image
+                                  src={r.logo}
+                                  alt=""
+                                  fill
+                                  sizes="96px"
+                                  className="object-contain"
+                                />
+                              </span>
                             </span>
-                          </span>
+                            <div className="text-right">
+                              <span className="block font-display text-[26px] font-light leading-none text-card-heading">
+                                {r.year}
+                              </span>
+                              <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.12em] text-card-body-soft">
+                                {r.span}
+                              </span>
+                            </div>
+                          </div>
 
-                          {/* the year, kept on the card for phones, where the
-                              sticky column is not shown */}
-                          <span className="font-display text-[34px] font-light leading-none text-card-heading lg:hidden">
-                            {r.year}
-                          </span>
-                        </div>
+                          <div>
+                            <h3 className="font-display text-[21px] font-semibold uppercase leading-[1.09] text-card-heading xl:text-[28px]">
+                              {r.org}
+                            </h3>
+                            <p className="mt-1.5 text-[13px] font-bold uppercase leading-[1.2] text-card-heading xl:text-[16px]">
+                              {r.role} &middot; {r.place}
+                            </p>
+                          </div>
 
-                        <div>
-                          <h3 className="font-display text-[24px] font-semibold uppercase leading-[1.09] text-card-heading xl:text-[34px]">
-                            {r.org}
-                          </h3>
-                          <p className="mt-2 text-[14px] font-bold uppercase leading-[1.2] text-card-heading xl:text-[18px]">
-                            {r.role} &middot; {r.place}
+                          <p className="max-w-2xl text-[15px] leading-[1.45] text-card-body xl:text-[17px]">
+                            {r.body}
                           </p>
-                          <p className="mt-1 text-[12px] font-semibold uppercase tracking-[0.14em] text-card-body-soft lg:hidden">
-                            {r.span}
-                          </p>
-                        </div>
 
-                        <p className="max-w-2xl text-[16px] leading-[1.45] text-card-body xl:text-[18px]">
-                          {r.body}
-                        </p>
-
-                        <div>
-                          <Link
-                            href="/work"
-                            className="inline-flex h-11 items-center justify-center gap-2.5 rounded-full bg-brown px-6 text-[13px] font-semibold uppercase text-white transition-colors duration-300 hover:bg-oxblood xl:h-12 xl:px-7 xl:text-[15px]"
-                          >
-                            {r.cta}
-                            <span
-                              aria-hidden="true"
-                              className="transition-transform duration-300 group-hover:translate-x-0.5"
+                          <div>
+                            <Link
+                              href="/work"
+                              className="inline-flex h-10 items-center justify-center gap-2.5 rounded-full bg-brown px-5 text-[12px] font-semibold uppercase text-white transition-colors duration-300 hover:bg-oxblood xl:h-11 xl:px-6 xl:text-[14px]"
                             >
-                              &rarr;
-                            </span>
-                          </Link>
+                              {r.cta}
+                              <span
+                                aria-hidden="true"
+                                className="transition-transform duration-300 group-hover:translate-x-0.5"
+                              >
+                                &rarr;
+                              </span>
+                            </Link>
+                          </div>
                         </div>
+
+                        {/* the mark, in the room the card was leaving empty */}
+                        <span className="hidden h-[92px] w-[210px] shrink-0 items-center justify-center rounded-[16px] bg-oxblood px-6 transition-transform duration-500 group-hover:scale-[1.03] lg:flex xl:h-[104px] xl:w-[240px]">
+                          <span className="relative block h-full w-full">
+                            <Image
+                              src={r.logo}
+                              alt=""
+                              fill
+                              sizes="240px"
+                              className="object-contain"
+                            />
+                          </span>
+                        </span>
                       </div>
                     </article>
                   </motion.li>
