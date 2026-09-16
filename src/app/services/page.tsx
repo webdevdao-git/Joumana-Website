@@ -170,7 +170,9 @@ export default function ServicesPage() {
 
           <div className="mt-10 grid w-full max-w-[1363px] items-end gap-10 lg:grid-cols-[644fr_639fr] xl:mt-[3vw] xl:gap-[5vw]">
             {/* 517 by 711, with the 291 by 258 plate overlapping it from below
-                and 127px further left.
+                and 127px further left. The large plate was the design's own
+                placeholder and now carries her portrait; the small one stays
+                architectural, as the design has it.
 
                 The plate is sized by height rather than width so the section
                 can never grow taller than the screen. At the design's own
@@ -181,11 +183,11 @@ export default function ServicesPage() {
             <Reveal className="relative ml-auto w-fit">
               <div className="relative aspect-[517/711] h-[min(41.15vw,57svh)]">
                 <Image
-                  src="/brand/services-plate.webp"
-                  alt=""
+                  src="/brand/services-bring.webp"
+                  alt="Joumana Saad, journalist and communications specialist in Dubai"
                   fill
                   sizes="(max-width: 1024px) 80vw, 517px"
-                  className="object-cover"
+                  className="object-cover object-top"
                 />
               </div>
               <div className="absolute bottom-0 left-[-24.6%] h-[36.3%] w-[56.3%]">
