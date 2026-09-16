@@ -49,7 +49,7 @@ function Row({ full = false }: { full?: boolean }) {
 }
 
 export function OutletBand({
-  heading = "Worked with",
+  heading = "Newsrooms and Boardrooms",
   size = "compact",
 }: {
   heading?: string;
@@ -60,21 +60,21 @@ export function OutletBand({
   return (
     <section
       aria-label="Publications and organisations Joumana Saad has worked with"
-      className={`relative overflow-hidden bg-band ${full ? "py-10 xl:py-[5.79vw]" : "py-10 xl:py-14"}`}
+      className={`relative overflow-hidden bg-band ${full ? "py-10 xl:py-[5.79vw]" : "py-8 xl:py-10"}`}
     >
       <div className="frame">
         <h2
           className={
             full
               ? "s-title text-center text-white"
-              : "t-section text-center text-[clamp(1.125rem,1.7vw,1.75rem)] text-on-band"
+              : "text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-on-band/60 xl:text-[13px]"
           }
         >
           {heading}
         </h2>
       </div>
 
-      <div className={full ? "mt-8 overflow-hidden xl:mt-[3.1vw]" : "mt-7 overflow-hidden xl:mt-9"}>
+      <div className={full ? "mt-8 overflow-hidden xl:mt-[3.1vw]" : "mt-6 overflow-hidden xl:mt-7"}>
         <Row full={full} />
       </div>
 
