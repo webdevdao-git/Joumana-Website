@@ -34,52 +34,15 @@ export const nav = [
   { label: "Contact", href: "/contact" },
 ] as const;
 
-/* ------------------------------------------------------------------ hero */
+/* ------------------------------------------------------- held, not yet used
+   Nothing below is rendered anywhere today. It is Joumana's own factual
+   record, kept because the About, Speaking and Press pages will want it:
+   the organisations she has worked for, the people she has interviewed, the
+   events she has hosted, the two radio features with live links, the
+   Arabian Radio Network engagement written up, and the experience figures.
 
-export const heroSlides = [
-  {
-    id: "newsroom",
-    index: "01",
-    label: "Newsroom",
-    caption:
-      "Business, markets and technology reporting for Forbes, The Epoch Times and Dubai Eye 103.8.",
-    image: "/images/hero-1.jpg",
-    alt: "Joumana Saad, freelance business journalist based in Dubai",
-  },
-  {
-    id: "stage",
-    index: "02",
-    label: "Stage",
-    caption:
-      "Bilingual hosting and panel moderation in English and Arabic for summits, launches and awards nights.",
-    image: "/images/hero-2.jpg",
-    alt: "Joumana Saad, bilingual master of ceremonies and panel moderator in Dubai",
-  },
-  {
-    id: "studio",
-    index: "03",
-    label: "Studio",
-    caption:
-      "Content strategy, corporate reports and press material for organisations across the Gulf.",
-    image: "/images/hero-3.jpg",
-    alt: "Joumana Saad, editor and content specialist in Dubai",
-  },
-] as const;
-
-export const heroCopy = {
-  eyebrow: "Dubai, United Arab Emirates",
-  name: "Joumana Saad",
-  headline: "Freelance journalist, editor and content specialist in Dubai.",
-  // the headline broken for display: the first block is set enormous, the
-  // second keeps the rest of the phrase in the same h1 for search
-  displayLines: ["Freelance", "Journalist"],
-  displayTail: "Editor and content specialist in Dubai",
-  lede:
-    "An American journalist who has spent close to two decades in newsrooms in New York and Dubai, reporting on finance, business and technology. Today she writes, edits and hosts for brands and publications across the Gulf, in English and in Arabic.",
-  primaryCta: { label: "Start a project", href: "/contact" },
-  secondaryCta: { label: "See the work", href: "/work" },
-} as const;
-
+   Anything here that is still unused when those pages are settled should
+   go. */
 export const outlets = [
   "Forbes",
   "Forbes Middle East",
@@ -97,41 +60,11 @@ export const outlets = [
 
 /* ------------------------------------------------------------- positioning */
 
-/** The strongest names, for the band on the home page. */
-export const featuredOutlets = [
-  "Forbes",
-  "The Epoch Times",
-  "Dubai Eye 103.8",
-  "Argaam",
-  "Forbes Middle East",
-  "Souqalmal",
-  "Dubai Chamber",
-  "Dubai Future Foundation",
-] as const;
-
 export const stats = [
   { value: "19", label: "Years in newsrooms and communications" },
   { value: "03", label: "Working languages: English, Arabic, Spanish" },
   { value: "02", label: "Media markets: New York and Dubai" },
 ] as const;
-
-/** One line on the home page. The bio itself sits in Meet Joumana. */
-export const homeStatement = {
-  kicker: "Who she is",
-  line: "Nineteen years in newsrooms. Now she writes, edits and hosts for the Gulf.",
-  cta: { label: "See the work", href: "/work" },
-} as const;
-
-export const introCopy = {
-  kicker: "Who she is",
-  heading: "A reporter's instinct, applied to your brand.",
-  body: [
-    "Joumana Saad is an American freelance journalist, editor and content specialist based in Dubai. She began at Forbes in New York, producing and reporting for the magazine's video network, and moved to the Gulf where she has covered finance, business and technology ever since.",
-    "That newsroom background is what clients hire. She knows what makes an editor pick up a story, what a reader will actually finish, and how to say something precise in the fewest possible words. Whether the brief is a corporate annual report, a press release, a keynote script or a live awards ceremony, the work is researched first and written second.",
-    "She reports and presents in English and Arabic, and reads and writes Spanish, which makes her a practical choice for organisations speaking to the region and to the world at the same time.",
-  ],
-  cta: { label: "See the work", href: "/work" },
-} as const;
 
 /* ---------------------------------------------------------------- services */
 
@@ -225,29 +158,6 @@ export const services = [
       "Brand strategy and account management",
     ],
     keywords: "PR consultant Dubai, media relations UAE, media training Dubai",
-  },
-] as const;
-
-export const workflow = [
-  {
-    step: "01",
-    title: "Brief",
-    body: "A short call to establish the audience, the outcome and the deadline. You get a written scope and a fixed fee before anything begins.",
-  },
-  {
-    step: "02",
-    title: "Research",
-    body: "Interviews, source material, data and desk research. This is the part most freelancers skip and the reason the finished copy holds up.",
-  },
-  {
-    step: "03",
-    title: "Draft",
-    body: "A first draft delivered on the agreed date, in your voice, formatted the way your team will actually use it.",
-  },
-  {
-    step: "04",
-    title: "Deliver",
-    body: "Two rounds of revision included as standard, then a clean final file. For live work, a full run sheet and rehearsal before the day.",
   },
 ] as const;
 
@@ -396,7 +306,6 @@ export const broadcast = [
   },
 ] as const;
 
-
 /* ------------------------------------------------------------ case study
    Split out of the Arabian Radio Network entry already in `experience`. Every
    line is drawn from that description. Nothing about results or outcomes has
@@ -466,12 +375,6 @@ export const reels = [
     lang: "English",
   },
 ] as const;
-
-export const reelCopy = {
-  kicker: "On camera",
-  title: "Watch her present",
-  lede: "Six pieces to camera, in English and in Arabic. Sound is off until you press play.",
-} as const;
 
 /* ---------------------------------------------------------------- hosting */
 
