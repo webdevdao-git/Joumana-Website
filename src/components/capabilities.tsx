@@ -129,10 +129,12 @@ function ArrowUpRight({ className = "" }: { className?: string }) {
 function FlipCard({
   title,
   body,
+  index,
   Icon,
 }: {
   title: string;
   body: string;
+  index: string;
   Icon: () => React.ReactElement;
 }) {
   const [pinned, setPinned] = useState(false);
@@ -148,11 +150,20 @@ function FlipCard({
       onMouseLeave={() => setNear(false)}
       onFocus={() => setNear(true)}
       onBlur={() => setNear(false)}
-      className="flip-scene h-[228px] w-full xl:h-[252px]"
+      className="group flip-scene h-[228px] w-full xl:h-[252px]"
     >
       <span className="flip-inner block" data-flipped={flipped}>
         {/* face: the mark, then the discipline, then the way in */}
-        <span className="flip-face flip-front flex flex-col items-center justify-center gap-4 rounded-[24px] bg-card p-6 text-center shadow-[0_14px_40px_-30px_rgba(0,0,0,0.45)] xl:gap-5 xl:p-8">
+        <span className="flip-face flip-front flex flex-col items-center justify-center gap-4 overflow-hidden rounded-[24px] bg-card p-6 text-center shadow-[0_14px_40px_-30px_rgba(0,0,0,0.45)] xl:gap-5 xl:p-8">
+          {/* the index, set large and faint in the corner, brightening as the
+              card comes forward */}
+          <span
+            aria-hidden="true"
+            className="pointer-events-none absolute right-5 top-3 font-display text-[54px] font-light leading-none text-card-heading/[0.07] transition-colors duration-500 group-hover:text-card-heading/[0.14] xl:right-7 xl:top-4 xl:text-[68px]"
+          >
+            {index}
+          </span>
+
           <span className="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-oxblood/[0.07] text-card-heading ring-1 ring-oxblood/10">
             <Icon />
           </span>
@@ -180,14 +191,24 @@ function FlipCard({
 
 export function Capabilities() {
   return (
-    <section className="sec bg-cream">
-      <div className="frame flex flex-col items-center gap-7 xl:gap-10">
-        <h2 className="t-section text-center text-card-heading">Services</h2>
+    <section className="flex min-h-[100svh] items-center bg-cream py-14 xl:py-20">
+      <div className="frame flex w-full flex-col items-center gap-7 xl:gap-9">
+        <div className="flex flex-col items-center gap-4">
+          <h2 className="t-section text-center text-card-heading">Services</h2>
+          <p className="max-w-[62ch] text-center text-[15px] leading-[1.5] text-card-body-soft xl:text-[18px]">
+            {servicesPage.hero.lede}
+          </p>
+        </div>
 
         <ul className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {servicesPage.disciplines.map((d) => (
+          {servicesPage.disciplines.map((d, i) => (
             <li key={d.label}>
-              <FlipCard title={d.label} body={d.body[0]} Icon={MARKS[d.label] ?? Newspaper} />
+              <FlipCard
+                title={d.label}
+                body={d.body[0]}
+                index={String(i + 1).padStart(2, "0")}
+                Icon={MARKS[d.label] ?? Newspaper}
+              />
             </li>
           ))}
         </ul>
