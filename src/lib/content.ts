@@ -463,6 +463,21 @@ export const contactCopy = {
     "Event hosting, moderating and media training",
     "Retained content and communications support",
   ],
+  /* The three facts someone actually wants off this page before they write,
+     set in the opening rather than buried in a card beside the form. */
+  direct: [
+    {
+      label: "Email",
+      value: "joumanasaad@gmail.com",
+      href: "mailto:joumanasaad@gmail.com",
+    },
+    {
+      label: "Based in",
+      value: "Dubai, United Arab Emirates. Gulf Standard Time.",
+      href: undefined,
+    },
+    { label: "Reply", value: "Usually within one working day.", href: undefined },
+  ],
 } as const;
 
 export const faqs = [
@@ -472,7 +487,7 @@ export const faqs = [
   },
   {
     q: "Do you host events in Arabic as well as English?",
-    a: "Yes. She presents and moderates in both languages, and regularly runs bilingual events where the room switches between the two.",
+    a: "Yes. I present and moderate in both languages, and regularly run bilingual events where the room switches between the two.",
   },
   {
     q: "How do you price a project?",
