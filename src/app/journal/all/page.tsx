@@ -48,7 +48,10 @@ export default function TheJournalPage() {
       {/* --------------------------------------------------------------- hero
           929 tall on the 1728 frame, the picture full bleed under a black
           57% wash, the title centred on it at 96px */}
-      <section className="relative flex min-h-[56svh] items-center overflow-hidden bg-black lg:aspect-[1728/929] lg:min-h-0">
+      <section
+        className="fit-hero relative flex min-h-[56svh] items-center overflow-hidden bg-black lg:min-h-0"
+        style={{ "--fit-w": 1728, "--fit-h": 929 } as React.CSSProperties}
+      >
         <Image
           src={hero.image.src}
           alt={hero.image.alt}

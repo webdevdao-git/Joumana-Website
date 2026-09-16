@@ -66,8 +66,8 @@ export default function JournalPage() {
           past its foot. Held as a two column grid so the picture keeps its
           proportion and the copy keeps the page's gutter. */}
       <section className="relative overflow-hidden bg-cream">
-        <div className="mx-auto grid w-full max-w-[1728px] items-center gap-10 px-6 py-14 md:px-10 lg:grid-cols-[minmax(0,718fr)_minmax(0,844fr)] lg:gap-[4%] lg:px-0 lg:py-0 lg:pl-[9.72%]">
-          <div className="flex flex-col gap-7 lg:py-20 xl:gap-9">
+        <div className="mx-auto grid w-full max-w-[1728px] items-center gap-10 px-6 py-14 md:px-10 lg:h-[calc(100svh-var(--nav-h))] lg:min-h-[620px] lg:grid-cols-[minmax(0,718fr)_minmax(0,844fr)] lg:gap-[4%] lg:px-0 lg:py-0 lg:pl-[9.72%]">
+          <div className="flex flex-col gap-7 lg:py-12 xl:gap-9">
             <Reveal>
               <h1 className="s-title max-w-[14ch] text-card-heading">
                 {hero.heading.map((line) => (
@@ -102,7 +102,7 @@ export default function JournalPage() {
 
           {/* the design runs this to the section's right edge and past its
               top and bottom, so it is the section's full height on desktop */}
-          <div className="relative -mx-6 aspect-[844/760] md:-mx-10 lg:mx-0 lg:aspect-auto lg:h-full lg:min-h-[640px] xl:min-h-[780px]">
+          <div className="relative -mx-6 aspect-[844/760] md:-mx-10 lg:mx-0 lg:aspect-auto lg:h-full">
             <Image
               src={hero.portrait.src}
               alt={hero.portrait.alt}

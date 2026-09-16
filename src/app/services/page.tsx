@@ -47,7 +47,7 @@ function Pill({
   return (
     <Link
       href={href}
-      className={`s-button inline-flex h-[52px] items-center justify-center gap-3 rounded-[32px] px-7 text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:px-9 ${
+      className={`s-button fit-pill inline-flex h-[52px] items-center justify-center gap-3 rounded-[32px] px-7 text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:px-9 ${
         tone === "oxblood" ? "bg-oxblood" : "bg-brown"
       }`}
     >
@@ -82,7 +82,10 @@ export default function ServicesPage() {
           It also sits above the headline in the design's own layer order, so
           it does here. */}
       <section className="relative overflow-hidden bg-cream">
-        <div className="relative mx-auto w-full max-w-[1728px] lg:aspect-[1728/981]">
+        <div
+          className="fit-hero max-w-[1728px]"
+          style={{ "--fit-w": 1728, "--fit-h": 981 } as React.CSSProperties}
+        >
           <div className="hidden lg:block">
             {/* Each word is pinned to its own x. Centring the pair and
                 spacing them apart looked right until it was measured: the

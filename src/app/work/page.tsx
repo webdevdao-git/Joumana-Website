@@ -102,7 +102,10 @@ export default function WorkPage() {
           the title at 140px in oxblood, the lede under it, and a circled
           arrow pointing into the page. */}
       <section className="bg-cream">
-        <div className="mx-auto flex w-full max-w-[1728px] flex-col items-center px-6 py-12 lg:aspect-[1728/981] lg:justify-center lg:px-0 lg:py-0">
+        <div
+          className="fit-hero flex max-w-[1728px] flex-col items-center px-6 py-12 lg:justify-center lg:px-0 lg:py-0"
+          style={{ "--fit-w": 1728, "--fit-h": 981 } as React.CSSProperties}
+        >
           <div className="relative aspect-[377/408] w-[52%] max-w-[240px] lg:w-[21.8%] lg:max-w-none">
             <Image
               src="/brand/work-hero.webp"
@@ -114,17 +117,17 @@ export default function WorkPage() {
             />
           </div>
 
-          <h1 className="mt-6 text-center font-display text-[clamp(2.5rem,8.1vw,8.75rem)] font-light uppercase leading-[1.19] tracking-[0.02em] text-oxblood lg:mt-[1.7vw]">
+          <h1 className="mt-6 text-center font-display work-title text-[clamp(2.5rem,8.1vw,8.75rem)] font-light uppercase leading-[1.19] tracking-[0.02em] text-oxblood lg:mt-[1.7cqw]">
             {hero.title}
           </h1>
 
-          <p className="s-body mt-4 max-w-[46ch] text-center text-card-body lg:mt-[1.3vw] lg:max-w-[57.3%]">
+          <p className="s-body mt-4 max-w-[46ch] text-center text-card-body lg:mt-[1.3cqw] lg:max-w-[57.3%]">
             {hero.lede}
           </p>
 
           <span
             aria-hidden="true"
-            className="mt-8 flex h-12 w-8 items-center justify-center rounded-full border border-oxblood/30 text-oxblood lg:mt-[2.4vw] lg:h-[3.65vw] lg:w-[2.4vw]"
+            className="mt-8 flex h-12 w-8 items-center justify-center rounded-full border border-oxblood/30 text-oxblood lg:mt-[2.4cqw] lg:h-[3.65cqw] lg:w-[2.4cqw]"
           >
             <svg width="16" height="20" viewBox="0 0 24 24" fill="none">
               <path
