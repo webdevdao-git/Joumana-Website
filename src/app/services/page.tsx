@@ -298,14 +298,16 @@ export default function ServicesPage() {
       {/* the page alternates the two brand grounds, so every other discipline
           sits on the cream rather than the oxblood the design draws for all
           six. CONFIRM: this is a departure from the file. */}
-      {disciplines.map((d, i) => (
-        <DisciplineSection
-          key={d.index}
-          d={d}
-          plate="/brand/services-columns.webp"
-          tone={i % 2 === 0 ? "dark" : "light"}
-        />
-      ))}
+      <div className="relative">
+        {disciplines.map((d, i) => (
+          <DisciplineSection
+            key={d.index}
+            d={d}
+            plate="/brand/services-columns.webp"
+            tone={i % 2 === 0 ? "dark" : "light"}
+          />
+        ))}
+      </div>
 
       {/* the design closes on Tell Me What You're Working On */}
       <ContactPanel tone="dark" />

@@ -8,6 +8,11 @@ import { motion, useInView, useReducedMotion, useScroll, useTransform } from "mo
 /**
  * One of the six disciplines on the services page.
  *
+ * The six are a pinned stack: each one holds the screen while you scroll, and
+ * the next rises over it. That only works because every section paints an
+ * opaque ground, and because the two grounds alternate, so what covers what is
+ * never in doubt.
+ *
  * The layout is the design's, to the pixel, and none of the motion below moves
  * it: everything animates from a state that resolves to exactly where the
  * frame puts it. What the motion adds is a sense that these are six separate
@@ -94,28 +99,16 @@ export function DisciplineSection({
   const inView = useInView(section, { once: true, margin: "-120px" });
 
   /**
-   * Everything below is tied to how far the section has travelled through the
-   * window, not fired once on arrival. A one shot animation plays and is over;
-   * scrolling on afterwards feels like nothing is happening. Bound to scroll,
-   * the section keeps answering the whole way past.
+   * A stuck element's box stops moving, so scroll progress against it freezes
+   * and anything bound to it stops with it. Arrival drives the section
+   * instead: it plays as the section takes the screen and holds while it has
+   * it, which is what a pinned stack wants anyway.
    */
   const { scrollYProgress } = useScroll({
     target: section,
     offset: ["start end", "end start"],
   });
-
-  /* the label and the number pass each other, slowly, in opposite directions */
-  const labelX = useTransform(scrollYProgress, [0, 1], [-26, 26]);
-  const indexX = useTransform(scrollYProgress, [0, 1], [26, -26]);
-
-  /* the plate opens from its bottom edge as the section comes up the screen */
-  const open = useTransform(scrollYProgress, [0.06, 0.42], [100, 0]);
-  const clip = useTransform(open, (v) => `inset(${v}% 0% 0% 0%)`);
-
-  /* and the picture settles back out of an overscale while the wash clears */
-  const plateScale = useTransform(scrollYProgress, [0.06, 0.6], [1.16, 1]);
-  const wash = useTransform(scrollYProgress, [0.1, 0.5], [0.85, 0]);
-  const drift = useTransform(scrollYProgress, [0, 1], ["-3%", "3%"]);
+  const drift = useTransform(scrollYProgress, [0, 1], ["-2.5%", "2.5%"]);
 
   const rise = (delay: number) => ({
     initial: reduced ? { opacity: 0 } : { opacity: 0, y: 26 },
@@ -124,25 +117,26 @@ export function DisciplineSection({
   });
 
   return (
-    <section ref={section} className={`${skin.section} py-12 xl:py-[5.79vw]`}>
+    <section
+      ref={section}
+      className={`pin-stack ${skin.section} py-12 lg:py-10`}
+    >
       <div className="mx-auto w-full max-w-[1658px] px-6 md:px-10 xl:px-20">
         <div className="flex items-start justify-between gap-6">
           <motion.h2
             className={`s-title ${skin.head}`}
-            style={reduced ? undefined : { x: labelX }}
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : undefined}
-            transition={{ duration: 0.8, ease: EASE }}
+            initial={reduced ? { opacity: 0 } : { opacity: 0, x: -38 }}
+            animate={inView ? { opacity: 1, x: 0 } : undefined}
+            transition={{ duration: 0.9, ease: EASE }}
           >
             {d.label}
           </motion.h2>
 
           <motion.span
             className={`s-title ${skin.head}`}
-            style={reduced ? undefined : { x: indexX }}
-            initial={{ opacity: 0 }}
-            animate={inView ? { opacity: 1 } : undefined}
-            transition={{ duration: 0.8, ease: EASE }}
+            initial={reduced ? { opacity: 0 } : { opacity: 0, x: 38 }}
+            animate={inView ? { opacity: 1, x: 0 } : undefined}
+            transition={{ duration: 0.9, ease: EASE }}
           >
             {d.index}
           </motion.span>
@@ -205,15 +199,25 @@ export function DisciplineSection({
           {/* the plate, opening from the bottom, drifting against the scroll */}
           <div className="group relative self-start">
             <motion.div
-              className="relative aspect-[600/667] w-full overflow-hidden"
-              initial={reduced ? { opacity: 0 } : undefined}
-              animate={reduced && inView ? { opacity: 1 } : undefined}
-              transition={{ duration: 0.8 }}
-              style={reduced ? undefined : { clipPath: clip }}
+              className="relative aspect-[600/667] w-full overflow-hidden lg:ml-auto lg:h-[min(38.6vw,52svh)] lg:w-auto"
+              initial={
+                reduced ? { opacity: 0 } : { clipPath: "inset(100% 0% 0% 0%)" }
+              }
+              animate={
+                inView
+                  ? reduced
+                    ? { opacity: 1 }
+                    : { clipPath: "inset(0% 0% 0% 0%)" }
+                  : undefined
+              }
+              transition={{ duration: 1.15, delay: 0.12, ease: EASE }}
             >
               <motion.div
                 className="absolute inset-[-3%]"
-                style={reduced ? undefined : { y: drift, scale: plateScale }}
+                initial={reduced ? undefined : { scale: 1.14 }}
+                animate={inView && !reduced ? { scale: 1 } : undefined}
+                transition={{ duration: 1.6, ease: EASE }}
+                style={reduced ? undefined : { y: drift }}
               >
                 <Image
                   src={plate}
@@ -229,7 +233,9 @@ export function DisciplineSection({
                 <motion.span
                   aria-hidden="true"
                   className="pointer-events-none absolute inset-0 bg-oxblood"
-                  style={{ opacity: wash }}
+                  initial={{ opacity: 0.85 }}
+                  animate={inView ? { opacity: 0 } : undefined}
+                  transition={{ duration: 1.3, delay: 0.15, ease: EASE }}
                 />
               )}
 

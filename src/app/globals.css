@@ -429,6 +429,22 @@
     text-transform: capitalize;
   }
 
+
+  /* ------------------------------------------------------- the pinned stack
+     Each discipline holds the screen while the next rises over it. Only where
+     there is room for one: on a short window the section would be taller than
+     the viewport and sticky would put its foot permanently below the fold, so
+     below 760px tall they simply stack in the normal way. */
+  @media (min-width: 1024px) and (min-height: 760px) {
+    .pin-stack {
+      position: sticky;
+      top: 0;
+      display: flex;
+      min-height: 100svh;
+      align-items: center;
+    }
+  }
+
   .t-body {
     font-family: var(--font-sans);
     font-size: 18px;
