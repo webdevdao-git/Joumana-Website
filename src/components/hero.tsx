@@ -30,13 +30,13 @@ import {
  * Reduced motion holds the first frame and nothing moves.
  */
 const SLIDES = [
-  { src: "/images/hero-slide-1.webp", at: "50% 20%", alt: "Joumana Saad, communications specialist and journalist in Dubai" },
-  { src: "/images/hero-slide-2.webp", at: "46% 22%", alt: "Joumana Saad" },
-  { src: "/images/hero-slide-3.webp", at: "48% 24%", alt: "Joumana Saad in Dubai" },
-  { src: "/images/hero-slide-4.webp", at: "52% 20%", alt: "Joumana Saad" },
-  { src: "/images/hero-slide-5.webp", at: "55% 26%", alt: "Joumana Saad" },
-  { src: "/images/hero-slide-6.webp", at: "52% 24%", alt: "Joumana Saad at work" },
-  { src: "/images/hero-slide-7.webp", at: "42% 24%", alt: "Joumana Saad at work in Dubai" },
+  { src: "/images/hero-slide-1.webp", at: "50% 24%", alt: "Joumana Saad, communications specialist and journalist in Dubai" },
+  { src: "/images/hero-slide-2.webp", at: "50% 28%", alt: "Joumana Saad" },
+  { src: "/images/hero-slide-3.webp", at: "50% 32%", alt: "Joumana Saad in Dubai" },
+  { src: "/images/hero-slide-4.webp", at: "50% 28%", alt: "Joumana Saad" },
+  { src: "/images/hero-slide-5.webp", at: "50% 34%", alt: "Joumana Saad" },
+  { src: "/images/hero-slide-6.webp", at: "50% 30%", alt: "Joumana Saad at work" },
+  { src: "/images/hero-slide-7.webp", at: "50% 30%", alt: "Joumana Saad at work in Dubai" },
 ] as const;
 
 const HOLD = 5200;
@@ -86,18 +86,7 @@ export function Hero() {
             exit={{ opacity: 0 }}
             transition={{ duration: 1.4, ease: "easeInOut" }}
           >
-            {/* the width, filled with the same frame thrown out of focus */}
-            <Image
-              src={slide.src}
-              alt=""
-              aria-hidden="true"
-              fill
-              sizes="100vw"
-              className="scale-110 object-cover blur-2xl brightness-[0.55] saturate-[0.85]"
-              style={{ objectPosition: slide.at }}
-            />
-
-            {/* and the frame itself, whole, drifting in as it holds */}
+            {/* the frame, filling the band, drifting in as it holds */}
             <motion.div
               className="absolute inset-0"
               initial={reduced ? { scale: 1 } : { scale: 1.05 }}
@@ -109,8 +98,9 @@ export function Hero() {
                 alt={slide.alt}
                 fill
                 priority={active === 0}
-                sizes="(max-width: 768px) 100vw, 60vh"
-                className="object-cover object-[50%_18%] md:object-contain md:object-center"
+                sizes="100vw"
+                className="object-cover"
+                style={{ objectPosition: slide.at }}
               />
             </motion.div>
           </motion.div>
