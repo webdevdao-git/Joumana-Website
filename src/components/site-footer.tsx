@@ -179,7 +179,7 @@ export function SiteFooter() {
               </Column>
             </div>
 
-            <div className="lg:absolute lg:left-[85.8%] lg:top-0">
+            <div className="lg:absolute lg:right-0 lg:top-0">
               <Column heading="Socials">
                 <Socials />
               </Column>

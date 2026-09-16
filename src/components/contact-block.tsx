@@ -43,73 +43,87 @@ export function ContactBlock() {
   }
 
   const field =
-    "w-full border-0 border-b border-cream/30 bg-transparent pb-3 text-[18px] text-body outline-none transition-colors placeholder:text-body-soft focus:border-cream xl:text-[20px]";
+    "w-full border-0 border-b border-rule bg-transparent pb-3 text-[18px] text-card-body outline-none transition-colors placeholder:text-card-body-soft focus:border-card-heading xl:text-[20px]";
 
   return (
     <section className="sec bg-page">
-      <div className="frame grid items-center gap-8 lg:grid-cols-2 xl:gap-16">
-        <div className="flex flex-col gap-6 xl:gap-10">
-          <h2 className="t-section max-w-[16ch] text-heading">
-            Have a Story to Tell?
-          </h2>
-          <p className="max-w-xl text-[17px] leading-[1.3] text-body xl:text-[24px]">
-            Whether it&rsquo;s an interview, feature, live discussion,
-            documentary, or editorial collaboration, I&rsquo;m always interested
-            in conversations that bring important stories and perspectives to the
-            surface.
-          </p>
-        </div>
+      {/* The section keeps the oxblood, but the block sits on it as a panel
+          rather than running full bleed. Full bleed put an oxblood contact
+          section directly above an oxblood footer and the two read as one
+          slab; with a panel there is oxblood above, below and either side of
+          it, so it is plainly its own thing. */}
+      <div className="frame">
+        <div className="grid items-center gap-8 rounded-[24px] bg-card px-6 py-10 lg:grid-cols-2 xl:gap-16 xl:px-14 xl:py-16">
+          <div className="flex flex-col gap-6 xl:gap-10">
+            <h2 className="t-section max-w-[16ch] text-card-heading">
+              Have a Story to Tell?
+            </h2>
+            <p className="max-w-xl text-[17px] leading-[1.3] text-card-body xl:text-[24px]">
+              Whether it&rsquo;s an interview, feature, live discussion,
+              documentary, or editorial collaboration, I&rsquo;m always
+              interested in conversations that bring important stories and
+              perspectives to the surface.
+            </p>
+          </div>
 
-        <div className="rounded-[24px] p-6 xl:p-8">
-          <form onSubmit={handleSubmit} className="flex flex-col gap-6 xl:gap-7">
-            {FIELDS.map((f) => (
-              <div key={f.name}>
-                <label htmlFor={f.name} className="sr-only">
-                  {f.label}
+          <div>
+            <form
+              onSubmit={handleSubmit}
+              className="flex flex-col gap-6 xl:gap-7"
+            >
+              {FIELDS.map((f) => (
+                <div key={f.name}>
+                  <label htmlFor={f.name} className="sr-only">
+                    {f.label}
+                  </label>
+                  <input
+                    id={f.name}
+                    name={f.name}
+                    type={f.type}
+                    required={f.required}
+                    placeholder={f.label}
+                    autoComplete={
+                      f.name === "name"
+                        ? "name"
+                        : f.name === "email"
+                          ? "email"
+                          : "tel"
+                    }
+                    className={field}
+                  />
+                </div>
+              ))}
+
+              <div>
+                <label htmlFor="message" className="sr-only">
+                  Message
                 </label>
-                <input
-                  id={f.name}
-                  name={f.name}
-                  type={f.type}
-                  required={f.required}
-                  placeholder={f.label}
-                  autoComplete={
-                    f.name === "name" ? "name" : f.name === "email" ? "email" : "tel"
-                  }
-                  className={field}
+                <textarea
+                  id="message"
+                  name="message"
+                  rows={3}
+                  required
+                  placeholder="Message"
+                  className={`${field} resize-none`}
                 />
               </div>
-            ))}
 
-            <div>
-              <label htmlFor="message" className="sr-only">
-                Message
-              </label>
-              <textarea
-                id="message"
-                name="message"
-                rows={3}
-                required
-                placeholder="Message"
-                className={`${field} resize-none`}
-              />
-            </div>
-
-            <div className="flex flex-wrap items-center gap-5">
-              <button
-                type="submit"
-                className="inline-flex h-14 w-[170px] items-center justify-center gap-1.5 rounded-full bg-cream text-[16px] font-semibold uppercase text-oxblood transition-opacity duration-300 hover:opacity-90 xl:text-[18px]"
-              >
-                Submit
-                <span aria-hidden="true">&rarr;</span>
-              </button>
-              {sent ? (
-                <p role="status" className="text-[14px] text-body-soft">
-                  Your mail app should have opened with the message filled in.
-                </p>
-              ) : null}
-            </div>
-          </form>
+              <div className="flex flex-wrap items-center gap-5">
+                <button
+                  type="submit"
+                  className="inline-flex h-14 w-[170px] items-center justify-center gap-1.5 rounded-full bg-brown text-[16px] font-semibold uppercase text-white transition-opacity duration-300 hover:opacity-90 xl:text-[18px]"
+                >
+                  Submit
+                  <span aria-hidden="true">&rarr;</span>
+                </button>
+                {sent ? (
+                  <p role="status" className="text-[14px] text-card-body-soft">
+                    Your mail app should have opened with the message filled in.
+                  </p>
+                ) : null}
+              </div>
+            </form>
+          </div>
         </div>
       </div>
     </section>
