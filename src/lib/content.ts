@@ -951,18 +951,26 @@ export const workPage = {
     ],
   },
 
+  /**
+   * Revised design. The grid drops from four rows to three and every face is
+   * repositioned, each tile now carries the name across the foot of the
+   * picture, and the copy sits under the grid with the button opposite it
+   * rather than lying over the empty tiles in the lower left.
+   *
+   * CONFIRM: the design labels the last tile "Raph Nader". He is Ralph Nader,
+   * so the spelling here is the man's rather than the file's.
+   */
   people: {
-    heading: ["People Behind the", "Headlines"],
+    heading: ["People Behind", "The"],
+    headingAccent: "Headlines",
     lede: "Over the years, Joumana has interviewed and spoken with influential voices across business, politics, finance, media and culture.",
     cta: { label: "Start a Conversation", href: "/contact" },
-    // a six by four grid. Only eight tiles carry a face; the rest are the
-    // empty outlined tiles the design leaves between them, and the copy sits
-    // over the bottom left corner where four of them are.
+    // six columns, three rows; the tiles without a face are the outlined
+    // empties the design leaves between them
     grid: [
-      [null, null, "richard-branson", null, "george-soros", null],
+      ["christiane-amanpour", null, "richard-branson", null, "george-soros", null],
       [null, "nouriel-roubini", null, "jack-bogle", null, "barbara-corcoran"],
-      [null, null, null, null, "ralph-nader", null],
-      [null, null, null, "christiane-amanpour", null, "bill-clinton"],
+      [null, null, "bill-clinton", null, "ralph-nader", null],
     ],
     names: {
       "richard-branson": "Sir Richard Branson",

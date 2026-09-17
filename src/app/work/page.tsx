@@ -249,52 +249,71 @@ export default function WorkPage() {
       </section>
 
       {/* ----------------------------------------------------------- people
-          A six by four grid of 251 x 245 tiles on white. Eight carry a face;
-          the rest are the outlined empties the design leaves between them,
-          and the copy sits over the bottom left where four of them are. */}
+          A six by three grid of 251 x 245 tiles on white. Eight carry a face
+          with the name across its foot; the rest are the outlined empties the
+          design leaves between them. The copy runs under the grid with the
+          button opposite it.
+
+          On a phone the empties are dropped: an outlined blank is a rhythm
+          the six column grid makes, and at three columns it reads as a
+          missing picture. */}
       <section className="bg-cream py-12 xl:py-0">
         <div className="mx-auto w-full max-w-[1728px] px-6 md:px-10 xl:px-[4.63%] xl:py-[5.79vw]">
-          <div className="relative">
-            <ul className="grid grid-cols-3 gap-3 sm:grid-cols-4 lg:grid-cols-6 xl:gap-[0.69vw]">
-              {people.grid.flat().map((slug, i) => (
-                <li
-                  key={i}
-                  className={`relative aspect-[251/245] overflow-hidden rounded-[12px] ${
-                    slug ? "" : "border border-black/[0.04]"
-                  }`}
-                >
-                  {slug ? (
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 xl:gap-[0.69vw]">
+            {people.grid.flat().map((slug, i) => (
+              <li
+                key={i}
+                className={`relative aspect-[251/245] overflow-hidden rounded-[12px] ${
+                  slug
+                    ? "shadow-[0_10px_28px_-18px_rgba(72,17,12,0.45)]"
+                    : "hidden border border-black/[0.05] lg:block"
+                }`}
+              >
+                {slug ? (
+                  <>
                     <Image
                       src={`/people/${slug}.webp`}
                       alt={people.names[slug]}
                       fill
-                      sizes="(max-width: 1024px) 33vw, 15vw"
+                      sizes="(max-width: 640px) 50vw, (max-width: 1024px) 33vw, 15vw"
                       className="object-cover"
                     />
-                  ) : null}
-                </li>
-              ))}
-            </ul>
+                    {/* the name is set on the picture, so it needs a floor */}
+                    <span
+                      aria-hidden="true"
+                      className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/25 to-transparent"
+                    />
+                    <span className="s-card-meta absolute bottom-0 left-0 right-0 px-3 pb-3 font-medium text-white xl:px-[0.93vw] xl:pb-[0.93vw]">
+                      {people.names[slug]}
+                    </span>
+                  </>
+                ) : null}
+              </li>
+            ))}
+          </ul>
 
-            {/* the design lays this over the empty tiles at the lower left */}
-            <div className="mt-8 xl:absolute xl:bottom-0 xl:left-0 xl:mt-0 xl:w-[41%]">
+          <div className="mt-10 flex flex-wrap items-end justify-between gap-8 xl:mt-[3.47vw]">
+            <div className="max-w-[52ch] xl:max-w-[41%]">
               <h2 className="s-people-head text-oxblood">
                 <span className="block">{people.heading[0]}</span>
-                <span className="block font-semibold">{people.heading[1]}</span>
+                <span className="block">
+                  {people.heading[1]}{" "}
+                  <span className="font-semibold">{people.headingAccent}</span>
+                </span>
               </h2>
 
-              <p className="s-body mt-5 max-w-[52ch] text-card-body xl:mt-[1.39vw] xl:max-w-[81%]">
+              <p className="s-body mt-5 text-card-body xl:mt-[1.39vw]">
                 {people.lede}
               </p>
-
-              <Link
-                href={people.cta.href}
-                className="s-button mt-6 inline-flex h-[52px] items-center gap-3 rounded-[32px] bg-brown px-7 text-white transition-opacity duration-300 hover:opacity-90 xl:mt-[1.39vw] xl:h-16 xl:px-8"
-              >
-                {people.cta.label}
-                <ArrowRight />
-              </Link>
             </div>
+
+            <Link
+              href={people.cta.href}
+              className="s-button inline-flex h-[52px] items-center gap-3 rounded-[32px] bg-brown px-7 text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:px-8"
+            >
+              {people.cta.label}
+              <ArrowRight />
+            </Link>
           </div>
         </div>
       </section>
