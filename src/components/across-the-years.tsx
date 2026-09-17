@@ -19,9 +19,9 @@ import { yearsIn } from "@/lib/years";
  * anchor and the cards move against it, which is what makes four stacked
  * blocks read as a span of years rather than four blocks.
  *
- * Each entry carries its organisation's own mark, set in an oxblood panel on
- * the right of the card, which is where the card had room going spare. The
- * files are white knockouts, so they need a dark ground or they vanish.
+ * Each entry carries a photograph of the work, in the room on the right of the
+ * card. It used to be the organisation's logo on an oxblood chip, which said
+ * only what the heading already says; the design puts a picture there.
  *
  * Dates and titles are from her LinkedIn record. The entries this replaces had
  * Forbes starting in 2009 rather than 2007, had her still at Arabian Radio
@@ -35,7 +35,8 @@ const ROLES = [
     org: "Dubai Department of Economy and Tourism",
     role: "Senior Communications Manager",
     place: "Dubai",
-    logo: "/brand/logo-dubai-economy-tourism.png",
+    image: "/images/years/det.webp",
+    alt: "A Dubai delegation meeting international partners",
     body: "Leading public relations and communications strategy across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
     cta: "View Work",
   },
@@ -45,7 +46,8 @@ const ROLES = [
     org: "Dubai Chamber of Commerce",
     role: "Media & Corporate Communications",
     place: "Dubai",
-    logo: "/brand/logo-dubai-chamber.png",
+    image: "/images/years/dubai-chamber.webp",
+    alt: "Joumana Saad speaking at a Dubai Chamber podium",
     body: "Developing and running the Chamber's public relations programme, media plans and press activity across the UAE and international markets.",
     cta: "View Work",
   },
@@ -55,7 +57,8 @@ const ROLES = [
     org: "Arabian Radio Network",
     role: "Senior Reporter",
     place: "Dubai",
-    logo: "/brand/logo-arn.png",
+    image: "/images/years/arn.webp",
+    alt: "The Arabian Radio Network studio during a live broadcast",
     body: "Reporting across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live from events and producing features for Business Breakfast and Drive Live.",
     cta: "View Work",
   },
@@ -65,7 +68,8 @@ const ROLES = [
     org: "Forbes",
     role: "Producer",
     place: "New York",
-    logo: "/brand/logo-forbes.png",
+    image: "/images/years/forbes.webp",
+    alt: "Joumana Saad during her Forbes years in New York",
     body: "Running the magazine's video network day to day, assigning and producing multimedia stories, editing copy for Forbes.com and reporting on air.",
     cta: "View Forbes Work",
   },
@@ -234,21 +238,19 @@ export function AcrossTheYears() {
                           : "lg:opacity-[0.94]"
                       }`}
                     >
-                      <div className="flex items-center gap-8">
+                      <div className="flex items-stretch gap-8">
                         <div className="flex min-w-0 flex-1 flex-col gap-4">
                           {/* on a phone there is no pinned column, so the year
                               and the mark ride at the top of the card instead */}
                           <div className="flex items-center justify-between gap-4 lg:hidden">
-                            <span className="flex h-[40px] w-[96px] shrink-0 items-center justify-center rounded-[10px] bg-oxblood px-2.5">
-                              <span className="relative block h-full w-full">
-                                <Image
-                                  src={r.logo}
-                                  alt=""
-                                  fill
-                                  sizes="96px"
-                                  className="object-contain"
-                                />
-                              </span>
+                            <span className="relative block h-[60px] w-[88px] shrink-0 overflow-hidden rounded-[10px]">
+                              <Image
+                                src={r.image}
+                                alt={r.alt}
+                                fill
+                                sizes="88px"
+                                className="object-cover"
+                              />
                             </span>
                             <div className="text-right">
                               <span className="block font-display text-[26px] font-light leading-none text-card-heading">
@@ -289,17 +291,17 @@ export function AcrossTheYears() {
                           </div>
                         </div>
 
-                        {/* the mark, in the room the card was leaving empty */}
-                        <span className="hidden h-[92px] w-[210px] shrink-0 items-center justify-center rounded-[16px] bg-oxblood px-6 transition-transform duration-500 group-hover:scale-[1.03] lg:flex xl:h-[104px] xl:w-[240px]">
-                          <span className="relative block h-full w-full">
-                            <Image
-                              src={r.logo}
-                              alt=""
-                              fill
-                              sizes="240px"
-                              className="object-contain"
-                            />
-                          </span>
+                        {/* the picture, in the room the card was leaving empty.
+                            It runs the height of the card, so the panel keeps
+                            the card's proportions rather than setting them. */}
+                        <span className="relative hidden w-[230px] shrink-0 self-stretch overflow-hidden rounded-[16px] lg:block xl:w-[280px]">
+                          <Image
+                            src={r.image}
+                            alt={r.alt}
+                            fill
+                            sizes="280px"
+                            className="object-cover transition-transform duration-700 group-hover:scale-[1.04]"
+                          />
                         </span>
                       </div>
                     </article>
