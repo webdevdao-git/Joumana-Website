@@ -22,8 +22,7 @@ export const site = {
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/joumana-saad-876b5144/" },
     { label: "Instagram", href: "https://www.instagram.com/joumanasaad_media/" },
-    { label: "X", href: "https://twitter.com/joumanasaad" },
-    { label: "Facebook", href: "http://fb.me/joumanasaadmedia" },
+    { label: "Facebook", href: "https://www.facebook.com/joumana.saad.100" },
   ],
 } as const;
 

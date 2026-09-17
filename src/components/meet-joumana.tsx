@@ -17,11 +17,14 @@ import Image from "next/image";
  * The figure is a date rather than a count. "13+ years" sat on the home page
  * against "nineteen years" on the work page and "more than 15 years" in the
  * services design. She began at Forbes in 2007, and a date cannot drift.
+ *
+ * This is Joumana's own wording, supplied in September 2026, kept verbatim
+ * apart from the dashes, which are out of the copy everywhere on this site.
  */
 const COPY = [
-  "I am a communications specialist, journalist and presenter based in Dubai. Today I lead public relations and communications strategy for the Dubai Department of Economy and Tourism, across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
-  "I started in newsrooms in 2007, at Forbes in New York, running the video network and reporting on air. In Dubai I reported for Arabian Radio Network across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live and producing features for Business Breakfast and Drive Live. I edited SME Advisor magazine, and covered financial markets in the UAE, Saudi Arabia and Egypt as Deputy Editor at Argaam.",
-  "Six years at Dubai Chamber of Commerce taught me what a reporter's instinct is worth inside a large organisation. Newsroom, boardroom or stage, the job has never changed: understand the subject, find what actually matters in it, and say it so people listen.",
+  "I am a Dubai based communications specialist, journalist and presenter with nearly two decades of experience across public relations, strategic communications, media relations, business journalism and broadcast media. Today I lead international PR and communications strategy for the Dubai Department of Economy and Tourism, supporting campaigns and media engagement across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
+  "My career began in 2007 at Forbes in New York, where I managed the video network and reported on air, before moving into broadcast journalism in Dubai with Arabian Radio Network, including Dubai Eye 103.8, Dubai 92 and Virgin Radio. I later worked across business journalism, financial markets and editorial leadership at SME Advisor and Argaam, covering the UAE, Saudi Arabia and Egypt.",
+  "Six years at Dubai Chamber of Commerce expanded that newsroom experience into corporate communications, media strategy, executive messaging and strategic storytelling. Whether in a newsroom, boardroom or on stage, my focus remains the same: understand the subject, identify what matters most and communicate it in a way that connects with people.",
 ];
 
 export function MeetJoumana() {

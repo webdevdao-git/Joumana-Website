@@ -75,7 +75,6 @@ export const metadata: Metadata = {
     title: "Joumana Saad | Communications Specialist and Journalist, Dubai",
     description:
       "Business journalism, content strategy and bilingual event hosting in Dubai.",
-    creator: "@joumanasaad",
     images: ["/images/headshot-wide.jpg"],
   },
   robots: {

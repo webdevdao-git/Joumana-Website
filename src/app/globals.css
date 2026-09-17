@@ -443,6 +443,29 @@
     }
   }
 
+  /* The same breathing ring on the card while it sits in the opening screen.
+     It went unnoticed there, being a light panel on a dark photograph in the
+     corner a visitor is least likely to look at; a slow pulse is what makes
+     it register without a popup that keeps reopening itself, which Google
+     treats as an intrusive interstitial. Rounder and wider than the tab's,
+     because the card is. */
+  .card-glow::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: 18px;
+    pointer-events: none;
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cream) 50%, transparent);
+    animation: card-glow 3.4s ease-out infinite;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .card-glow::after {
+      animation: none;
+      box-shadow: 0 0 0 3px color-mix(in srgb, var(--cream) 20%, transparent);
+    }
+  }
+
 
   /* ------------------------------------------------- the services page scale
      Read from the Figma file rather than matched by eye. Every size below is
@@ -726,6 +749,18 @@
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+  }
+}
+
+@keyframes card-glow {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cream) 50%, transparent);
+  }
+  72% {
+    box-shadow: 0 0 0 22px color-mix(in srgb, var(--cream) 0%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--cream) 0%, transparent);
   }
 }
 

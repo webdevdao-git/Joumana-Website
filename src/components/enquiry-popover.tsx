@@ -11,7 +11,8 @@ import { site } from "@/lib/content";
  * corner, which opens it again.
  *
  * No timer and nothing remembered between visits: on the opening screen the
- * card is simply there, and from the second section down the button is. The
+ * card is simply there, glowing on a slow pulse so it registers, and from the
+ * second section down the button is. The
  * only thing held is an explicit close, and only until the page is reloaded,
  * so scrolling back up does not reopen something the visitor just shut.
  *
@@ -160,7 +161,7 @@ export function EnquiryPopover() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={reduced ? { opacity: 0 } : { opacity: 0, y: 12, scale: 0.97 }}
             transition={{ duration: 0.4, ease: [0.22, 1, 0.36, 1] }}
-            className="fixed bottom-5 right-5 z-40 hidden w-[262px] rounded-[18px] bg-card p-4 shadow-[0_18px_44px_rgba(0,0,0,0.38)] md:block"
+            className="card-glow fixed bottom-5 right-5 z-40 hidden w-[262px] rounded-[18px] bg-card p-4 shadow-[0_18px_44px_rgba(0,0,0,0.38)] md:block"
           >
             <button
               type="button"
