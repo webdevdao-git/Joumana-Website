@@ -1054,8 +1054,8 @@ export const journalPage = {
     kicker: "From the Journal",
     heading: "A space for stories, ideas & perspective",
     image: {
-      src: "/images/journal/corridor.webp",
-      alt: "A colonnade in raking light",
+      src: "/images/journal/dubai-2021.webp",
+      alt: "Joumana Saad at a Dubai 2021 business event",
     },
     body: [
       "A collection of articles, observations and conversations covering communications, media, business, current affairs and the ideas shaping the world around us.",
@@ -1070,8 +1070,8 @@ export const journalPage = {
     hero: {
       heading: "The Journal",
       image: {
-        src: "/images/journal/newsstand.webp",
-        alt: "Newspapers spread across a table",
+        src: "/images/journal/roundtable.webp",
+        alt: "Joumana Saad with a media roundtable in Mexico City",
       },
     },
     kicker: "Coming Soon",

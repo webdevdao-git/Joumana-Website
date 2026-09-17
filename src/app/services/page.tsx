@@ -172,10 +172,11 @@ export default function ServicesPage() {
           </Reveal>
 
           <div className="mt-10 grid w-full max-w-[1363px] items-end gap-10 lg:grid-cols-[644fr_639fr] xl:mt-[3vw] xl:gap-[5vw]">
-            {/* 517 by 711, carrying her portrait where the design had its own
-                placeholder. The design also overlaps a 291 by 258 plate from
-                below and 127px further left; that one was never anything but
-                a placeholder and is dropped.
+            {/* Two frames, as the design has them: a 600 by 808 plate of the
+                studio, and a 340 by 390 one of the morning papers riding over
+                its lower left corner, a quarter of its width outside it. Both
+                are black and white, so they read as one object rather than
+                two pictures.
 
                 The plate is sized by height rather than width so the section
                 can never grow taller than the screen. At the design's own
@@ -184,13 +185,23 @@ export default function ServicesPage() {
                 goes and still leave the section inside one screen at 1440 by
                 820, which is the shortest window worth designing for. */}
             <Reveal className="relative ml-auto w-fit">
-              <div className="relative aspect-[517/711] h-[min(41.15vw,57svh)]">
+              <div className="relative aspect-[600/808] h-[min(41.15vw,57svh)]">
                 <Image
-                  src="/brand/services-bring.webp"
-                  alt="Joumana Saad, journalist and communications specialist in Dubai"
+                  src="/brand/bring-studio.webp"
+                  alt="A television studio set before recording"
                   fill
-                  sizes="(max-width: 1024px) 80vw, 517px"
-                  className="object-cover object-top"
+                  sizes="(max-width: 1024px) 80vw, 600px"
+                  className="object-cover"
+                />
+              </div>
+
+              <div className="absolute bottom-[22%] left-[-25%] h-[48%] w-[57%]">
+                <Image
+                  src="/brand/bring-news.webp"
+                  alt="A morning newspaper open on a desk"
+                  fill
+                  sizes="(max-width: 1024px) 45vw, 340px"
+                  className="object-cover"
                 />
               </div>
             </Reveal>

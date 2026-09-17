@@ -28,7 +28,7 @@ export const metadata: Metadata = {
       "An evolving collection of writing, observations and conversations. New pieces will be added soon.",
     url: "/journal/all",
     images: [
-      { url: "/images/journal/newsstand.webp", width: 1800, height: 1348, alt: "The Journal" },
+      { url: "/images/journal/roundtable.webp", width: 1800, height: 968, alt: "The Journal" },
     ],
   },
 };
