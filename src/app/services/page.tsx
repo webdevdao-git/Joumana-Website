@@ -291,13 +291,17 @@ export default function ServicesPage() {
           the frame puts the element. */}
       {/* the page alternates the two brand grounds, so every other discipline
           sits on the cream rather than the oxblood the design draws for all
-          six. CONFIRM: this is a departure from the file. */}
+          six. CONFIRM: this is a departure from the file.
+
+          Each discipline carries its own photograph now; they all shared one
+          placeholder plate before. */}
       <div className="relative">
         {disciplines.map((d, i) => (
           <DisciplineSection
             key={d.index}
             d={d}
-            plate="/brand/services-columns.webp"
+            plate={d.image}
+            plateAlt={d.alt}
             tone={i % 2 === 0 ? "dark" : "light"}
           />
         ))}

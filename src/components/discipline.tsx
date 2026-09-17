@@ -70,10 +70,12 @@ function ArrowRight() {
 export function DisciplineSection({
   d,
   plate,
+  plateAlt,
   tone = "dark",
 }: {
   d: Discipline;
   plate: string;
+  plateAlt: string;
   tone?: Tone;
 }) {
   /* the two grounds the site alternates between, and what reads on each */
@@ -221,7 +223,7 @@ export function DisciplineSection({
               >
                 <Image
                   src={plate}
-                  alt=""
+                  alt={plateAlt}
                   fill
                   sizes="(max-width: 1024px) 100vw, 600px"
                   className="object-cover"

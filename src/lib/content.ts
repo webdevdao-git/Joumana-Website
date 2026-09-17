@@ -775,12 +775,14 @@ export const journal = [
    designer's own wording. Two things in the file are left as they were
    found and flagged rather than quietly fixed:
 
-     - Editorial lists "Special Reports" twice
      - the fifth call to action reads "Enquire MORE About IT"
 
-   Both are almost certainly slips. They are kept verbatim so the page
-   matches the design, and they are the first thing to correct once
-   Joumana has read it. */
+   Almost certainly a slip. It is kept verbatim so the page matches the
+   design, and is the first thing to correct once Joumana has read it.
+
+   Editorial used to list "Special Reports" twice, flagged here the same
+   way; the revised design reads "Editing & Research" for the fourth, so
+   that one is now settled. */
 
 export const servicesPage = {
   hero: {
@@ -810,6 +812,8 @@ export const servicesPage = {
   disciplines: [
     {
       label: "Branded Content",
+      image: "/images/services/branded-content.webp",
+      alt: "Joumana Saad presenting branded content on location",
       index: "01",
       head: "Make the message matter",
       body: [
@@ -822,6 +826,8 @@ export const servicesPage = {
     },
     {
       label: "Presenting & Moderation",
+      image: "/images/services/presenting.webp",
+      alt: "Joumana Saad hosting an ESCADA event in Dubai",
       index: "02",
       head: "The right voice for the room",
       body: [
@@ -834,6 +840,8 @@ export const servicesPage = {
     },
     {
       label: "Editorial",
+      image: "/images/services/editorial.webp",
+      alt: "Joumana Saad writing at her desk",
       index: "03",
       head: "Stories grounded in substance",
       body: [
@@ -841,11 +849,13 @@ export const servicesPage = {
         "Joumana's journalism background spans business, finance, technology, current affairs, interviews, features and special reports.",
         "Her experience across Forbes, Arabian Radio Network, Argaam and other business publications has shaped an approach that is rigorous without losing the human story.",
       ],
-      includes: ["Feature Writing", "Business & Finance", "Special Reports", "Special Reports"],
+      includes: ["Feature Writing", "Business & Finance", "Special Reports", "Editing & Research"],
       cta: "Explore Editorial Work",
     },
     {
       label: "Podcasts",
+      image: "/images/services/podcasts.webp",
+      alt: "Joumana Saad recording a podcast interview",
       index: "04",
       head: "Conversations worth staying for",
       body: [
@@ -857,6 +867,8 @@ export const servicesPage = {
     },
     {
       label: "Media Training",
+      image: "/images/services/media-training.webp",
+      alt: "Joumana Saad presenting in a television studio",
       index: "05",
       head: "Be ready for the question",
       body: [
@@ -868,6 +880,8 @@ export const servicesPage = {
     },
     {
       label: "PR & Corporate Communications",
+      image: "/images/services/pr-communications.webp",
+      alt: "Joumana Saad speaking at a Dubai Chamber podium",
       index: "06",
       head: "Communication with purpose",
       body: [
