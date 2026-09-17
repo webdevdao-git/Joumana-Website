@@ -167,10 +167,10 @@ export default function WorkPage() {
             {highlights.cards.map((card, i) => (
               <Reveal as="li" key={card.title} delay={(i % 2) * 0.06}>
                 <article className="flex h-full flex-col bg-card p-5 xl:p-[1.39vw]">
-                  <div className="relative aspect-[724/380] w-full">
+                  <div className="relative aspect-[724/380] w-full overflow-hidden">
                     <Image
-                      src={PLATE}
-                      alt=""
+                      src={card.image}
+                      alt={card.alt}
                       fill
                       sizes="(max-width: 1024px) 100vw, 45vw"
                       className="object-cover"
@@ -219,10 +219,10 @@ export default function WorkPage() {
                   rel="noreferrer noopener"
                   className="group flex items-stretch gap-5 bg-white/[0.04] p-5 transition-colors duration-300 hover:bg-white/[0.08] lg:aspect-[1259/280] xl:gap-[1.99%] xl:p-[1.9%]"
                 >
-                  <span className="relative block w-[26%] shrink-0 self-stretch sm:w-[20%] xl:w-[20.1%]">
+                  <span className="relative block w-[26%] shrink-0 self-stretch overflow-hidden sm:w-[20%] xl:w-[20.1%]">
                     <Image
-                      src="/brand/work-thumb.webp"
-                      alt=""
+                      src={item.image}
+                      alt={item.alt}
                       fill
                       sizes="253px"
                       className="object-cover"

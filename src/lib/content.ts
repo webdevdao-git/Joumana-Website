@@ -894,43 +894,60 @@ export const workPage = {
 
   seenWith: { heading: "As seen with" },
 
+  /**
+   * The design was revised after this was first built: the order changed and
+   * the Forbes card, Reporting Beyond the Headlines, gave way to the VSL
+   * International conversation. Each card now carries its own plate, cut from
+   * the photographs Priya supplied, in place of the single placeholder that
+   * used to repeat across all four.
+   */
   highlights: {
     heading: "Top Highlights",
     cta: "See more",
     cards: [
       {
-        title: "International Media & Communications",
-        body: "Leading communications across international markets, with a focus on media relations, editorial content, journalist engagement and high-profile business and tourism initiatives.",
-        org: "Dubai Department of Economy & Tourism",
+        title: "Repairing Rather Than Rebuilding",
+        body: "A conversation on why preserving, strengthening and adapting existing buildings is becoming a smarter, more sustainable approach to the future of real estate.",
+        org: "Joumana Saad · VSL International · 2026",
+        image: "/images/work/highlight-repairing.webp",
+        alt: "Joumana Saad in conversation on a podcast set",
       },
       {
         title: "Building Connections Through Media",
         body: "Representing Dubai in Mexico, connecting with industry leaders and influential media, and helping lay the groundwork for future collaboration between Dubai and Mexico.",
         org: "Mexico",
+        image: "/images/work/highlight-mexico.webp",
+        alt: "A Dubai and Mexico delegation meeting around a boardroom table",
       },
       {
         title: "PR & Corporate Communications",
         body: "Developing communications and media initiatives across UAE and international markets, supporting major events, business initiatives, press activity and stakeholder communications.",
         org: "Dubai Chamber",
+        image: "/images/work/highlight-dubai-chamber.webp",
+        alt: "Joumana Saad speaking at a Dubai Chamber podium",
       },
       {
-        title: "Reporting Beyond the Headlines",
-        body: "A foundation in business journalism, multimedia storytelling and video production, covering markets, entrepreneurs, finance and global business stories.",
-        org: "Forbes",
+        title: "International Media & Communications",
+        body: "Leading communications across international markets, with a focus on media relations, editorial content, journalist engagement and high-profile business and tourism initiatives.",
+        org: "Dubai Department of Economy & Tourism",
+        image: "/images/work/highlight-det.webp",
+        alt: "Joumana Saad at the Strategic Alignment Mexico Dubai briefing in Mexico City",
       },
     ],
   },
 
   articles: {
     heading: "Featured Articles",
-    // hrefs are matched to the live links already held in `clips`
+    /* hrefs are matched to the live links already held in `clips`. Each row
+       now carries the plate the design puts beside it, cut from the artwork
+       Priya supplied; they all used to share one placeholder. */
     items: [
-      { outlet: "Forbes", title: "Submarines For The super rich", meta: "Featured, 2010", href: "https://www.forbes.com/sites/face-to-face/2010/05/11/submarines-for-the-super-rich/" },
-      { outlet: "The Epoch Times", title: "New Retirement Visas Could Be A Game Changer For Expats In The UAE", meta: "News feature, 2018", href: "https://www.theepochtimes.com/new-retirement-visas-could-be-game-changer-for-expats-in-uae_2682211.html" },
-      { outlet: "Dubai Chamber of Commerce", title: "Dubai Chamber 2017 Highlights", meta: "Annual report, 2017", href: "http://www.dubaichamber.com/uploads/annualreports/2017/index.php" },
-      { outlet: "Arabian Business", title: "Latin America, Dubai's Final Frontier", meta: "Analysis, 2017", href: "https://www.arabianbusiness.com/politics-economics/420155-dubais-final-frontier" },
-      { outlet: "Forbes", title: "Excitement Returns To The Art Market", meta: "Featured, 2010", href: "https://www.forbes.com/sites/face-to-face/2010/05/14/excitement-returns-to-art-market/" },
-      { outlet: "Dubai Expo", title: "Say Yes To The Future, Expo Bid Book", meta: "Publication, 2013", href: "http://www.sayyestodubai.com/bid-book/" },
+      { outlet: "Forbes", title: "Submarines For The super rich", meta: "Featured, 2010", href: "https://www.forbes.com/sites/face-to-face/2010/05/11/submarines-for-the-super-rich/", image: "/images/work/clip-submarines.webp", alt: "A personal submarine moored in a bay" },
+      { outlet: "The Epoch Times", title: "New Retirement Visas Could Be A Game Changer For Expats In The UAE", meta: "News feature, 2018", href: "https://www.theepochtimes.com/new-retirement-visas-could-be-game-changer-for-expats-in-uae_2682211.html", image: "/images/work/clip-retirement.webp", alt: "People walking along a street in Dubai" },
+      { outlet: "Dubai Chamber of Commerce", title: "Dubai Chamber 2017 Highlights", meta: "Annual report, 2017", href: "http://www.dubaichamber.com/uploads/annualreports/2017/index.php", image: "/images/work/clip-dubai-chamber.webp", alt: "An audience at a Dubai Chamber briefing" },
+      { outlet: "Arabian Business", title: "Latin America, Dubai's Final Frontier", meta: "Analysis, 2017", href: "https://www.arabianbusiness.com/politics-economics/420155-dubais-final-frontier", image: "/images/work/clip-latin-america.webp", alt: "A Latin American city skyline across the water" },
+      { outlet: "Forbes", title: "Excitement Returns To The Art Market", meta: "Featured, 2010", href: "https://www.forbes.com/sites/face-to-face/2010/05/14/excitement-returns-to-art-market/", image: "/images/work/clip-art-market.webp", alt: "A modernist painting at auction" },
+      { outlet: "Dubai Expo", title: "Say Yes To The Future, Expo Bid Book", meta: "Publication, 2013", href: "http://www.sayyestodubai.com/bid-book/", image: "/images/work/clip-expo.webp", alt: "The Expo site in Dubai" },
     ],
   },
 
