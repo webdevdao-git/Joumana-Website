@@ -13,8 +13,17 @@ cd "$(dirname "$0")/.."
 SHA=$(git rev-parse --short HEAD)
 REMOTE=$(git remote get-url origin)
 
-echo "building..."
-npm run build:preview >/dev/null
+# LIVE=1 builds for the real domain: robots.txt opens, the sitemap and every
+# canonical point at joumanasaad.com. Without it the build is a preview, shut
+# to crawlers, so the temporary hostingersite.com subdomain never gets indexed
+# and then competes with the real domain for the same pages.
+if [ "${LIVE:-}" = "1" ]; then
+  echo "building for the live domain..."
+  npm run build >/dev/null
+else
+  echo "building (preview, closed to search engines)..."
+  npm run build:preview >/dev/null
+fi
 
 test -f out/index.html
 test -f out/.htaccess
@@ -37,3 +46,7 @@ git push -qf origin deploy
 
 echo "pushed $(git ls-files | wc -l | tr -d ' ') files to the deploy branch"
 echo "now press Deploy in hPanel, or let the webhook do it"
+if [ "${LIVE:-}" != "1" ]; then
+  echo "note: this build is closed to search engines. Use npm run publish:live"
+  echo "      once the real domain is serving the site."
+fi

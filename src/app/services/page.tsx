@@ -23,7 +23,7 @@ import { servicesPage } from "@/lib/content";
 export const metadata: Metadata = {
   title: { absolute: "Services | Content, Communications and Media in Dubai" },
   description:
-    "Branded content, presenting and moderation, editorial, podcasts, media training and corporate communications from a journalist with fifteen years across media, government and business in Dubai.",
+    "Branded content, presenting and moderation, editorial, podcasts, media training and corporate communications, from a Dubai journalist of nineteen years.",
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Services | Joumana Saad, Dubai",

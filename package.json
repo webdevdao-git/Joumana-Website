@@ -8,7 +8,8 @@
     "start": "next start",
     "lint": "eslint",
     "build:preview": "NEXT_PUBLIC_SITE_URL=https://seashell-dog-863923.hostingersite.com NEXT_PUBLIC_NOINDEX=1 next build",
-    "publish": "bash scripts/publish.sh"
+    "publish": "bash scripts/publish.sh",
+    "publish:live": "LIVE=1 bash scripts/publish.sh"
   },
   "dependencies": {
     "lenis": "^1.3.26",

@@ -10,8 +10,7 @@ import { ContactPanel } from "@/components/contact-panel";
 
 export const metadata: Metadata = {
   title: {
-    absolute:
-      "Joumana Saad | Journalist, Presenter, Moderator and Communications Specialist in Dubai",
+    absolute: "Joumana Saad | Journalist, Presenter, Communications, Dubai",
   },
   description:
     "Joumana Saad is a Dubai based journalist, presenter, moderator and content specialist with over a decade across media, business, technology and communications.",

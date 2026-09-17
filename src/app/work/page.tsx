@@ -24,7 +24,7 @@ import { workPage } from "@/lib/content";
 export const metadata: Metadata = {
   title: { absolute: "Selected Work | Journalism, Communications and Broadcast" },
   description:
-    "Selected work by Joumana Saad across strategic communications, editorial, media, branded content and broadcasting, from international media engagements to published journalism and on-camera work.",
+    "Selected work across strategic communications, editorial, branded content and broadcast, from international media engagements to published journalism.",
   alternates: { canonical: "/work" },
   openGraph: {
     title: "Selected Work | Joumana Saad",

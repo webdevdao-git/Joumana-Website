@@ -30,8 +30,7 @@ const scriptStandIn = Parisienne({
 export const metadata: Metadata = {
   metadataBase: new URL(site.url),
   title: {
-    default:
-      "Joumana Saad | Communications Specialist, Journalist and Presenter in Dubai",
+    default: "Joumana Saad | Communications, Journalism and Presenting",
     template: "%s | Joumana Saad",
   },
   description:

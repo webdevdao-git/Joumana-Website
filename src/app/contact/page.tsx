@@ -22,7 +22,7 @@ import { contactCopy, faqs, pageCopy } from "@/lib/content";
 export const metadata: Metadata = {
   title: { absolute: "Contact | Hire a Journalist, Writer and MC in Dubai" },
   description:
-    "Enquire about editorial assignments, corporate content, press material, media training or bilingual event hosting in Dubai. Send a brief and receive a quote and a rate card.",
+    "Enquire about editorial work, corporate content, media training or bilingual event hosting in Dubai. Send a brief, get a quote and a rate card.",
   alternates: { canonical: "/contact" },
   openGraph: {
     title: "Contact Joumana Saad | Journalist and MC, Dubai",
