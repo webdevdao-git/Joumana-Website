@@ -144,7 +144,9 @@ export default function WorkPage() {
 
       {/* the logo row the design calls As seen with, which is the band the
           home page already runs */}
-      <OutletBand heading={workPage.seenWith.heading} size="full" />
+      {/* the same band the home page runs, at the same size and with the
+          same heading */}
+      <OutletBand />
 
       {/* ------------------------------------------------------ highlights
           Label row at y100 with the pill at the right, then a two by two grid

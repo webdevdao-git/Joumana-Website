@@ -5,6 +5,10 @@ import Image from "next/image";
  * here it runs as a continuous marquee that never pauses, so the full set is
  * visible on any screen width.
  *
+ * One size, used by both the home and the work page. The work page had the
+ * design's own 483 tall version under the heading "As seen with", which next
+ * to the home page's band read as two different things doing the same job.
+ *
  * Each file is exported onto a canvas the same shape as the tile, with the mark
  * already scaled for optical weight: a one line wordmark like Forbes is set
  * shorter than a stacked lockup like Dubai Economy and Tourism, because at
@@ -21,7 +25,7 @@ const LOGOS = [
   { src: "/brand/logo-dubai-economy.png", alt: "Dubai Economy" },
 ];
 
-function Row({ full = false }: { full?: boolean }) {
+function Row() {
   // doubled so the -50% loop meets itself with no seam
   const run = [...LOGOS, ...LOGOS, ...LOGOS, ...LOGOS];
   return (
@@ -29,11 +33,7 @@ function Row({ full = false }: { full?: boolean }) {
       {run.map((logo, i) => (
         <span
           key={`${logo.src}-${i}`}
-          className={
-            full
-              ? "relative mx-5 h-[86px] w-[150px] shrink-0 xl:mx-[0.7vw] xl:h-[8.62vw] xl:w-[15.05vw]"
-              : "relative mx-6 h-[42px] w-[125px] shrink-0 xl:mx-9 xl:h-[56px] xl:w-[170px]"
-          }
+          className="relative mx-6 h-[42px] w-[125px] shrink-0 xl:mx-9 xl:h-[56px] xl:w-[170px]"
         >
           <Image
             src={logo.src}
@@ -50,32 +50,22 @@ function Row({ full = false }: { full?: boolean }) {
 
 export function OutletBand({
   heading = "Newsrooms and Boardrooms",
-  size = "compact",
 }: {
   heading?: string;
-  /** compact is the home page's cut down band, full is the design's 483. */
-  size?: "compact" | "full";
 }) {
-  const full = size === "full";
   return (
     <section
       aria-label="Publications and organisations Joumana Saad has worked with"
-      className={`relative overflow-hidden bg-band ${full ? "py-10 xl:py-[5.79vw]" : "py-8 xl:py-10"}`}
+      className="relative overflow-hidden bg-band py-8 xl:py-10"
     >
       <div className="frame">
-        <h2
-          className={
-            full
-              ? "s-title text-center text-white"
-              : "text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-on-band/60 xl:text-[13px]"
-          }
-        >
+        <h2 className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-on-band/60 xl:text-[13px]">
           {heading}
         </h2>
       </div>
 
-      <div className={full ? "mt-8 overflow-hidden xl:mt-[3.1vw]" : "mt-6 overflow-hidden xl:mt-7"}>
-        <Row full={full} />
+      <div className="mt-6 overflow-hidden xl:mt-7">
+        <Row />
       </div>
 
       {/* the real list, for crawlers and screen readers */}

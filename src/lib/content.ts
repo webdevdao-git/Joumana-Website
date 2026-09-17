@@ -892,8 +892,6 @@ export const workPage = {
     lede: "A selection of Joumana's work across strategic communications, editorial, media, branded content and broadcasting, from international media engagements to published journalism and on-camera work.",
   },
 
-  seenWith: { heading: "As seen with" },
-
   /**
    * The design was revised after this was first built: the order changed and
    * the Forbes card, Reporting Beyond the Headlines, gave way to the VSL
