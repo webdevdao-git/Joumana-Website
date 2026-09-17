@@ -103,7 +103,7 @@ export default function WorkPage() {
           arrow pointing into the page. */}
       <section className="bg-cream">
         <div
-          className="fit-hero flex max-w-[1728px] flex-col items-center px-6 py-12 lg:justify-center lg:px-0 lg:py-0"
+          className="fit-frame flex max-w-[1728px] flex-col items-center px-6 py-12 lg:justify-center lg:px-0 lg:py-0"
           style={{ "--fit-w": 1728, "--fit-h": 981 } as React.CSSProperties}
         >
           <div className="relative aspect-[377/408] w-[52%] max-w-[240px] lg:w-[21.8%] lg:max-w-none">
@@ -254,19 +254,24 @@ export default function WorkPage() {
           design leaves between them. The copy runs under the grid with the
           button opposite it.
 
-          On a phone the empties are dropped: an outlined blank is a rhythm
-          the six column grid makes, and at three columns it reads as a
-          missing picture. */}
-      <section className="bg-cream py-12 xl:py-0">
-        <div className="mx-auto w-full max-w-[1728px] px-6 md:px-10 xl:px-[4.63%] xl:py-[5.79vw]">
-          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 xl:gap-[0.69vw]">
+          The empties hold their cells and draw nothing. Outlining them, which
+          is what this did first, turns the space between the faces into a set
+          of empty boxes; the design leaves it as space. On a phone they are
+          dropped altogether, since at two columns a gap in the run reads as a
+          picture that failed to load. */}
+      <section className="bg-cream py-12 lg:py-0">
+        <div
+          className="fit-frame mx-auto flex max-w-[1728px] flex-col justify-center px-6 md:px-10 lg:px-[4.63cqw] lg:py-[3.2cqw]"
+          style={{ "--fit-w": 1728, "--fit-h": 1164, "--fit-reserve": "0px" } as React.CSSProperties}
+        >
+          <ul className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-6 lg:gap-[0.69cqw]">
             {people.grid.flat().map((slug, i) => (
               <li
                 key={i}
-                className={`relative aspect-[251/245] overflow-hidden rounded-[12px] ${
+                className={`relative aspect-[251/245] rounded-[12px] ${
                   slug
-                    ? "shadow-[0_10px_28px_-18px_rgba(72,17,12,0.45)]"
-                    : "hidden border border-black/[0.05] lg:block"
+                    ? "overflow-hidden shadow-[0_10px_28px_-18px_rgba(72,17,12,0.45)]"
+                    : "hidden lg:block"
                 }`}
               >
                 {slug ? (
@@ -283,7 +288,7 @@ export default function WorkPage() {
                       aria-hidden="true"
                       className="absolute inset-x-0 bottom-0 h-1/2 bg-gradient-to-t from-black/70 via-black/25 to-transparent"
                     />
-                    <span className="s-card-meta absolute bottom-0 left-0 right-0 px-3 pb-3 font-medium text-white xl:px-[0.93vw] xl:pb-[0.93vw]">
+                    <span className="s-card-meta absolute bottom-0 left-0 right-0 px-3 pb-3 font-medium text-white lg:px-[0.93cqw] lg:pb-[0.93cqw]">
                       {people.names[slug]}
                     </span>
                   </>
@@ -292,7 +297,7 @@ export default function WorkPage() {
             ))}
           </ul>
 
-          <div className="mt-10 flex flex-wrap items-end justify-between gap-8 xl:mt-[3.47vw]">
+          <div className="mt-10 flex flex-wrap items-end justify-between gap-8 lg:mt-[2.6cqw]">
             <div className="max-w-[52ch] xl:max-w-[41%]">
               <h2 className="s-people-head text-oxblood">
                 <span className="block">{people.heading[0]}</span>
@@ -302,14 +307,14 @@ export default function WorkPage() {
                 </span>
               </h2>
 
-              <p className="s-body mt-5 text-card-body xl:mt-[1.39vw]">
+              <p className="s-body mt-5 text-card-body lg:mt-[1.39cqw]">
                 {people.lede}
               </p>
             </div>
 
             <Link
               href={people.cta.href}
-              className="s-button inline-flex h-[52px] items-center gap-3 rounded-[32px] bg-brown px-7 text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:px-8"
+              className="s-button fit-pill inline-flex h-[52px] items-center gap-3 rounded-[32px] bg-brown px-7 text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:px-8"
             >
               {people.cta.label}
               <ArrowRight />

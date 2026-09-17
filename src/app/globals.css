@@ -185,7 +185,7 @@
     min-height: calc(100svh - var(--nav-h));
   }
 
-  /* A page hero drawn at a fixed size on the 1728 frame, held whole.
+  /* A block drawn at a fixed size on the 1728 frame, held whole.
      Pinning it to the design's aspect alone makes it taller than the screen
      on any laptop, and the foot of it is cut: on a 1728 by 920 viewport the
      services hero wants 981 and loses the lede and the button.
@@ -195,52 +195,63 @@
      child is placed in percentages, and the type inside is set in cqw rather
      than vw, so when the cap bites the whole composition steps down together
      instead of the box shrinking under type that stays put. */
-  .fit-hero {
+  .fit-frame {
+    /* what the block has to share the screen with. A hero sits under the
+       nav; a block further down the page has the screen to itself. */
+    --fit-reserve: var(--nav-h);
     position: relative;
     width: 100%;
     margin-inline: auto;
   }
 
   @media (min-width: 1024px) {
-    .fit-hero {
+    .fit-frame {
       width: min(
         100%,
-        calc((100svh - var(--nav-h)) * var(--fit-w) / var(--fit-h))
+        calc((100svh - var(--fit-reserve)) * var(--fit-w) / var(--fit-h))
       );
       aspect-ratio: var(--fit-w) / var(--fit-h);
       container-type: size;
     }
 
     /* the .s-* scale again, against the box instead of the viewport */
-    .fit-hero .s-display {
+    .fit-frame .s-display {
       font-size: clamp(1.875rem, 5.09cqw, 5.5rem);
     }
 
-    .fit-hero .s-hero {
+    .fit-frame .s-hero {
       font-size: clamp(2rem, 5.56cqw, 6rem);
     }
 
-    .fit-hero .s-title {
+    .fit-frame .s-title {
       font-size: clamp(1.625rem, 3.7cqw, 4rem);
     }
 
-    .fit-hero .s-body {
+    .fit-frame .s-body {
       font-size: clamp(0.9375rem, 1.39cqw, 1.5rem);
     }
 
-    .fit-hero .s-button {
+    .fit-frame .s-button {
       font-size: clamp(0.75rem, 1.04cqw, 1.125rem);
     }
 
     /* the design's pill is 64 tall on the 1728 frame */
-    .fit-hero .fit-pill {
+    .fit-frame .fit-pill {
       height: clamp(44px, 3.7cqw, 64px);
       padding-inline: clamp(20px, 2.2cqw, 36px);
     }
 
     /* the work page's opening title is set larger than the shared scale */
-    .fit-hero .work-title {
+    .fit-frame .work-title {
       font-size: clamp(2.5rem, 8.1cqw, 8.75rem);
+    }
+
+    .fit-frame .s-people-head {
+      font-size: clamp(1.625rem, 3.24cqw, 3.5rem);
+    }
+
+    .fit-frame .s-card-meta {
+      font-size: clamp(0.8125rem, 0.93cqw, 1rem);
     }
   }
 

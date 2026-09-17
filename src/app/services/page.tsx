@@ -83,7 +83,7 @@ export default function ServicesPage() {
           it does here. */}
       <section className="relative overflow-hidden bg-cream">
         <div
-          className="fit-hero max-w-[1728px]"
+          className="fit-frame max-w-[1728px]"
           style={{ "--fit-w": 1728, "--fit-h": 981 } as React.CSSProperties}
         >
           <div className="hidden lg:block">
