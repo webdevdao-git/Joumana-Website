@@ -3,7 +3,7 @@ import { Hero } from "@/components/hero";
 import { OutletBand } from "@/components/outlet-band";
 import { MeetJoumana } from "@/components/meet-joumana";
 import { AcrossTheYears } from "@/components/across-the-years";
-import { ServicesIndex } from "@/components/services-index";
+import { Capabilities } from "@/components/capabilities";
 import { FeaturedArticles } from "@/components/featured-articles";
 import { BroadcastStage } from "@/components/broadcast-stage";
 import { ContactPanel } from "@/components/contact-panel";
@@ -25,7 +25,7 @@ export default function HomePage() {
       <Hero />
       <OutletBand />
       <MeetJoumana />
-      <ServicesIndex />
+      <Capabilities />
       <AcrossTheYears />
       <FeaturedArticles />
       <BroadcastStage />
