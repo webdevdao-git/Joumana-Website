@@ -172,10 +172,10 @@ export default function ServicesPage() {
           </Reveal>
 
           <div className="mt-10 grid w-full max-w-[1363px] items-end gap-10 lg:grid-cols-[644fr_639fr] xl:mt-[3vw] xl:gap-[5vw]">
-            {/* 517 by 711, with the 291 by 258 plate overlapping it from below
-                and 127px further left. The large plate was the design's own
-                placeholder and now carries her portrait; the small one stays
-                architectural, as the design has it.
+            {/* 517 by 711, carrying her portrait where the design had its own
+                placeholder. The design also overlaps a 291 by 258 plate from
+                below and 127px further left; that one was never anything but
+                a placeholder and is dropped.
 
                 The plate is sized by height rather than width so the section
                 can never grow taller than the screen. At the design's own
@@ -191,15 +191,6 @@ export default function ServicesPage() {
                   fill
                   sizes="(max-width: 1024px) 80vw, 517px"
                   className="object-cover object-top"
-                />
-              </div>
-              <div className="absolute bottom-0 left-[-24.6%] h-[36.3%] w-[56.3%]">
-                <Image
-                  src="/brand/services-columns.webp"
-                  alt=""
-                  fill
-                  sizes="(max-width: 1024px) 45vw, 291px"
-                  className="object-cover"
                 />
               </div>
             </Reveal>
