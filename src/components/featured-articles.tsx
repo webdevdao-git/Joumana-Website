@@ -1,31 +1,20 @@
+import Image from "next/image";
 import Link from "next/link";
-import { clips } from "@/lib/content";
+import { workPage } from "@/lib/content";
 
 /**
- * Published work, six pieces, two to a row.
+ * Published work, six pieces, three to a row.
  *
- * The cards used to carry a thumbnail and every one of them was the same
- * placeholder, because no artwork has ever been supplied for these pieces. The
- * outlet's name takes that place instead: it is the thing a reader recognises
- * first anyway, so it is set large and it is what the card leads on.
+ * The list is the work page's own, so the two cannot drift: the same six
+ * pieces, in the same order, carrying the same plates. It used to be a
+ * separate six picked out of `clips` by title, which meant the home page and
+ * the work page could disagree about what her featured work is.
  *
- * CONFIRM: with real artwork per piece a plate could come back above the
- * outlet line.
+ * The cards led on the outlet's name with no picture at all, because no
+ * artwork had ever been supplied for these pieces. The plate is back above it
+ * now that there is one per piece.
  */
-const FEATURED = [
-  "Jeff Koons, The King Of Kitsch",
-  "Latin America, Dubai's Final Frontier",
-  "New Retirement Visas Could Be A Game Changer For Expats In The UAE",
-  "A New Playing Field",
-  "Dubai Chamber 2017 Highlights",
-  "Say Yes To The Future, Expo Bid Book",
-] as const;
-
-const articles = FEATURED.map((title) => {
-  const clip = clips.find((c) => c.title === title);
-  if (!clip) throw new Error(`featured article not in clips: ${title}`);
-  return clip;
-});
+const articles = workPage.articles.items;
 
 function ArrowUpRight() {
   return (
@@ -52,34 +41,44 @@ export function FeaturedArticles() {
       <div className="frame flex flex-col items-center gap-8 xl:gap-11">
         <h2 className="t-section text-center text-heading">Featured Articles</h2>
 
-        <ul className="grid w-full max-w-[1280px] gap-4 md:grid-cols-2 xl:gap-5">
+        <ul className="grid w-full max-w-[1400px] gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:gap-5">
           {articles.map((article) => (
-            <li key={article.title}>
+            <li key={`${article.outlet}-${article.title}`}>
               <a
                 href={article.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group flex h-full flex-col rounded-[24px] bg-card p-6 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_60px_-34px_rgba(0,0,0,0.6)] xl:p-8"
+                className="group flex h-full flex-col rounded-[24px] bg-card p-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_60px_-34px_rgba(0,0,0,0.6)] xl:p-6"
               >
-                <div className="flex items-start justify-between gap-5 text-card-heading">
-                  <span className="font-display text-[22px] font-semibold uppercase leading-[1.1] xl:text-[30px]">
+                <span className="relative block aspect-[16/10] w-full overflow-hidden rounded-[14px]">
+                  <Image
+                    src={article.image}
+                    alt={article.alt}
+                    fill
+                    sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 420px"
+                    className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-[1.04]"
+                  />
+                </span>
+
+                <div className="mt-5 flex items-start justify-between gap-5 text-card-heading xl:mt-6">
+                  <span className="font-display text-[19px] font-semibold uppercase leading-[1.1] xl:text-[23px]">
                     {article.outlet}
                   </span>
                   <ArrowUpRight />
                 </div>
 
-                <p className="mt-5 flex-1 text-[17px] leading-[1.35] text-card-body xl:mt-7 xl:text-[20px]">
+                <p className="mt-3 flex-1 text-[16px] leading-[1.35] text-card-body xl:text-[18px]">
                   {article.title}
                 </p>
 
                 {/* the rule draws across as the card comes forward */}
                 <span
                   aria-hidden="true"
-                  className="mt-6 block h-px w-full origin-left scale-x-[0.12] bg-rule transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 xl:mt-8"
+                  className="mt-5 block h-px w-full origin-left scale-x-[0.12] bg-rule transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 xl:mt-6"
                 />
 
                 <span className="mt-4 text-[12px] uppercase tracking-[0.14em] text-card-body-soft xl:text-[14px]">
-                  {article.kind} &middot; {article.year}
+                  {article.meta}
                 </span>
               </a>
             </li>
