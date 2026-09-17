@@ -57,7 +57,7 @@ export function SiteHeader() {
     <>
       <header className="relative z-50 bg-oxblood">
         <div className="frame">
-          <div className="nav-bar grid grid-cols-[1fr_auto_1fr] items-center gap-10 xl:gap-14">
+          <div className="nav-bar grid grid-cols-[1fr_auto_1fr] items-center gap-14 xl:gap-20">
             <div className="flex items-center justify-start lg:justify-end">
               {/* mirrors the menu button opposite, so the two outer columns
                   weigh the same and the wordmark stays on the centre line */}
