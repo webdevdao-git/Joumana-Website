@@ -351,7 +351,7 @@ export default function WorkPage() {
         </div>
       </section>
 
-      <ContactPanel />
+      <ContactPanel page="work" />
     </>
   );
 }

@@ -1,19 +1,18 @@
 "use client";
 
 import { useState } from "react";
-import { site } from "@/lib/content";
+import { contactPanels, site } from "@/lib/content";
 
 /**
- * Node 125:3165, the block that closes the services, work and journal pages.
+ * Node 125:3165, the block that closes every page. The home page had its own
+ * near copy of it; they are one component now, differing only in the words,
+ * which each page passes in.
  *
  * The design draws it 1728 by 828 and places everything inside as a share of
  * that box. Pinned to that aspect it came out 828 tall on a 928 screen, which
  * is most of a screen to say one thing and hold four fields, so it is laid out
  * rather than placed now: a two column grid at the design's own 499 to 449
  * split, sized by what is in it. That is about 590, a third off.
- *
- * The home page keeps its own ContactBlock, which was signed off before these
- * two were drawn and is deliberately left alone.
  *
  * On the 1728 by 828 section the design puts the heading block at x80, 783
  * wide, with the heading at y278 and the copy at y458, and a white card at
@@ -32,8 +31,15 @@ const FIELDS = [
   { name: "email", label: "Email Address", type: "email", autoComplete: "email" },
 ] as const;
 
-export function ContactPanel({ tone = "light" }: { tone?: "dark" | "light" }) {
+export function ContactPanel({
+  page,
+  tone = "light",
+}: {
+  page: keyof typeof contactPanels;
+  tone?: "dark" | "light";
+}) {
   const dark = tone === "dark";
+  const { heading, lede } = contactPanels[page];
 
   const [sent, setSent] = useState(false);
 
@@ -65,13 +71,14 @@ export function ContactPanel({ tone = "light" }: { tone?: "dark" | "light" }) {
         <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,499fr)_minmax(0,449fr)] lg:gap-[5.2%]">
           <div>
             <h2 className={`s-title ${dark ? "text-heading" : "text-card-heading"}`}>
-              <span className="block">Tell Me What</span>
-              <span className="block">You&rsquo;re Working On</span>
+              {heading.map((line) => (
+                <span key={line} className="block">
+                  {line}
+                </span>
+              ))}
             </h2>
             <p className={`s-body mt-5 max-w-[52ch] lg:mt-[1.4vw] ${dark ? "text-body" : "text-card-body"}`}>
-              Whether you&rsquo;re planning an event, looking for a presenter or
-              moderator, developing content, or exploring a communications
-              project, I&rsquo;d love to hear more.
+              {lede}
             </p>
           </div>
 

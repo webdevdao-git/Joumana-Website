@@ -3,10 +3,10 @@ import { Hero } from "@/components/hero";
 import { OutletBand } from "@/components/outlet-band";
 import { MeetJoumana } from "@/components/meet-joumana";
 import { AcrossTheYears } from "@/components/across-the-years";
-import { Capabilities } from "@/components/capabilities";
+import { ServicesIndex } from "@/components/services-index";
 import { FeaturedArticles } from "@/components/featured-articles";
 import { BroadcastStage } from "@/components/broadcast-stage";
-import { ContactBlock } from "@/components/contact-block";
+import { ContactPanel } from "@/components/contact-panel";
 
 export const metadata: Metadata = {
   title: {
@@ -25,11 +25,15 @@ export default function HomePage() {
       <Hero />
       <OutletBand />
       <MeetJoumana />
-      <Capabilities />
+      <ServicesIndex />
       <AcrossTheYears />
       <FeaturedArticles />
       <BroadcastStage />
-      <ContactBlock />
+      {/* On the cream, not the oxblood. Sitting dark it ran straight into the
+          dark footer and the two read as one slab however the block itself was
+          styled; a light band between them ends the page, and the footer
+          begins. */}
+      <ContactPanel page="home" />
     </>
   );
 }

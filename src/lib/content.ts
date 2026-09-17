@@ -1080,3 +1080,35 @@ export const journalPage = {
     cta: { label: "Until then, explore the work", href: "/work" },
   },
 } as const;
+
+/**
+ * The closing block, one per page.
+ *
+ * It used to say "Tell Me What You're Working On" on all four of the built
+ * pages, which is the services design's line and reads oddly at the foot of
+ * the journal. Each page asks for what that page is actually about now.
+ *
+ * Services keeps the design's own wording.
+ */
+export const contactPanels = {
+  home: {
+    heading: ["Have a Story", "to Tell?"],
+    lede: "Whether it's an interview, feature, live discussion, documentary, or editorial collaboration, I'm always interested in conversations that bring important stories and perspectives to the surface.",
+  },
+  services: {
+    heading: ["Tell Me What", "You're Working On"],
+    lede: "Whether you're planning an event, looking for a presenter or moderator, developing content, or exploring a communications project, I'd love to hear more.",
+  },
+  work: {
+    heading: ["Want Work", "Like This?"],
+    lede: "Tell me what you are trying to say and who needs to hear it. The format, the length and the shape of it are worth working out together, and that is usually the first conversation.",
+  },
+  journal: {
+    heading: ["Something Worth", "Writing About?"],
+    lede: "If there is a subject you think deserves proper attention, or a conversation you would like to see had in public, send it over. The best pieces usually begin as somebody else's question.",
+  },
+  journalArchive: {
+    heading: ["Until Then,", "Say Hello"],
+    lede: "The Journal is still being built. If there is something you would like to read about here, or you simply want to get in touch, this comes straight to me.",
+  },
+} as const;

@@ -1,4 +1,3 @@
-import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { EnquiryForm } from "@/components/enquiry-form";
@@ -43,14 +42,17 @@ export default function ContactPage() {
       <FaqSchema items={faqs} />
 
       {/* --------------------------------------------------------------- hero
-          The journal's split, held to one screen: the copy in the page gutter
-          and the portrait running the full height of the section to the right
-          edge. */}
-      <section className="relative overflow-hidden bg-cream">
-        <div className="mx-auto grid w-full max-w-[1728px] items-center gap-10 px-6 py-14 md:px-10 lg:h-[calc(100svh-var(--nav-h))] lg:min-h-[640px] lg:grid-cols-[minmax(0,860fr)_minmax(0,700fr)] lg:gap-[5%] lg:px-0 lg:py-0 lg:pl-[4.63%]">
-          <div className="flex flex-col gap-6 lg:py-12 xl:gap-8">
+          No picture. It carried a portrait down the right, and against the
+          rest of the page it read as a stock headshot dropped in to fill a
+          column rather than as anything anyone needs on a contact page. The
+          two columns are the words instead: what this page is for on the
+          left, and the three facts someone wants before they write on the
+          right, on rules. */}
+      <section className="bg-cream py-16 xl:py-24">
+        <div className="frame grid gap-10 lg:grid-cols-[minmax(0,820fr)_minmax(0,620fr)] lg:items-start lg:gap-[6%]">
+          <div className="flex flex-col gap-6 xl:gap-8">
             <Reveal>
-              <p className="s-button text-brown/70 tracking-[0.3em]">{eyebrow}</p>
+              <p className="s-button tracking-[0.3em] text-brown/70">{eyebrow}</p>
             </Reveal>
 
             <Reveal delay={0.06}>
@@ -67,35 +69,7 @@ export default function ContactPage() {
               <p className="s-body max-w-[46ch] text-card-body">{lede}</p>
             </Reveal>
 
-            {/* the three facts, on rules rather than in a card */}
             <Reveal delay={0.18}>
-              <dl className="mt-1 border-t border-oxblood/15">
-                {contactCopy.direct.map((row) => (
-                  <div
-                    key={row.label}
-                    className="flex flex-col gap-1 border-b border-oxblood/15 py-4 sm:flex-row sm:items-baseline sm:gap-8"
-                  >
-                    <dt className="s-button shrink-0 tracking-[0.18em] text-brown/60 sm:w-[128px] xl:w-[150px]">
-                      {row.label}
-                    </dt>
-                    <dd className="s-body text-card-heading">
-                      {row.href ? (
-                        <a
-                          href={row.href}
-                          className="underline decoration-oxblood/25 underline-offset-[6px] transition-colors hover:decoration-current"
-                        >
-                          {row.value}
-                        </a>
-                      ) : (
-                        row.value
-                      )}
-                    </dd>
-                  </div>
-                ))}
-              </dl>
-            </Reveal>
-
-            <Reveal delay={0.24}>
               <Link
                 href="#brief"
                 className="s-button inline-flex h-[52px] items-center justify-center gap-3 rounded-[32px] bg-oxblood px-7 text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:px-9"
@@ -106,16 +80,32 @@ export default function ContactPage() {
             </Reveal>
           </div>
 
-          <div className="relative -mx-6 aspect-[4/5] md:-mx-10 lg:mx-0 lg:aspect-auto lg:h-full">
-            <Image
-              src="/images/contact-portrait.webp"
-              alt="Joumana Saad, journalist, presenter and communications specialist in Dubai"
-              fill
-              priority
-              sizes="(max-width: 1024px) 100vw, 41vw"
-              className="object-cover object-center"
-            />
-          </div>
+          <Reveal delay={0.1}>
+            <dl className="border-t border-oxblood/15">
+              {contactCopy.direct.map((rowItem) => (
+                <div
+                  key={rowItem.label}
+                  className="flex flex-col gap-1 border-b border-oxblood/15 py-5"
+                >
+                  <dt className="s-button tracking-[0.18em] text-brown/60">
+                    {rowItem.label}
+                  </dt>
+                  <dd className="s-body text-card-heading">
+                    {rowItem.href ? (
+                      <a
+                        href={rowItem.href}
+                        className="underline decoration-oxblood/25 underline-offset-[6px] transition-colors hover:decoration-current"
+                      >
+                        {rowItem.value}
+                      </a>
+                    ) : (
+                      rowItem.value
+                    )}
+                  </dd>
+                </div>
+              ))}
+            </dl>
+          </Reveal>
         </div>
       </section>
 
