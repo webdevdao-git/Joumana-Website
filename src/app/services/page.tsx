@@ -2,7 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ContactPanel } from "@/components/contact-panel";
-import { DisciplineSection } from "@/components/discipline";
+import { DisciplinesDeck } from "@/components/disciplines-deck";
 import { Reveal } from "@/components/reveal";
 import { BreadcrumbSchema } from "@/components/schema";
 import { servicesPage } from "@/lib/content";
@@ -286,29 +286,14 @@ export default function ServicesPage() {
           between every block in the left column, content 1498 wide leaving
           115 either side, and columns of 818 and 600 with 80 between.
 
-          The motion that brings each one in lives in DisciplineSection. None
-          of it moves the layout: every animation resolves to exactly where
-          the frame puts the element. */}
-      {/* the page alternates the two brand grounds, so every other discipline
-          sits on the cream rather than the oxblood the design draws for all
-          six. CONFIRM: this is a departure from the file.
-
-          Each discipline carries its own photograph now; they all shared one
-          placeholder plate before. */}
-      <div className="relative">
-        {disciplines.map((d, i) => (
-          <DisciplineSection
-            key={d.index}
-            d={d}
-            plate={d.image}
-            plateAlt={d.alt}
-            tone={i % 2 === 0 ? "dark" : "light"}
-          />
-        ))}
-      </div>
+          The motion lives in DisciplinesDeck. */}
+      {/* The six were a pinned stack of full screen sections, one per
+          discipline. They are a deck now: one screen, six cards, the open one
+          holding most of the width. DisciplinesDeck carries the reasoning. */}
+      <DisciplinesDeck items={disciplines} />
 
       {/* the design closes on Tell Me What You're Working On */}
-      <ContactPanel tone="dark" />
+      <ContactPanel />
     </>
   );
 }

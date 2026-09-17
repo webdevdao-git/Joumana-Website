@@ -880,6 +880,8 @@ export const servicesPage = {
     },
     {
       label: "PR & Corporate Communications",
+      // she stands at the left of this frame, so the copy takes the other side
+      copySide: "right",
       image: "/images/services/pr-communications.webp",
       alt: "Joumana Saad speaking at a Dubai Chamber podium",
       index: "06",

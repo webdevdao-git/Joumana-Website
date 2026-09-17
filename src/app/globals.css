@@ -584,19 +584,117 @@
   }
 
 
-  /* ------------------------------------------------------- the pinned stack
-     Each discipline holds the screen while the next rises over it. Only where
-     there is room for one: on a short window the section would be taller than
-     the viewport and sticky would put its foot permanently below the fold, so
-     below 760px tall they simply stack in the normal way. */
-  @media (min-width: 1024px) and (min-height: 760px) {
-    .pin-stack {
-      position: sticky;
-      top: 0;
-      display: flex;
-      min-height: 100svh;
-      align-items: center;
+  /* ----------------------------------------------------------- the deck
+     The disciplines card row. Its own scale, well under the page's: the card
+     is a photograph with a caption on it, not a page of copy with a picture
+     behind it, so the type has to stay small enough that the picture is still
+     the thing you see. Shares of the 1728 frame, as everywhere else. */
+  .dk-label {
+    font-family: var(--font-display);
+    font-weight: 300;
+    font-size: clamp(1.25rem, 1.85vw, 2rem);
+    line-height: 1.1;
+    text-transform: uppercase;
+    letter-spacing: 0.02em;
+  }
+
+  .dk-head {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.9375rem, 1.16vw, 1.25rem);
+    line-height: 1.2;
+  }
+
+  .dk-body {
+    font-family: var(--font-sans);
+    font-weight: 400;
+    font-size: clamp(0.8125rem, 0.93vw, 1rem);
+    line-height: 1.45;
+  }
+
+  .dk-chip {
+    font-family: var(--font-sans);
+    font-weight: 500;
+    font-size: clamp(0.625rem, 0.75vw, 0.8125rem);
+    line-height: 1;
+  }
+
+  .dk-cta {
+    font-family: var(--font-sans);
+    font-weight: 600;
+    font-size: clamp(0.6875rem, 0.81vw, 0.875rem);
+    line-height: 1;
+    text-transform: uppercase;
+  }
+
+  /* The card itself. Below lg the deck is a plain column of picture cards,
+     every one of them open, so none of the row's sizing applies: a flex-basis
+     of zero in a column is a card with no height at all, which is what it was.
+     Everything that only makes sense in the row is behind the query. */
+  .dk-card {
+    position: relative;
+  }
+
+  .dk-copy,
+  .dk-beat {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (min-width: 1024px) {
+    .dk-card {
+      flex-grow: var(--grow);
+      flex-basis: 0;
+      transition: flex-grow 820ms cubic-bezier(0.22, 1, 0.36, 1);
     }
+
+    .dk-photo {
+      transform: scale(var(--pscale));
+      transform-origin: 50% 40%;
+      transition: transform 1720ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .dk-wash {
+      background: var(--wash);
+      transition: background 820ms cubic-bezier(0.22, 1, 0.36, 1);
+    }
+
+    .dk-copy {
+      opacity: var(--shown);
+      transition: opacity 320ms ease var(--copy-in);
+    }
+
+    .dk-beat {
+      opacity: var(--shown);
+      transform: translateY(var(--beat-y));
+      transition:
+        opacity 460ms ease var(--beat-in),
+        transform 620ms cubic-bezier(0.22, 1, 0.36, 1) var(--beat-in);
+    }
+
+    .dk-spine-wrap {
+      opacity: var(--spine);
+      transition: opacity var(--spine-ms) ease var(--spine-in);
+    }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .dk-card,
+    .dk-photo,
+    .dk-wash,
+    .dk-copy,
+    .dk-beat,
+    .dk-spine-wrap {
+      transition: none !important;
+    }
+  }
+
+  .dk-spine {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: clamp(0.8125rem, 1.04vw, 1.125rem);
+    line-height: 1;
+    letter-spacing: 0.02em;
   }
 
   .t-body {
