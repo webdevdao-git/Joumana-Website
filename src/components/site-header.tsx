@@ -58,13 +58,13 @@ export function SiteHeader() {
       <header className="relative z-50 bg-oxblood">
         <div className="frame">
           <div className="nav-bar grid grid-cols-[1fr_auto_1fr] items-center gap-14 xl:gap-20">
-            <div className="flex items-center justify-start lg:justify-end">
+            <div className="flex items-center justify-start lg:w-full">
               {/* mirrors the menu button opposite, so the two outer columns
                   weigh the same and the wordmark stays on the centre line */}
               <span aria-hidden="true" className="-ml-2 h-11 w-11 lg:hidden" />
 
               <nav
-                className="hidden items-center gap-8 lg:flex"
+                className="hidden w-full items-center justify-evenly gap-8 lg:flex"
                 aria-label="Primary"
               >
                 {LEFT.map(link)}
@@ -79,9 +79,9 @@ export function SiteHeader() {
               Joumana Saad
             </Link>
 
-            <div className="flex items-center justify-end lg:justify-start">
+            <div className="flex items-center justify-end lg:w-full lg:justify-evenly">
               <nav
-                className="hidden items-center gap-8 lg:flex"
+                className="hidden flex-1 items-center justify-evenly gap-8 lg:flex"
                 aria-label="Primary"
               >
                 {RIGHT.map(link)}
