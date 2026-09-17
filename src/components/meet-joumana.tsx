@@ -26,7 +26,7 @@ const COPY = [
 
 export function MeetJoumana() {
   return (
-    <section className="relative bg-cream pb-14 xl:pb-20">
+    <section className="relative bg-cream pb-14 xl:pb-0">
       <div className="frame">
         {/* the design nests a 40px inset inside the 80px frame and sets a 40px
             gap between the copy and the portrait */}
@@ -51,16 +51,26 @@ export function MeetJoumana() {
             </div>
           </div>
 
-          {/* The design places this at top: -73.74px inside a 1054px frame, so
-              the portrait rides up over the band above rather than starting at
-              the panel edge. Kept proportional to the trimmed section height. */}
-          <div className="fade-into-panel relative -mt-10 h-[380px] self-end lg:-mt-14 lg:h-[560px] xl:-mt-[74px] xl:h-[640px]">
+          {/* She rides up out of this section and into the logo band above it,
+              which is what the design does and what the cutout was made for.
+
+              On the 1728 frame her hair starts 42px above the cream and she
+              runs about 1005px down, so she is the tallest thing in the
+              section and sets its height rather than being fitted into it.
+              Both numbers are shares of that frame, 2.43vw and 58.2vw, so the
+              overlap holds at every width.
+
+              The column clips at its own foot: the overlap has to escape
+              upward, so the section cannot hide its overflow, and without this
+              she would carry on down over the section below. The bottom fade
+              is gone with it, since the design cuts her cleanly. */}
+          <div className="relative z-10 -mt-8 h-[420px] overflow-hidden lg:-mt-[2.43vw] lg:h-[min(58.2vw,1010px)]">
             <Image
               src="/brand/portrait-cutout.webp"
               alt="Joumana Saad, journalist, presenter and moderator based in Dubai"
               fill
-              sizes="(max-width: 1024px) 100vw, 703px"
-              className="object-contain object-bottom"
+              sizes="(max-width: 1024px) 100vw, 47vw"
+              className="object-contain object-top"
               priority
             />
           </div>
