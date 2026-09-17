@@ -37,20 +37,23 @@ function ArrowUpRight() {
 
 export function FeaturedArticles() {
   return (
-    <section className="sec bg-page">
-      <div className="frame flex flex-col items-center gap-8 xl:gap-11">
+    <section className="bg-page py-10 lg:py-0">
+      <div
+        className="fit-frame mx-auto flex max-w-[1728px] flex-col items-center justify-center gap-6 px-6 md:px-10 lg:gap-[2.1cqw] lg:px-[4.63cqw] lg:py-[3cqw]"
+        style={{ "--fit-w": 1728, "--fit-h": 1030, "--fit-reserve": "0px" } as React.CSSProperties}
+      >
         <h2 className="t-section text-center text-heading">Featured Articles</h2>
 
-        <ul className="grid w-full max-w-[1400px] gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:gap-5">
+        <ul className="grid w-full max-w-[1400px] gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-[1.04cqw]">
           {articles.map((article) => (
             <li key={`${article.outlet}-${article.title}`}>
               <a
                 href={article.href}
                 target="_blank"
                 rel="noreferrer noopener"
-                className="group flex h-full flex-col rounded-[24px] bg-card p-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_60px_-34px_rgba(0,0,0,0.6)] xl:p-6"
+                className="group flex h-full flex-col rounded-[24px] bg-card p-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_60px_-34px_rgba(0,0,0,0.6)] lg:p-[1.16cqw]"
               >
-                <span className="relative block aspect-[16/10] w-full overflow-hidden rounded-[14px]">
+                <span className="relative block aspect-[16/9] w-full overflow-hidden rounded-[14px]">
                   <Image
                     src={article.image}
                     alt={article.alt}
@@ -60,24 +63,24 @@ export function FeaturedArticles() {
                   />
                 </span>
 
-                <div className="mt-5 flex items-start justify-between gap-5 text-card-heading xl:mt-6">
-                  <span className="font-display text-[19px] font-semibold uppercase leading-[1.1] xl:text-[23px]">
+                <div className="mt-4 flex items-start justify-between gap-5 text-card-heading lg:mt-[0.93cqw]">
+                  <span className="fa-outlet font-display text-[19px] font-semibold uppercase leading-[1.1]">
                     {article.outlet}
                   </span>
                   <ArrowUpRight />
                 </div>
 
-                <p className="mt-3 flex-1 text-[16px] leading-[1.35] text-card-body xl:text-[18px]">
+                <p className="fa-title mt-2 flex-1 text-[16px] leading-[1.35] text-card-body lg:mt-[0.46cqw]">
                   {article.title}
                 </p>
 
                 {/* the rule draws across as the card comes forward */}
                 <span
                   aria-hidden="true"
-                  className="mt-5 block h-px w-full origin-left scale-x-[0.12] bg-rule transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 xl:mt-6"
+                  className="mt-4 block h-px w-full origin-left scale-x-[0.12] bg-rule transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 lg:mt-[0.93cqw]"
                 />
 
-                <span className="mt-4 text-[12px] uppercase tracking-[0.14em] text-card-body-soft xl:text-[14px]">
+                <span className="fa-meta mt-3 text-[12px] uppercase tracking-[0.14em] text-card-body-soft lg:mt-[0.69cqw]">
                   {article.meta}
                 </span>
               </a>
@@ -87,7 +90,7 @@ export function FeaturedArticles() {
 
         <Link
           href="/work"
-          className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-brown px-8 text-[15px] font-semibold uppercase text-white transition-colors duration-300 hover:bg-cream hover:text-oxblood xl:h-16 xl:text-[18px]"
+          className="fa-cta inline-flex h-14 items-center justify-center gap-3 rounded-full bg-brown px-8 text-[15px] font-semibold uppercase text-white transition-colors duration-300 hover:bg-cream hover:text-oxblood"
         >
           View All Published Work
           <span aria-hidden="true">&rarr;</span>

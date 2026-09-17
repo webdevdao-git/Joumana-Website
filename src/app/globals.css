@@ -253,6 +253,25 @@
     .fit-frame .s-card-meta {
       font-size: clamp(0.8125rem, 0.93cqw, 1rem);
     }
+
+    /* the home page's article cards, three to a row */
+    .fit-frame .fa-outlet {
+      font-size: clamp(1rem, 1.33cqw, 1.4375rem);
+    }
+
+    .fit-frame .fa-title {
+      font-size: clamp(0.875rem, 1.04cqw, 1.125rem);
+    }
+
+    .fit-frame .fa-meta {
+      font-size: clamp(0.6875rem, 0.81cqw, 0.875rem);
+    }
+
+    .fit-frame .fa-cta {
+      height: clamp(44px, 3.7cqw, 64px);
+      padding-inline: clamp(20px, 2.2cqw, 36px);
+      font-size: clamp(0.75rem, 1.04cqw, 1.125rem);
+    }
   }
 
   /* A cutout that ends mid body reads as a mistake. Dissolving the last
