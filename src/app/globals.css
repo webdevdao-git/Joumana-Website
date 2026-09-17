@@ -195,7 +195,8 @@
      child is placed in percentages, and the type inside is set in cqw rather
      than vw, so when the cap bites the whole composition steps down together
      instead of the box shrinking under type that stays put. */
-  .fit-frame {
+  .fit-frame,
+  .fit-flow {
     /* what the block has to share the screen with. A hero sits under the
        nav; a block further down the page has the screen to itself. */
     --fit-reserve: var(--nav-h);
@@ -205,69 +206,103 @@
   }
 
   @media (min-width: 1024px) {
-    .fit-frame {
+    .fit-frame,
+    .fit-flow {
       width: min(
         100%,
         calc((100svh - var(--fit-reserve)) * var(--fit-w) / var(--fit-h))
       );
+    }
+
+    /* pinned: the box is exactly the design's shape, and whatever is in it is
+       placed against that shape */
+    .fit-frame {
       aspect-ratio: var(--fit-w) / var(--fit-h);
       container-type: size;
     }
 
+    /* flowing: the width is capped the same way, so everything inside still
+       steps down with the screen, but the height is whatever the content
+       comes to. A run of cards cannot be trusted to land on an exact height,
+       and in a pinned box the few pixels it misses by spill out of the
+       section and onto the one below. */
+    .fit-flow {
+      container-type: inline-size;
+    }
+
     /* the .s-* scale again, against the box instead of the viewport */
-    .fit-frame .s-display {
+    .fit-frame .s-display,
+    .fit-flow .s-display {
       font-size: clamp(1.875rem, 5.09cqw, 5.5rem);
     }
 
-    .fit-frame .s-hero {
+    .fit-frame .s-hero,
+    .fit-flow .s-hero {
       font-size: clamp(2rem, 5.56cqw, 6rem);
     }
 
-    .fit-frame .s-title {
+    .fit-frame .s-title,
+    .fit-flow .s-title {
       font-size: clamp(1.625rem, 3.7cqw, 4rem);
     }
 
-    .fit-frame .s-body {
+    .fit-frame .s-body,
+    .fit-flow .s-body {
       font-size: clamp(0.9375rem, 1.39cqw, 1.5rem);
     }
 
-    .fit-frame .s-button {
+    .fit-frame .s-button,
+    .fit-flow .s-button {
       font-size: clamp(0.75rem, 1.04cqw, 1.125rem);
     }
 
     /* the design's pill is 64 tall on the 1728 frame */
-    .fit-frame .fit-pill {
+    .fit-frame .fit-pill,
+    .fit-flow .fit-pill {
       height: clamp(44px, 3.7cqw, 64px);
       padding-inline: clamp(20px, 2.2cqw, 36px);
     }
 
     /* the work page's opening title is set larger than the shared scale */
-    .fit-frame .work-title {
+    .fit-frame .work-title,
+    .fit-flow .work-title {
       font-size: clamp(2.5rem, 8.1cqw, 8.75rem);
     }
 
-    .fit-frame .s-people-head {
+    .fit-frame .s-people-head,
+    .fit-flow .s-people-head {
       font-size: clamp(1.625rem, 3.24cqw, 3.5rem);
     }
 
-    .fit-frame .s-card-meta {
+    .fit-frame .s-card-meta,
+    .fit-flow .s-card-meta {
       font-size: clamp(0.8125rem, 0.93cqw, 1rem);
     }
 
     /* the home page's article cards, three to a row */
-    .fit-frame .fa-outlet {
+    .fit-frame .fa-outlet,
+    .fit-flow .fa-outlet {
       font-size: clamp(1rem, 1.33cqw, 1.4375rem);
     }
 
-    .fit-frame .fa-title {
+    .fit-frame .fa-title,
+    .fit-flow .fa-title {
       font-size: clamp(0.875rem, 1.04cqw, 1.125rem);
     }
 
-    .fit-frame .fa-meta {
+    .fit-frame .fa-meta,
+    .fit-flow .fa-meta {
       font-size: clamp(0.6875rem, 0.81cqw, 0.875rem);
     }
 
-    .fit-frame .fa-cta {
+    /* the shared section heading, so it steps down with the block */
+    .fit-frame .t-section,
+    .fit-flow .t-section {
+      font-size: clamp(1.625rem, 2.8cqw, 2.875rem);
+    }
+
+    .fit-frame .fa-cta,
+    .fit-flow .fa-cta {
       height: clamp(44px, 3.7cqw, 64px);
       padding-inline: clamp(20px, 2.2cqw, 36px);
       font-size: clamp(0.75rem, 1.04cqw, 1.125rem);

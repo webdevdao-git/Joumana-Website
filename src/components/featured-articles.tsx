@@ -38,10 +38,15 @@ function ArrowUpRight() {
 export function FeaturedArticles() {
   return (
     <section className="bg-page py-10 lg:py-0">
+      {/* The padding and the gaps live on the inner wrapper, not on the box
+          itself: an element cannot size itself in its own container units, so
+          cqw set here would silently fall back to the viewport and the content
+          would outgrow the box it is meant to fit inside. */}
       <div
-        className="fit-frame mx-auto flex max-w-[1728px] flex-col items-center justify-center gap-6 px-6 md:px-10 lg:gap-[2.1cqw] lg:px-[4.63cqw] lg:py-[3cqw]"
-        style={{ "--fit-w": 1728, "--fit-h": 1030, "--fit-reserve": "0px" } as React.CSSProperties}
+        className="fit-flow mx-auto max-w-[1728px]"
+        style={{ "--fit-w": 1728, "--fit-h": 1250, "--fit-reserve": "0px" } as React.CSSProperties}
       >
+        <div className="flex flex-col items-center gap-6 px-6 md:px-10 lg:gap-[2.1cqw] lg:px-[4.63cqw] lg:py-[2.1cqw]">
         <h2 className="t-section text-center text-heading">Featured Articles</h2>
 
         <ul className="grid w-full max-w-[1400px] gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-[1.04cqw]">
@@ -94,7 +99,8 @@ export function FeaturedArticles() {
         >
           View All Published Work
           <span aria-hidden="true">&rarr;</span>
-        </Link>
+          </Link>
+        </div>
       </div>
     </section>
   );
