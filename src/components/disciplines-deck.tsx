@@ -24,9 +24,14 @@ import { useReducedMotion } from "motion/react";
  *     others in the same movement, on one long ease
  *   the open card's wash clears off the photograph while the picture settles
  *     back from an overscale, which is the move the rest of the site uses
- *   the copy arrives in beats behind it, name, then line, then paragraph,
- *     then the chips, so the card fills rather than appears
+ *   the copy arrives in beats behind it, name, then line, then the chips,
+ *     so the card fills rather than appears
  *   a slat lifts slightly under the pointer before it is even opened
+ *
+ * The card carries a caption, not a page: the name, the line under it, the
+ * chips and the way out. CONFIRM: the descriptive paragraph each discipline
+ * used to show is no longer rendered anywhere. It is still in content.ts under
+ * `body`, so it can come back here or go on a page of its own.
  *
  * The copy sits in a fixed width box inside the card, so it does not reflow
  * while the card is growing around it. Text that rewraps mid animation is the
@@ -205,13 +210,10 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
                         <span key="label" className="dk-label block text-white">
                           {d.label}
                         </span>,
-                        <span key="head" className="dk-head mt-2 block text-white/85 lg:mt-[0.5vw]">
+                        <span key="head" className="dk-head mt-2 block text-white/80 lg:mt-[0.6vw]">
                           {d.head}
                         </span>,
-                        <span key="body" className="dk-body mt-2 block text-white/65 lg:mt-[0.5vw]">
-                          {d.body[0]}
-                        </span>,
-                        <span key="chips" className="mt-3 flex flex-wrap gap-1.5 lg:mt-[0.8vw]">
+                        <span key="chips" className="mt-4 flex flex-wrap gap-1.5 lg:mt-[1vw]">
                           {d.includes.map((chip) => (
                             <span
                               key={chip}
