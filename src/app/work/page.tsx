@@ -2,6 +2,7 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ContactPanel } from "@/components/contact-panel";
+import { PublishedReels } from "@/components/published-reels";
 import { OutletBand } from "@/components/outlet-band";
 import { Reveal } from "@/components/reveal";
 import { BreadcrumbSchema } from "@/components/schema";
@@ -33,8 +34,6 @@ export const metadata: Metadata = {
     images: [{ url: "/brand/work-hero.webp", width: 544, height: 816, alt: "Joumana Saad at work in Dubai" }],
   },
 };
-
-const PLATE = "/brand/services-columns.webp";
 
 function ArrowCircle() {
   return (
@@ -326,30 +325,9 @@ export default function WorkPage() {
       </section>
 
       {/* -------------------------------------------------- published work
-          Heading at the gutter, then five 294 x 465 plates in a row. */}
-      <section className="bg-page py-12 xl:py-[5.79vw]">
-        <div className="frame">
-          <Reveal>
-            <h2 className="s-title text-white">{published.heading}</h2>
-          </Reveal>
-
-          <ul className="mt-8 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-5 xl:mt-[5.79vw] xl:gap-[1.39vw]">
-            {Array.from({ length: published.count }, (_, i) => (
-              <Reveal as="li" key={i} delay={i * 0.05}>
-                <div className="relative aspect-[294/465] w-full overflow-hidden rounded-[12px] bg-card">
-                  <Image
-                    src={PLATE}
-                    alt=""
-                    fill
-                    sizes="(max-width: 1024px) 50vw, 18vw"
-                    className="object-cover"
-                  />
-                </div>
-              </Reveal>
-            ))}
-          </ul>
-        </div>
-      </section>
+          The design draws five 294 x 465 plates in a row with no captions.
+          They carry her own reels now; PublishedReels has the reasoning. */}
+      <PublishedReels heading={published.heading} />
 
       <ContactPanel page="work" />
     </>
