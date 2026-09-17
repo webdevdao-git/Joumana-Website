@@ -4,7 +4,13 @@ import { useState } from "react";
 import { site } from "@/lib/content";
 
 /**
- * Node 125:3165, the block that closes the services and work pages.
+ * Node 125:3165, the block that closes the services, work and journal pages.
+ *
+ * The design draws it 1728 by 828 and places everything inside as a share of
+ * that box. Pinned to that aspect it came out 828 tall on a 928 screen, which
+ * is most of a screen to say one thing and hold four fields, so it is laid out
+ * rather than placed now: a two column grid at the design's own 499 to 449
+ * split, sized by what is in it. That is about 590, a third off.
  *
  * The home page keeps its own ContactBlock, which was signed off before these
  * two were drawn and is deliberately left alone.
@@ -55,15 +61,14 @@ export function ContactPanel({ tone = "light" }: { tone?: "dark" | "light" }) {
 
   return (
     <section className={dark ? "bg-page" : "bg-cream"}>
-      <div className="mx-auto w-full max-w-[1728px] px-6 py-12 md:px-10 lg:aspect-[1728/828] lg:px-0 lg:py-0">
-        <div className="relative h-full lg:mx-[4.63%]">
-          {/* the heading block, sitting low in its column as the design has it */}
-          <div className="lg:absolute lg:left-0 lg:top-[33.6%] lg:w-[49.9%]">
+      <div className="mx-auto w-full max-w-[1728px] px-6 py-12 md:px-10 lg:px-[4.63%] lg:py-[2.6vw]">
+        <div className="grid items-center gap-10 lg:grid-cols-[minmax(0,499fr)_minmax(0,449fr)] lg:gap-[5.2%]">
+          <div>
             <h2 className={`s-title ${dark ? "text-heading" : "text-card-heading"}`}>
               <span className="block">Tell Me What</span>
               <span className="block">You&rsquo;re Working On</span>
             </h2>
-            <p className={`s-body mt-5 max-w-[52ch] lg:mt-[4.8%] ${dark ? "text-body" : "text-card-body"}`}>
+            <p className={`s-body mt-5 max-w-[52ch] lg:mt-[1.4vw] ${dark ? "text-body" : "text-card-body"}`}>
               Whether you&rsquo;re planning an event, looking for a presenter or
               moderator, developing content, or exploring a communications
               project, I&rsquo;d love to hear more.
@@ -71,10 +76,10 @@ export function ContactPanel({ tone = "light" }: { tone?: "dark" | "light" }) {
           </div>
 
           {/* the white card */}
-          <div className="mt-10 rounded-[24px] bg-white p-7 lg:absolute lg:right-0 lg:top-[12.1%] lg:mt-0 lg:h-[75.8%] lg:w-[44.9%] lg:p-[3.6%]">
-            <form onSubmit={handleSubmit} className="flex h-full flex-col">
+          <div className="rounded-[24px] bg-white p-6 lg:p-[2.1vw]">
+            <form onSubmit={handleSubmit} className="flex flex-col">
               {FIELDS.map((f) => (
-                <div key={f.name} className="mb-7 lg:mb-[4.4%]">
+                <div key={f.name} className="mb-5 lg:mb-[1.2vw]">
                   <label htmlFor={f.name} className="sr-only">
                     {f.label}
                   </label>
@@ -90,24 +95,24 @@ export function ContactPanel({ tone = "light" }: { tone?: "dark" | "light" }) {
                 </div>
               ))}
 
-              <div className="mb-7 lg:mb-[4.4%]">
+              <div className="mb-5 lg:mb-[1.2vw]">
                 <label htmlFor="message" className="sr-only">
                   Message
                 </label>
                 <textarea
                   id="message"
                   name="message"
-                  rows={3}
+                  rows={2}
                   required
                   placeholder="Message"
                   className={`${field} resize-none`}
                 />
               </div>
 
-              <div className="mt-auto flex flex-wrap items-center gap-5">
+              <div className="flex flex-wrap items-center gap-5">
                 <button
                   type="submit"
-                  className="s-button inline-flex h-14 w-[170px] items-center justify-center gap-2 rounded-full bg-brown text-white transition-opacity duration-300 hover:opacity-90"
+                  className="s-button inline-flex h-12 w-[160px] items-center justify-center gap-2 rounded-full bg-brown text-white transition-opacity duration-300 hover:opacity-90 xl:h-14 xl:w-[170px]"
                 >
                   Submit
                   <span aria-hidden="true">&rarr;</span>

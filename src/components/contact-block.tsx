@@ -53,8 +53,8 @@ export function ContactBlock() {
           slab; with a panel there is oxblood above, below and either side of
           it, so it is plainly its own thing. */}
       <div className="frame">
-        <div className="grid items-center gap-8 rounded-[24px] bg-card px-6 py-10 lg:grid-cols-2 xl:gap-16 xl:px-14 xl:py-16">
-          <div className="flex flex-col gap-6 xl:gap-10">
+        <div className="grid items-center gap-8 rounded-[24px] bg-card px-6 py-8 lg:grid-cols-2 xl:gap-14 xl:px-12 xl:py-10">
+          <div className="flex flex-col gap-5 xl:gap-7">
             <h2 className="t-section max-w-[16ch] text-card-heading">
               Have a Story to Tell?
             </h2>
@@ -69,7 +69,7 @@ export function ContactBlock() {
           <div>
             <form
               onSubmit={handleSubmit}
-              className="flex flex-col gap-6 xl:gap-7"
+              className="flex flex-col gap-5"
             >
               {FIELDS.map((f) => (
                 <div key={f.name}>
@@ -101,7 +101,7 @@ export function ContactBlock() {
                 <textarea
                   id="message"
                   name="message"
-                  rows={3}
+                  rows={2}
                   required
                   placeholder="Message"
                   className={`${field} resize-none`}
@@ -111,7 +111,7 @@ export function ContactBlock() {
               <div className="flex flex-wrap items-center gap-5">
                 <button
                   type="submit"
-                  className="inline-flex h-14 w-[170px] items-center justify-center gap-1.5 rounded-full bg-brown text-[16px] font-semibold uppercase text-white transition-opacity duration-300 hover:opacity-90 xl:text-[18px]"
+                  className="inline-flex h-12 w-[160px] items-center justify-center gap-1.5 rounded-full bg-brown text-[15px] font-semibold uppercase text-white transition-opacity duration-300 hover:opacity-90 xl:h-14 xl:w-[170px] xl:text-[17px]"
                 >
                   Submit
                   <span aria-hidden="true">&rarr;</span>
