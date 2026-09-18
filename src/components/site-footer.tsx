@@ -188,7 +188,15 @@ export function SiteFooter() {
         <div className="frame flex flex-col items-center justify-between gap-1.5 py-4 text-[12px] leading-snug text-white/75 sm:h-[54px] sm:flex-row sm:gap-6 sm:py-0 sm:text-[13px] xl:text-[17px]">
           <p>&copy; Copyright {new Date().getFullYear()} Joumana Saad Media</p>
           <p className="text-center sm:text-right">
-            Designed and developed by DAO Marketing Management LLC
+            Designed and developed by{" "}
+            <a
+              href="https://daomarketing.com"
+              target="_blank"
+              rel="noreferrer noopener"
+              className="underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-current"
+            >
+              DAO Marketing Management LLC
+            </a>
           </p>
         </div>
       </div>
