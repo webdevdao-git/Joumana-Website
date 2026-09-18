@@ -181,11 +181,14 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* the brown bar the design closes on */}
+      {/* the brown bar the design closes on. Two lines rather than one now,
+          the copyright at the gutter and the credit opposite it; on a phone
+          they stack and the bar grows to hold them. */}
       <div className="bg-brown">
-        <div className="frame flex h-[54px] items-center justify-center">
-          <p className="text-center text-[13px] leading-none text-white/75 xl:text-[20px]">
-            &copy; Copyright {new Date().getFullYear()} Joumana Saad Media
+        <div className="frame flex flex-col items-center justify-between gap-1.5 py-4 text-[12px] leading-snug text-white/75 sm:h-[54px] sm:flex-row sm:gap-6 sm:py-0 sm:text-[13px] xl:text-[17px]">
+          <p>&copy; Copyright {new Date().getFullYear()} Joumana Saad Media</p>
+          <p className="text-center sm:text-right">
+            Designed and developed by DAO Marketing Management LLC
           </p>
         </div>
       </div>
