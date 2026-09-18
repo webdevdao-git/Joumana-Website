@@ -16,6 +16,24 @@ import { workPage } from "@/lib/content";
  */
 const articles = workPage.articles.items;
 
+/** A link when there is somewhere to go, otherwise a plain card. */
+function Card({
+  href,
+  className,
+  children,
+}: {
+  href: string;
+  className: string;
+  children: React.ReactNode;
+}) {
+  if (!href) return <div className={className}>{children}</div>;
+  return (
+    <a href={href} target="_blank" rel="noreferrer noopener" className={className}>
+      {children}
+    </a>
+  );
+}
+
 function ArrowUpRight() {
   return (
     <svg
@@ -52,10 +70,10 @@ export function FeaturedArticles() {
         <ul className="grid w-full max-w-[1400px] gap-4 sm:grid-cols-2 lg:grid-cols-3 lg:gap-[1.04cqw]">
           {articles.map((article) => (
             <li key={`${article.outlet}-${article.title}`}>
-              <a
+              {/* a piece whose original page has gone is still shown, it just
+                  is not a link to nowhere */}
+              <Card
                 href={article.href}
-                target="_blank"
-                rel="noreferrer noopener"
                 className="group flex h-full flex-col rounded-[24px] bg-card p-5 transition-all duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] hover:-translate-y-1 hover:shadow-[0_28px_60px_-34px_rgba(0,0,0,0.6)] lg:p-[1.16cqw]"
               >
                 <span className="relative block aspect-[16/9] w-full overflow-hidden rounded-[14px]">
@@ -88,7 +106,7 @@ export function FeaturedArticles() {
                 <span className="fa-meta mt-3 text-[12px] uppercase tracking-[0.14em] text-card-body-soft lg:mt-[0.69cqw]">
                   {article.meta}
                 </span>
-              </a>
+              </Card>
             </li>
           ))}
         </ul>

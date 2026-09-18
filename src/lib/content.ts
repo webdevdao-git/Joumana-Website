@@ -952,15 +952,23 @@ export const workPage = {
   articles: {
     heading: "Featured Articles",
     /* hrefs are matched to the live links already held in `clips`. Each row
-       now carries the plate the design puts beside it, cut from the artwork
-       Priya supplied; they all used to share one placeholder. */
+       carries the plate the design puts beside it, cut from the artwork Priya
+       supplied.
+
+       An empty href is a piece whose original page has gone: the card still
+       shows the work, it just does not pretend to link anywhere. Put the URL
+       back and it becomes a link again with no other change. */
     items: [
       { outlet: "Forbes", title: "Submarines For The super rich", meta: "Featured, 2010", href: "https://www.forbes.com/sites/face-to-face/2010/05/11/submarines-for-the-super-rich/", image: "/images/work/clip-submarines.webp", alt: "A personal submarine moored in a bay" },
       { outlet: "The Epoch Times", title: "New Retirement Visas Could Be A Game Changer For Expats In The UAE", meta: "News feature, 2018", href: "https://www.theepochtimes.com/new-retirement-visas-could-be-game-changer-for-expats-in-uae_2682211.html", image: "/images/work/clip-retirement.webp", alt: "People walking along a street in Dubai" },
-      { outlet: "Dubai Chamber of Commerce", title: "Dubai Chamber 2017 Highlights", meta: "Annual report, 2017", href: "http://www.dubaichamber.com/uploads/annualreports/2017/index.php", image: "/images/work/clip-dubai-chamber.webp", alt: "An audience at a Dubai Chamber briefing" },
+      // CONFIRM: dubaichamber.com now redirects any old path to the group's
+      // homepage, so the 2017 report is no longer reachable at its own URL.
+      { outlet: "Dubai Chamber of Commerce", title: "Dubai Chamber 2017 Highlights", meta: "Annual report, 2017", href: "", image: "/images/work/clip-dubai-chamber.webp", alt: "An audience at a Dubai Chamber briefing" },
       { outlet: "Arabian Business", title: "Latin America, Dubai's Final Frontier", meta: "Analysis, 2017", href: "https://www.arabianbusiness.com/politics-economics/420155-dubais-final-frontier", image: "/images/work/clip-latin-america.webp", alt: "A Latin American city skyline across the water" },
       { outlet: "Forbes", title: "Excitement Returns To The Art Market", meta: "Featured, 2010", href: "https://www.forbes.com/sites/face-to-face/2010/05/14/excitement-returns-to-art-market/", image: "/images/work/clip-art-market.webp", alt: "A modernist painting at auction" },
-      { outlet: "Dubai Expo", title: "Say Yes To The Future, Expo Bid Book", meta: "Publication, 2013", href: "http://www.sayyestodubai.com/bid-book/", image: "/images/work/clip-expo.webp", alt: "The Expo site in Dubai" },
+      // CONFIRM: sayyestodubai.com no longer resolves at all; the bid book
+      // site was retired after Expo 2020.
+      { outlet: "Dubai Expo", title: "Say Yes To The Future, Expo Bid Book", meta: "Publication, 2013", href: "", image: "/images/work/clip-expo.webp", alt: "The Expo site in Dubai" },
     ],
   },
 

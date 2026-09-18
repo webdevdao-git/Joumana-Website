@@ -37,8 +37,8 @@ import { useReducedMotion } from "motion/react";
  * while the card is growing around it. Text that rewraps mid animation is the
  * thing that makes this pattern look cheap.
  *
- * Pointer opens, click pins, keyboard opens on focus and the arrow keys walk
- * the row. Under prefers-reduced-motion nothing moves: the cards take equal
+ * Pointer opens, click pins, keyboard opens on focus, Enter and Space pin and
+ * the arrow keys walk the row. Under prefers-reduced-motion nothing moves: the cards take equal
  * widths as a plain grid and every open card shows its copy outright.
  */
 export type Deck = {
@@ -114,7 +114,7 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
         <div className="flex flex-col gap-6 lg:gap-[1.6vw]">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
             <h2 className="s-title text-white">What I Do Best</h2>
-            <p className="s-card-meta text-white/45">
+            <p className="s-card-meta text-white/65">
               {String(open + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
             </p>
           </div>
@@ -131,17 +131,27 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
             {items.map((d, i) => {
               const isOpen = i === open;
               const right = d.copySide === "right";
+              // a div rather than a button: the card holds the call to
+              // action, and a link inside a button is invalid HTML. The role
+              // and the handlers give it the same behaviour.
               return (
-                <button
+                <div
                   key={d.index}
                   data-card
-                  type="button"
                   role="tab"
+                  tabIndex={0}
                   aria-selected={isOpen}
                   aria-label={d.label}
                   onPointerEnter={() => !reduced && reach(i)}
                   onPointerLeave={() => !reduced && release()}
                   onFocus={() => setActive(i)}
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ") {
+                      e.preventDefault();
+                      setActive(i);
+                      setHovered(null);
+                    }
+                  }}
                   onClick={() => {
                     setActive(i);
                     setHovered(null);
@@ -227,6 +237,7 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
                           <Link
                             href="/contact"
                             tabIndex={isOpen ? 0 : -1}
+                            onClick={(e) => e.stopPropagation()}
                             className="dk-cta group/pill inline-flex h-[40px] items-center gap-2.5 rounded-full bg-white px-5 text-oxblood transition-opacity duration-300 hover:opacity-90 lg:h-[2.4vw] lg:px-[1.2vw]"
                           >
                             {d.cta}
@@ -255,7 +266,7 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
                     aria-hidden="true"
                     className="absolute inset-0 rounded-[20px] ring-1 ring-inset ring-white/0 transition-[box-shadow,--tw-ring-color] duration-500 group-hover:ring-white/20"
                   />
-                </button>
+                </div>
               );
             })}
           </div>

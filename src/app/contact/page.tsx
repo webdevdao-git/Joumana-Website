@@ -52,7 +52,7 @@ export default function ContactPage() {
         <div className="frame grid gap-10 lg:grid-cols-[minmax(0,820fr)_minmax(0,620fr)] lg:items-start lg:gap-[6%]">
           <div className="flex flex-col gap-6 xl:gap-8">
             <Reveal>
-              <p className="s-button tracking-[0.3em] text-brown/70">{eyebrow}</p>
+              <p className="s-button tracking-[0.3em] text-brown/85">{eyebrow}</p>
             </Reveal>
 
             <Reveal delay={0.06}>
@@ -87,14 +87,14 @@ export default function ContactPage() {
                   key={rowItem.label}
                   className="flex flex-col gap-1 border-b border-oxblood/15 py-5"
                 >
-                  <dt className="s-button tracking-[0.18em] text-brown/60">
+                  <dt className="s-button tracking-[0.18em] text-brown/85">
                     {rowItem.label}
                   </dt>
                   <dd className="s-body text-card-heading">
                     {rowItem.href ? (
                       <a
                         href={rowItem.href}
-                        className="underline decoration-oxblood/25 underline-offset-[6px] transition-colors hover:decoration-current"
+                        className="inline-block py-1 underline decoration-oxblood/25 underline-offset-[6px] transition-colors hover:decoration-current"
                       >
                         {rowItem.value}
                       </a>

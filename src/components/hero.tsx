@@ -194,7 +194,9 @@ export function Hero() {
                 onClick={() => go(i)}
                 aria-label={`Show frame ${i + 1} of ${SLIDES.length}`}
                 aria-current={i === active}
-                className="py-2"
+                /* the mark is 3px tall; the padding is what makes the target
+                   big enough to hit on a phone */
+                className="px-1.5 py-3"
               >
                 <span
                   className={`block h-[3px] rounded-full transition-all duration-500 ${

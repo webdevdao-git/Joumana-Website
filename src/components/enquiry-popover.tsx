@@ -167,7 +167,7 @@ export function EnquiryPopover() {
               type="button"
               onClick={collapse}
               aria-label="Close"
-              className="absolute right-3 top-3 flex h-6 w-6 items-center justify-center rounded-full text-card-body-soft transition-colors hover:bg-rule hover:text-card-heading"
+              className="absolute right-2.5 top-2.5 flex h-7 w-7 items-center justify-center rounded-full text-card-body-soft transition-colors hover:bg-rule hover:text-card-heading"
             >
               <svg width="10" height="10" viewBox="0 0 12 12" aria-hidden="true">
                 <path

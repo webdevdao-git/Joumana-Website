@@ -46,7 +46,7 @@ export function SiteHeader() {
       key={item.href}
       href={item.href}
       aria-current={pathname === item.href ? "page" : undefined}
-      className="t-nav text-white transition-opacity duration-300 hover:opacity-70"
+      className="t-nav inline-block py-1.5 text-white transition-opacity duration-300 hover:opacity-70"
     >
       {item.label}
     </Link>

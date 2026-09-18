@@ -84,7 +84,7 @@ export default async function JournalPostPage({
           <div className="frame flex flex-col items-center gap-5 text-center xl:gap-7">
             <Link
               href="/journal"
-              className="t-nav text-body-soft transition-opacity hover:opacity-70"
+              className="t-nav inline-block py-1.5 text-body-soft transition-opacity hover:opacity-70"
             >
               <span aria-hidden="true">&larr;</span> Journal
             </Link>

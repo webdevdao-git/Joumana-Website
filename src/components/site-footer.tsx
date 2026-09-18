@@ -124,12 +124,12 @@ export function SiteFooter() {
 
             <div className="lg:absolute lg:left-[40%] lg:top-0 lg:w-[16%]">
               <Column heading="Services">
-                <ul className="flex flex-col gap-2 text-[15px] leading-snug text-white/60 xl:text-[17px]">
+                <ul className="flex flex-col gap-0.5 text-[15px] leading-snug text-white/75 xl:text-[17px]">
                   {servicesPage.disciplines.map((d) => (
                     <li key={d.label}>
                       <Link
                         href="/services"
-                        className="transition-colors hover:text-white"
+                        className="inline-block py-1 transition-colors hover:text-white"
                       >
                         {d.label}
                       </Link>
@@ -141,12 +141,12 @@ export function SiteFooter() {
 
             <div className="lg:absolute lg:left-[57%] lg:top-0">
               <Column heading="Pages">
-                <ul className="flex flex-col gap-2 text-[15px] leading-snug text-white/60 xl:text-[18px]">
+                <ul className="flex flex-col gap-0.5 text-[15px] leading-snug text-white/75 xl:text-[18px]">
                   {[{ label: "Home", href: "/" }, ...nav].map((item) => (
                     <li key={item.href}>
                       <Link
                         href={item.href}
-                        className="transition-colors hover:text-white"
+                        className="inline-block py-1 transition-colors hover:text-white"
                       >
                         {item.label}
                       </Link>
@@ -158,10 +158,10 @@ export function SiteFooter() {
 
             <div className="lg:absolute lg:left-[68%] lg:top-0 lg:w-[17%]">
               <Column heading="Contact">
-                <div className="flex flex-col gap-1.5 text-[15px] leading-snug text-white/60 xl:text-[18px]">
+                <div className="flex flex-col gap-0.5 text-[15px] leading-snug text-white/75 xl:text-[18px]">
                   <a
                     href={`mailto:${site.email}`}
-                    className="transition-colors hover:text-white"
+                    className="inline-block py-1 transition-colors hover:text-white"
                   >
                     Email: {site.email}
                   </a>
@@ -184,7 +184,7 @@ export function SiteFooter() {
       {/* the brown bar the design closes on */}
       <div className="bg-brown">
         <div className="frame flex h-[54px] items-center justify-center">
-          <p className="text-center text-[13px] leading-none text-white/60 xl:text-[20px]">
+          <p className="text-center text-[13px] leading-none text-white/75 xl:text-[20px]">
             &copy; Copyright {new Date().getFullYear()} Joumana Saad Media
           </p>
         </div>
