@@ -193,7 +193,7 @@ export function SiteFooter() {
               href="https://daomarketing.com"
               target="_blank"
               rel="noreferrer noopener"
-              className="underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-current"
+              className="inline-block py-1 underline decoration-white/30 underline-offset-4 transition-colors hover:text-white hover:decoration-current"
             >
               DAO Marketing Management LLC
             </a>
