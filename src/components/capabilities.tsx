@@ -141,31 +141,29 @@ function ServiceCard({
         }}
       />
 
-      {/* the face */}
+      {/* the face. The name is the graphic: set large and ranged left, it
+          fills the card on its own, which a centred line and a mark above it
+          did not. The number is a small label in the corner, where a printed
+          page puts it, rather than the thing you look at first. */}
       <span
-        className="absolute inset-0 flex flex-col items-center justify-center gap-4 p-6 text-center xl:gap-5 xl:p-8"
+        className="absolute inset-0 flex flex-col justify-between p-6 xl:p-8"
         style={{
           opacity: showing ? 0 : 1,
           transform: showing && !reduced ? "scale(0.96)" : "scale(1)",
           transition: `opacity 260ms ease, transform 500ms ${EASE}`,
         }}
       >
-        {/* the edition mark: the number set in the display face over a short
-            rule, which is what a printed contents page does and what the six
-            drawn icons were standing in for. */}
-        <span className="flex flex-col items-center gap-2">
-          <span className="font-display text-[28px] font-light leading-none text-card-heading/75 xl:text-[34px]">
+        <span className="flex items-start justify-between gap-4">
+          <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-card-heading/45 xl:text-[13px]">
             {index}
           </span>
-          <span aria-hidden="true" className="block h-px w-8 bg-oxblood/25" />
+          <span className="text-card-heading/35">
+            <ArrowUpRight className="h-5 w-5" />
+          </span>
         </span>
 
-        <span className="font-display text-[21px] font-semibold uppercase leading-tight text-card-heading xl:text-[26px]">
+        <span className="font-display text-[28px] font-light uppercase leading-[1.04] tracking-[0.01em] text-card-heading xl:text-[38px]">
           {title}
-        </span>
-
-        <span className="text-card-heading/45">
-          <ArrowUpRight className="h-5 w-5" />
         </span>
       </span>
 
