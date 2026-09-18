@@ -14,6 +14,14 @@ import Image from "next/image";
  * shorter than a stacked lockup like Dubai Economy and Tourism, because at
  * equal height the wordmark reads twice as loud. That means the tile below can
  * stay one fixed box for every logo.
+ *
+ * They are white knockouts, so a coloured original is repainted in its own
+ * alpha before it goes on the canvas. Argaam arrived orange and grey and would
+ * otherwise have been the one mark on the band with a colour of its own.
+ *
+ * The run is the list four times over and the loop travels minus fifty
+ * percent, so it meets itself on an exact copy whatever the list holds; adding
+ * to it cannot put a seam in.
  */
 const LOGOS = [
   { src: "/brand/logo-forbes.png", alt: "Forbes" },
@@ -23,6 +31,7 @@ const LOGOS = [
   { src: "/brand/logo-cpi-media.png", alt: "CPI Media Group" },
   { src: "/brand/logo-dubai-economy-tourism.png", alt: "Dubai Economy and Tourism" },
   { src: "/brand/logo-dubai-economy.png", alt: "Dubai Economy" },
+  { src: "/brand/logo-argaam.png", alt: "Argaam" },
 ];
 
 function Row() {
