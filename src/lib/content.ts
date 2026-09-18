@@ -808,9 +808,12 @@ export const servicesPage = {
     body: "Whether the goal is to shape a brand story, create meaningful content, prepare a spokesperson, or bring a conversation to life, each engagement starts with the audience, the message and the purpose behind it.",
   },
 
+  /* Each carries a slug so the home page can send you to this one rather
+     than to the top of the page. The services deck reads it off the hash. */
   disciplines: [
     {
       label: "Branded Content",
+      slug: "branded-content",
       image: "/images/services/branded-content.webp",
       alt: "Joumana Saad presenting branded content on location",
       index: "01",
@@ -825,6 +828,7 @@ export const servicesPage = {
     },
     {
       label: "Presenting & Moderation",
+      slug: "presenting-and-moderation",
       image: "/images/services/presenting.webp",
       alt: "Joumana Saad hosting an ESCADA event in Dubai",
       index: "02",
@@ -839,6 +843,7 @@ export const servicesPage = {
     },
     {
       label: "Editorial",
+      slug: "editorial",
       image: "/images/services/editorial.webp",
       alt: "Joumana Saad writing at her desk",
       index: "03",
@@ -853,6 +858,7 @@ export const servicesPage = {
     },
     {
       label: "Podcasts",
+      slug: "podcasts",
       image: "/images/services/podcasts.webp",
       alt: "Joumana Saad recording a podcast interview",
       index: "04",
@@ -866,6 +872,7 @@ export const servicesPage = {
     },
     {
       label: "Media Training",
+      slug: "media-training",
       image: "/images/services/media-training.webp",
       alt: "Joumana Saad presenting in a television studio",
       index: "05",
@@ -879,6 +886,7 @@ export const servicesPage = {
     },
     {
       label: "PR & Corporate Communications",
+      slug: "pr-and-corporate-communications",
       // she stands at the left of this frame, so the copy takes the other side
       copySide: "right",
       image: "/images/services/pr-communications.webp",

@@ -8,8 +8,10 @@ import { servicesPage } from "@/lib/content";
 /**
  * Node 45:1319.
  *
- * The card is a button rather than a link. Nesting a link inside it would be
- * invalid, so the one route out of the section is the button at the bottom.
+ * Each card is a link into its own discipline on the services page, not to
+ * the top of it: /services#podcasts opens the podcasts card in the deck there.
+ * The reveal still happens on approach, so the card reads the same; the click
+ * now goes somewhere useful instead of only pinning the reveal open.
  */
 
 
@@ -141,20 +143,21 @@ function ArrowUpRight({ className = "" }: { className?: string }) {
 function ServiceCard({
   title,
   body,
+  href,
   Icon,
 }: {
   title: string;
   body: string;
+  href: string;
   Icon: () => React.ReactElement;
 }) {
   const reduced = useReducedMotion();
-  const card = useRef<HTMLButtonElement>(null);
+  const card = useRef<HTMLAnchorElement>(null);
   const [open, setOpen] = useState(false);
-  const [pinned, setPinned] = useState(false);
   const [origin, setOrigin] = useState({ x: 50, y: 50 });
   const [lean, setLean] = useState({ x: 0, y: 0 });
 
-  const showing = open || pinned;
+  const showing = open;
   const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
   /** where the pointer is, as a percentage of the card */
@@ -180,10 +183,9 @@ function ServiceCard({
   };
 
   return (
-    <button
+    <Link
       ref={card}
-      type="button"
-      aria-expanded={showing}
+      href={href}
       onPointerEnter={(e) => {
         setOrigin(at(e));
         setOpen(true);
@@ -193,16 +195,12 @@ function ServiceCard({
         setOrigin(at(e));
         rest();
       }}
-      onClick={(e) => {
-        setOrigin(at(e));
-        setPinned((v) => !v);
-      }}
       onFocus={() => {
         setOrigin({ x: 50, y: 50 });
         setOpen(true);
       }}
       onBlur={rest}
-      className="relative h-[228px] w-full overflow-hidden rounded-[24px] bg-card text-left will-change-transform xl:h-[252px]"
+      className="relative block h-[228px] w-full overflow-hidden rounded-[24px] bg-card text-left will-change-transform xl:h-[252px]"
       style={{
         transform: reduced
           ? undefined
@@ -273,7 +271,7 @@ function ServiceCard({
           {body}
         </span>
       </span>
-    </button>
+    </Link>
   );
 }
 
@@ -294,6 +292,7 @@ export function Capabilities() {
               <ServiceCard
                 title={d.label}
                 body={d.body[0]}
+                href={`/services#${d.slug}`}
                 Icon={MARKS[d.label] ?? Newspaper}
               />
             </li>

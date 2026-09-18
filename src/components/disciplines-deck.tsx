@@ -38,7 +38,9 @@ import { useReducedMotion } from "motion/react";
  * thing that makes this pattern look cheap.
  *
  * Pointer opens, click pins, keyboard opens on focus, Enter and Space pin and
- * the arrow keys walk the row. Under prefers-reduced-motion nothing moves: the cards take equal
+ * the arrow keys walk the row. Arriving on /services#podcasts opens that one
+ * and brings the whole row up, rather than the browser dropping the card at
+ * the top of the window with the heading left above it. Under prefers-reduced-motion nothing moves: the cards take equal
  * widths as a plain grid and every open card shows its copy outright.
  */
 export type Deck = {
@@ -48,6 +50,7 @@ export type Deck = {
   body: readonly string[];
   includes: readonly string[];
   cta: string;
+  slug: string;
   image: string;
   alt: string;
   /** which side of the card the copy takes, so it never lands on her */
@@ -79,6 +82,36 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
   const [hovered, setHovered] = useState<number | null>(null);
   const row = useRef<HTMLDivElement>(null);
   const hold = useRef<ReturnType<typeof setTimeout> | null>(null);
+
+  /* The home page links into a single discipline, /services#podcasts. Open
+     that one and bring the row to the top, rather than letting the browser
+     jump the card itself to the top of the window and leave the heading
+     above the fold. */
+  useEffect(() => {
+    const open = () => {
+      const slug = decodeURIComponent(window.location.hash.slice(1));
+      if (!slug) return;
+      const i = items.findIndex((d) => d.slug === slug);
+      if (i < 0) return;
+      setActive(i);
+      setHovered(null);
+      /* the row only exists from lg. Below it the six are a column, so the
+         card itself is what you want brought up, not the top of the section */
+      const deck = window.matchMedia("(min-width: 1024px)").matches;
+      const target = deck
+        ? row.current?.closest("section")
+        : row.current?.querySelectorAll<HTMLElement>("[data-card]")[i];
+      target?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+        block: "start",
+      });
+    };
+    open();
+    window.addEventListener("hashchange", open);
+    return () => window.removeEventListener("hashchange", open);
+  }, [items]);
 
   const open = hovered ?? active;
 
@@ -137,6 +170,7 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
               return (
                 <div
                   key={d.index}
+                  id={d.slug}
                   data-card
                   role="tab"
                   tabIndex={0}
