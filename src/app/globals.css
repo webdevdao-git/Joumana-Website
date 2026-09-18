@@ -607,6 +607,18 @@
   }
 
 
+  /* A row that scrolls sideways under its own arrows. The bar is hidden
+     because the arrows and the half card at the edge already say there is
+     more; the row keeps its keyboard focus and its native swipe. */
+  .rail {
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+  }
+
+  .rail::-webkit-scrollbar {
+    display: none;
+  }
+
   /* ----------------------------------------------------------- the deck
      The disciplines card row. Its own scale, well under the page's: the card
      is a photograph with a caption on it, not a page of copy with a picture
