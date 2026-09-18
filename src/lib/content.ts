@@ -885,8 +885,8 @@ export const servicesPage = {
       cta: "Enquire MORE About IT",
     },
     {
-      label: "PR & Corporate Communications",
-      slug: "pr-and-corporate-communications",
+      label: "PR & Strategic Communications",
+      slug: "pr-and-strategic-communications",
       // she stands at the left of this frame, so the copy takes the other side
       copySide: "right",
       image: "/images/services/pr-communications.webp",
