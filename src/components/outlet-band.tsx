@@ -32,6 +32,7 @@ const LOGOS = [
   { src: "/brand/logo-dubai-economy-tourism.png", alt: "Dubai Economy and Tourism" },
   { src: "/brand/logo-dubai-economy.png", alt: "Dubai Economy" },
   { src: "/brand/logo-argaam.png", alt: "Argaam" },
+  { src: "/brand/logo-aljazeera.png", alt: "Al Jazeera Media Network" },
 ];
 
 function Row() {

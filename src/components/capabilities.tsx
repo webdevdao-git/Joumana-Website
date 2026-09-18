@@ -154,7 +154,7 @@ function ServiceCard({
         }}
       >
         <span className="flex items-start justify-between gap-4">
-          <span className="text-[12px] font-semibold uppercase tracking-[0.2em] text-card-heading/45 xl:text-[13px]">
+          <span className="text-[12px] font-semibold tracking-[0.2em] text-card-heading/45 xl:text-[13px]">
             {index}
           </span>
           <span className="text-card-heading/35">
@@ -170,7 +170,7 @@ function ServiceCard({
       {/* what it means, in two beats */}
       <span className="absolute inset-0 flex flex-col justify-center gap-3 p-6 text-white xl:p-8">
         <span
-          className="text-[11px] font-semibold uppercase tracking-[0.18em] text-white/65"
+          className="text-[11px] font-semibold tracking-[0.18em] text-white/65"
           style={{
             opacity: showing ? 1 : 0,
             transform: showing || reduced ? "translateY(0)" : "translateY(14px)",
@@ -220,7 +220,7 @@ export function Capabilities() {
 
         <Link
           href="/services"
-          className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-brown px-8 text-[15px] font-semibold uppercase text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:text-[18px]"
+          className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-brown px-8 text-[15px] font-semibold text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:text-[18px]"
         >
           View the Full Offering
           <span aria-hidden="true">&rarr;</span>

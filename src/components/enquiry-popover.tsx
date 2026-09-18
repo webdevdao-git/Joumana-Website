@@ -191,10 +191,10 @@ export function EnquiryPopover() {
             ) : (
               <>
                 <p className="pr-7 font-display text-[14px] font-semibold uppercase leading-tight tracking-[0.04em] text-card-heading">
-                  Working on something
+                  Have a project in mind?
                 </p>
                 <p className="mt-1 text-[12px] leading-[1.4] text-card-body-soft">
-                  Send a line, I reply within a working day.
+                  Let&rsquo;s talk.
                 </p>
 
                 <form onSubmit={handleSubmit} className="mt-3.5 flex flex-col gap-3">
@@ -230,21 +230,21 @@ export function EnquiryPopover() {
 
                   <div>
                     <label htmlFor="pop-message" className="sr-only">
-                      What do you need
+                      Tell me about the project
                     </label>
                     <textarea
                       id="pop-message"
                       name="message"
                       rows={2}
                       required
-                      placeholder="What do you need?"
+                      placeholder="Tell me about the project"
                       className={`${field} resize-none`}
                     />
                   </div>
 
                   <button
                     type="submit"
-                    className="mt-0.5 inline-flex h-10 items-center justify-center gap-2 rounded-full bg-brown text-[12px] font-semibold uppercase tracking-[0.06em] text-white transition-opacity duration-300 hover:opacity-90"
+                    className="mt-0.5 inline-flex h-10 items-center justify-center gap-2 rounded-full bg-brown text-[12px] font-semibold tracking-[0.06em] text-white transition-opacity duration-300 hover:opacity-90"
                   >
                     Send
                     <span aria-hidden="true">&rarr;</span>

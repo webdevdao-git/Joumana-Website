@@ -209,7 +209,7 @@ export default function JournalPage() {
         </div>
       </section>
 
-      <ContactPanel page="journal" />
+      <ContactPanel />
     </>
   );
 }

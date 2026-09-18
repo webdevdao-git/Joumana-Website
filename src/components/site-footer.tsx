@@ -115,7 +115,7 @@ export function SiteFooter() {
 
               <Link
                 href="/contact"
-                className="mt-7 inline-flex h-14 w-[200px] items-center justify-center gap-2 rounded-full bg-white text-[14px] font-semibold uppercase tracking-[0.04em] text-oxblood transition-opacity duration-300 hover:opacity-90 xl:mt-8 xl:text-[16px]"
+                className="mt-7 inline-flex h-14 w-[200px] items-center justify-center gap-2 rounded-full bg-white text-[14px] font-semibold tracking-[0.04em] text-oxblood transition-opacity duration-300 hover:opacity-90 xl:mt-8 xl:text-[16px]"
               >
                 Let&rsquo;s talk
                 <span aria-hidden="true">&rarr;</span>

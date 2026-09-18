@@ -89,7 +89,7 @@ export default async function JournalPostPage({
               <span aria-hidden="true">&larr;</span> Journal
             </Link>
 
-            <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[12px] uppercase tracking-[0.14em] text-body-soft xl:text-[13px]">
+            <p className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 text-[12px] tracking-[0.14em] text-body-soft xl:text-[13px]">
               <span className="font-semibold text-heading">{post.category}</span>
               <span aria-hidden="true">&middot;</span>
               <time dateTime={post.date}>{formatDate(post.date)}</time>
@@ -192,7 +192,7 @@ export default async function JournalPostPage({
               </figure>
 
               <div className="flex flex-col justify-center gap-2 p-6 xl:p-8">
-                <span className="text-[12px] font-semibold uppercase tracking-[0.16em] text-card-body-soft">
+                <span className="text-[12px] font-semibold tracking-[0.16em] text-card-body-soft">
                   Read next
                 </span>
                 <h2 className="font-display text-[20px] font-semibold uppercase leading-[1.2] text-card-heading xl:text-[26px]">

@@ -31,15 +31,9 @@ const FIELDS = [
   { name: "email", label: "Email Address", type: "email", autoComplete: "email" },
 ] as const;
 
-export function ContactPanel({
-  page,
-  tone = "light",
-}: {
-  page: keyof typeof contactPanels;
-  tone?: "dark" | "light";
-}) {
+export function ContactPanel({ tone = "light" }: { tone?: "dark" | "light" }) {
   const dark = tone === "dark";
-  const { heading, lede } = contactPanels[page];
+  const { heading, lede } = contactPanels;
 
   const [sent, setSent] = useState(false);
 

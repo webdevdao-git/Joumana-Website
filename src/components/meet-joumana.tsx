@@ -18,10 +18,33 @@ import Image from "next/image";
  * against "nineteen years" on the work page and "more than 15 years" in the
  * services design. She began at Forbes in 2007, and a date cannot drift.
  */
-const COPY = [
-  "I am a communications specialist, journalist and presenter based in Dubai. Today I lead public relations and communications strategy for the Dubai Department of Economy and Tourism, across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
-  "I started in newsrooms in 2007, at Forbes in New York, running the video network and reporting on air. In Dubai I reported for Arabian Radio Network across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live and producing features for Business Breakfast and Drive Live. I edited SME Advisor magazine, and covered financial markets in the UAE, Saudi Arabia and Egypt as Deputy Editor at Argaam.",
-  "Six years at Dubai Chamber of Commerce taught me what a reporter's instinct is worth inside a large organisation. Newsroom, boardroom or stage, the job has never changed: understand the subject, find what actually matters in it, and say it so people listen.",
+/**
+ * Joumana's own wording. The three phrases she asked to have stand out are
+ * segments rather than markup in a string, so the bolding is data and nobody
+ * has to parse a paragraph to find it.
+ */
+const COPY: { text: string; bold?: boolean }[][] = [
+  [
+    { text: "I am a Dubai-based " },
+    { text: "Communications Specialist, Journalist and Presenter", bold: true },
+    {
+      text:
+        " with over 18 years of experience across journalism, public relations, media relations and strategic communications. Having worked on both sides of the media industry, I bring a strong editorial understanding of what local, regional and international journalists look for, and how media expectations differ across markets.",
+    },
+  ],
+  [
+    { text: "My career began at " },
+    { text: "Forbes", bold: true },
+    {
+      text:
+        " in New York before moving to Dubai, where I worked across broadcast, business and financial journalism. Today, I lead international PR and communications strategy for the ",
+    },
+    { text: "Dubai Department of Economy and Tourism", bold: true },
+    {
+      text:
+        " across twenty markets, combining global media expertise with deep knowledge of the UAE, GCC and Middle East from both a business and cultural perspective.",
+    },
+  ],
 ];
 
 export function MeetJoumana() {
@@ -40,12 +63,20 @@ export function MeetJoumana() {
             </h2>
 
             <div className="flex flex-col gap-5 lg:mt-10">
-              {COPY.map((para) => (
+              {COPY.map((para, i) => (
                 <p
-                  key={para}
+                  key={i}
                   className="text-[17px] leading-[1.3] text-card-body lg:text-[24px]"
                 >
-                  {para}
+                  {para.map((part, j) =>
+                    part.bold ? (
+                      <strong key={j} className="font-semibold text-card-heading">
+                        {part.text}
+                      </strong>
+                    ) : (
+                      <span key={j}>{part.text}</span>
+                    ),
+                  )}
                 </p>
               ))}
             </div>

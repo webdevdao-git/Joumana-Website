@@ -139,7 +139,12 @@ export function BroadcastStage() {
         tabIndex={0}
         role="region"
         aria-label="Showreel clips"
-        className="rail mt-7 flex gap-3 overflow-x-auto px-6 pb-2 md:px-10 xl:mt-10 xl:px-20"
+        /* Lenis takes every wheel by default so it can drive the page, which
+           leaves a sideways swipe over this row doing nothing at all. This
+           hands the horizontal axis back to the row and keeps the vertical
+           one with the page. */
+        data-lenis-prevent-horizontal=""
+        className="rail mt-7 flex gap-3 overflow-x-auto overscroll-x-contain px-6 pb-2 md:px-10 xl:mt-10 xl:px-20"
       >
         {run.map((reel, i) => {
           const key = `${reel.slug}-${i}`;
@@ -215,7 +220,7 @@ export function BroadcastStage() {
       <div className="frame mt-7 flex justify-center xl:mt-9">
         <Link
           href="/work"
-          className="inline-flex h-12 items-center justify-center gap-3 rounded-full bg-brown px-7 text-[14px] font-semibold uppercase text-white transition-opacity duration-300 hover:opacity-90 xl:h-14 xl:px-8 xl:text-[16px]"
+          className="inline-flex h-12 items-center justify-center gap-3 rounded-full bg-brown px-7 text-[14px] font-semibold text-white transition-opacity duration-300 hover:opacity-90 xl:h-14 xl:px-8 xl:text-[16px]"
         >
           Explore Media
           <span aria-hidden="true">&rarr;</span>

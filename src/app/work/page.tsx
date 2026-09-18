@@ -347,7 +347,7 @@ export default function WorkPage() {
           They carry her own reels now; PublishedReels has the reasoning. */}
       <PublishedReels heading={published.heading} />
 
-      <ContactPanel page="work" />
+      <ContactPanel />
     </>
   );
 }

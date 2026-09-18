@@ -103,7 +103,7 @@ export function FeaturedArticles() {
                   className="mt-4 block h-px w-full origin-left scale-x-[0.12] bg-rule transition-transform duration-[650ms] ease-[cubic-bezier(0.22,1,0.36,1)] group-hover:scale-x-100 lg:mt-[0.93cqw]"
                 />
 
-                <span className="fa-meta mt-3 text-[12px] uppercase tracking-[0.14em] text-card-body-soft lg:mt-[0.69cqw]">
+                <span className="fa-meta mt-3 text-[12px] tracking-[0.14em] text-card-body-soft lg:mt-[0.69cqw]">
                   {article.meta}
                 </span>
               </Card>
@@ -113,7 +113,7 @@ export function FeaturedArticles() {
 
         <Link
           href="/work"
-          className="fa-cta inline-flex h-14 items-center justify-center gap-3 rounded-full bg-brown px-8 text-[15px] font-semibold uppercase text-white transition-colors duration-300 hover:bg-cream hover:text-oxblood"
+          className="fa-cta inline-flex h-14 items-center justify-center gap-3 rounded-full bg-brown px-8 text-[15px] font-semibold text-white transition-colors duration-300 hover:bg-cream hover:text-oxblood"
         >
           View All Published Work
           <span aria-hidden="true">&rarr;</span>

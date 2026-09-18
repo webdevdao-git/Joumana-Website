@@ -105,7 +105,7 @@ export function Pill({
       ? "bg-brown text-white"
       : "bg-card text-card-heading";
 
-  const className = `inline-flex h-14 items-center justify-center gap-3 rounded-full px-8 text-[15px] font-semibold uppercase transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:text-[18px] ${skin}`;
+  const className = `inline-flex h-14 items-center justify-center gap-3 rounded-full px-8 text-[15px] font-semibold transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:text-[18px] ${skin}`;
 
   if (external) {
     return (

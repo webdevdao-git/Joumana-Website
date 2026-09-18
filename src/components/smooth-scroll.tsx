@@ -1,7 +1,8 @@
 "use client";
 
-import { ReactLenis } from "lenis/react";
-import { useEffect, useState } from "react";
+import { ReactLenis, type LenisRef } from "lenis/react";
+import { usePathname } from "next/navigation";
+import { useEffect, useRef, useState } from "react";
 import type { ReactNode } from "react";
 
 /**
@@ -15,6 +16,8 @@ import type { ReactNode } from "react";
  */
 export function SmoothScroll({ children }: { children: ReactNode }) {
   const [enabled, setEnabled] = useState(false);
+  const lenis = useRef<LenisRef>(null);
+  const pathname = usePathname();
 
   useEffect(() => {
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
@@ -29,10 +32,27 @@ export function SmoothScroll({ children }: { children: ReactNode }) {
     };
   }, []);
 
+  /**
+   * A new page starts at the top.
+   *
+   * Next resets window.scrollY on a route change, but Lenis holds its own
+   * position and writes it back on the next frame, so a link followed while
+   * the page was still gliding landed on the new page at the old page's
+   * offset: 3564px down the work page, from the foot of the home timeline.
+   *
+   * A hash is left alone. /services#podcasts is asking for a place on the
+   * page, and the deck scrolls itself there.
+   */
+  useEffect(() => {
+    if (window.location.hash) return;
+    lenis.current?.lenis?.scrollTo(0, { immediate: true, force: true });
+  }, [pathname]);
+
   return (
     <>
       {enabled && (
         <ReactLenis
+          ref={lenis}
           root
           options={{
             duration: 1.15,

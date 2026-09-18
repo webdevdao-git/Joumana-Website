@@ -41,6 +41,17 @@ export function SiteHeader() {
     };
   }, [open]);
 
+  /* The menu and the button are both below lg, so widening a window past it
+     leaves the menu open with nothing on screen to close it, and the body
+     locked with it. */
+  useEffect(() => {
+    const wide = window.matchMedia("(min-width: 1024px)");
+    const close = () => wide.matches && setOpen(false);
+    close();
+    wide.addEventListener("change", close);
+    return () => wide.removeEventListener("change", close);
+  }, []);
+
   const link = (item: { label: string; href: string }) => (
     <Link
       key={item.href}

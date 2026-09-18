@@ -377,7 +377,6 @@
     font-size: 14px;
     letter-spacing: 0.04em;
     line-height: normal;
-    text-transform: uppercase;
   }
 
   @media (min-width: 1280px) {
@@ -562,7 +561,6 @@
     font-weight: 600;
     font-size: clamp(0.75rem, 1.04vw, 1.125rem);
     line-height: 1;
-    text-transform: uppercase;
   }
 
 
@@ -652,7 +650,6 @@
     font-weight: 600;
     font-size: clamp(0.6875rem, 0.81vw, 0.875rem);
     line-height: 1;
-    text-transform: uppercase;
   }
 
   /* The card itself. Below lg the deck is a plain column of picture cards,

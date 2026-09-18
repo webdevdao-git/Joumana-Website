@@ -149,7 +149,7 @@ export function Hero() {
       >
         <div className="frame flex flex-col items-start gap-6 xl:gap-8">
           <motion.p
-            className="text-[11px] font-semibold uppercase tracking-[0.3em] text-white/70 xl:text-[13px]"
+            className="text-[11px] font-semibold tracking-[0.3em] text-white/70 xl:text-[13px]"
             initial={reduced ? { opacity: 1 } : { opacity: 0, y: 12 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.22, 1, 0.36, 1] }}

@@ -304,7 +304,7 @@ export default function ServicesPage() {
       <DisciplinesDeck items={disciplines} />
 
       {/* the design closes on Tell Me What You're Working On */}
-      <ContactPanel page="services" />
+      <ContactPanel />
     </>
   );
 }

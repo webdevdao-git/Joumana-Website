@@ -16,7 +16,11 @@ export const site = {
   // The real home. A preview build on a temporary Hostinger subdomain sets
   // NEXT_PUBLIC_SITE_URL so canonicals, the sitemap and the social images do
   // not all point at a domain that is not serving the site yet.
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "https://www.joumanasaad.com",
+  //
+  // `||` rather than `??`: an unset GitHub Actions variable arrives as an
+  // empty string, not as undefined, and `??` kept it. Every build on the
+  // runner then died on `new URL("")` and mailed out a failure.
+  url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.joumanasaad.com",
   // Forbes, New York, June 2007
   careerStart: 2007,
   socials: [
@@ -523,8 +527,8 @@ export const pageCopy = {
   },
   contact: {
     eyebrow: "Contact",
-    title: ["Tell me what", "you are trying", "to say."],
-    lede: "For editorial assignments, corporate content, hosting enquiries or a rate card, send the brief, the audience and the date you need it by. Most enquiries get a reply within one working day.",
+    title: ["Looking for the", "right voice for", "your next project?"],
+    lede: "Whether it's a story, stage, campaign or communications brief, let's talk about what you're working on.",
   },
 } as const;
 
@@ -1105,25 +1109,14 @@ export const journalPage = {
  *
  * Services keeps the design's own wording.
  */
+/**
+ * The closing block.
+ *
+ * One wording on every page, Joumana's own. It ran a different line per page
+ * for a while; those are in the history if the per page version is ever
+ * wanted back.
+ */
 export const contactPanels = {
-  home: {
-    heading: ["Have a Story", "to Tell?"],
-    lede: "Whether it's an interview, feature, live discussion, documentary, or editorial collaboration, I'm always interested in conversations that bring important stories and perspectives to the surface.",
-  },
-  services: {
-    heading: ["Tell Me What", "You're Working On"],
-    lede: "Whether you're planning an event, looking for a presenter or moderator, developing content, or exploring a communications project, I'd love to hear more.",
-  },
-  work: {
-    heading: ["Want Work", "Like This?"],
-    lede: "Tell me what you are trying to say and who needs to hear it. The format, the length and the shape of it are worth working out together, and that is usually the first conversation.",
-  },
-  journal: {
-    heading: ["Something Worth", "Writing About?"],
-    lede: "If there is a subject you think deserves proper attention, or a conversation you would like to see had in public, send it over. The best pieces usually begin as somebody else's question.",
-  },
-  journalArchive: {
-    heading: ["Until Then,", "Say Hello"],
-    lede: "The Journal is still being built. If there is something you would like to read about here, or you simply want to get in touch, this comes straight to me.",
-  },
+  heading: ["Looking for the", "right voice for", "your next project?"],
+  lede: "Whether it's a story, stage, campaign or communications brief, let's talk about what you're working on.",
 } as const;

@@ -71,7 +71,20 @@ const ROLES = [
     image: "/images/years/forbes.webp",
     alt: "Joumana Saad during her Forbes years in New York",
     body: "Running the magazine's video network day to day, assigning and producing multimedia stories, editing copy for Forbes.com and reporting on air.",
-    cta: "View Forbes Work",
+    cta: "View Work",
+  },
+  {
+    year: "2006",
+    span: "2006 — 2007",
+    org: "Al Jazeera Media Network",
+    role: "Associate Producer",
+    // CONFIRM: which bureau. It is left off rather than guessed, and the card
+    // drops the separator on its own when there is no place to name.
+    place: "",
+    image: "/images/years/first-newsroom.webp",
+    alt: "A television studio before a broadcast",
+    body: "The first newsroom. A year inside an international broadcaster, before the move to Forbes in New York.",
+    cta: "View Work",
   },
 ] as const;
 
@@ -176,7 +189,7 @@ export function AcrossTheYears() {
 
                 <motion.p
                   key={current.span}
-                  className="mt-2 text-[13px] font-semibold uppercase tracking-[0.16em] text-card-body-soft"
+                  className="mt-2 text-[13px] font-semibold tracking-[0.16em] text-card-body-soft"
                   initial={reduced ? false : { opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.4 }}
@@ -256,7 +269,7 @@ export function AcrossTheYears() {
                               <span className="block font-display text-[26px] font-light leading-none text-card-heading">
                                 {r.year}
                               </span>
-                              <span className="mt-1 block text-[10px] font-semibold uppercase tracking-[0.12em] text-card-body-soft">
+                              <span className="mt-1 block text-[10px] font-semibold tracking-[0.12em] text-card-body-soft">
                                 {r.span}
                               </span>
                             </div>
@@ -266,8 +279,8 @@ export function AcrossTheYears() {
                             <h3 className="font-display text-[21px] font-semibold uppercase leading-[1.09] text-card-heading xl:text-[28px]">
                               {r.org}
                             </h3>
-                            <p className="mt-1.5 text-[13px] font-bold uppercase leading-[1.2] text-card-heading xl:text-[16px]">
-                              {r.role} &middot; {r.place}
+                            <p className="mt-1.5 text-[13px] font-bold leading-[1.2] text-card-heading xl:text-[16px]">
+                              {r.place ? `${r.role} \u00b7 ${r.place}` : r.role}
                             </p>
                           </div>
 
@@ -278,7 +291,7 @@ export function AcrossTheYears() {
                           <div>
                             <Link
                               href="/work"
-                              className="inline-flex h-10 items-center justify-center gap-2.5 rounded-full bg-brown px-5 text-[12px] font-semibold uppercase text-white transition-colors duration-300 hover:bg-oxblood xl:h-11 xl:px-6 xl:text-[14px]"
+                              className="inline-flex h-10 items-center justify-center gap-2.5 rounded-full bg-brown px-5 text-[12px] font-semibold text-white transition-colors duration-300 hover:bg-oxblood xl:h-11 xl:px-6 xl:text-[14px]"
                             >
                               {r.cta}
                               <span

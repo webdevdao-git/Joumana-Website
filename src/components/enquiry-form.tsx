@@ -44,7 +44,7 @@ export function EnquiryForm() {
   const field =
     "w-full border-0 border-b border-rule bg-transparent pb-3 text-[17px] text-card-body outline-none transition-colors placeholder:text-card-body-soft focus:border-card-heading xl:text-[19px]";
   const label =
-    "block text-[12px] font-semibold uppercase tracking-[0.14em] text-card-body-soft";
+    "block text-[12px] font-semibold tracking-[0.14em] text-card-body-soft";
 
   return (
     <form onSubmit={handleSubmit} className="flex flex-col gap-8 xl:gap-9">
@@ -146,7 +146,7 @@ export function EnquiryForm() {
       <div className="flex flex-wrap items-center gap-5">
         <button
           type="submit"
-          className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-brown px-8 text-[15px] font-semibold uppercase text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:text-[17px]"
+          className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-brown px-8 text-[15px] font-semibold text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:text-[17px]"
         >
           Send the brief
           <span aria-hidden="true">&rarr;</span>

@@ -32,7 +32,7 @@ export default function HomePage() {
           dark footer and the two read as one slab however the block itself was
           styled; a light band between them ends the page, and the footer
           begins. */}
-      <ContactPanel page="home" />
+      <ContactPanel />
     </>
   );
 }
