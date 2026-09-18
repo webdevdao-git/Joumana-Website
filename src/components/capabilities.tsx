@@ -8,102 +8,17 @@ import { servicesPage } from "@/lib/content";
 /**
  * Node 45:1319.
  *
+ * The mark on each card is its own number, set in the display face over a
+ * short rule. It was six drawn icons, a newspaper, a microphone, a pencil and
+ * so on, generic enough to belong to any site; the photographs already carry
+ * the six on the services page, so this one stays typographic.
+ *
  * Each card is a link into its own discipline on the services page, not to
  * the top of it: /services#podcasts opens the podcasts card in the deck there.
  * The reveal still happens on approach, so the card reads the same; the click
  * now goes somewhere useful instead of only pinning the reveal open.
  */
 
-
-/* ------------------------------------------------------------------ icons
-   One mark per discipline, drawn on the same 24 grid with the same 1.5 stroke
-   as the arrow below, so the six read as a set rather than six borrowed
-   glyphs. Line work only: a filled icon would fight the light card. */
-const ICON_PROPS = {
-  width: 30,
-  height: 30,
-  viewBox: "0 0 24 24",
-  fill: "none",
-  stroke: "currentColor",
-  strokeWidth: 1.5,
-  strokeLinecap: "round",
-  strokeLinejoin: "round",
-  "aria-hidden": true,
-} as const;
-
-function Newspaper() {
-  return (
-    <svg {...ICON_PROPS}>
-      <path d="M4 6a1 1 0 0 1 1-1h11a1 1 0 0 1 1 1v13H6a2 2 0 0 1-2-2V6Z" />
-      <path d="M17 10h2a1 1 0 0 1 1 1v6a2 2 0 0 1-2 2" />
-      <path d="M7 9h7M7 12h7M7 15h4" />
-    </svg>
-  );
-}
-
-function Microphone() {
-  return (
-    <svg {...ICON_PROPS}>
-      <rect x="9" y="3" width="6" height="10" rx="3" />
-      <path d="M5.5 11a6.5 6.5 0 0 0 13 0" />
-      <path d="M12 17.5V21M9 21h6" />
-    </svg>
-  );
-}
-
-function Pencil() {
-  return (
-    <svg {...ICON_PROPS}>
-      <path d="M4 20h16" />
-      <path d="M14.5 4.5 17.5 7.5 9 16l-4 1 1-4 8.5-8.5Z" />
-    </svg>
-  );
-}
-
-function Megaphone() {
-  return (
-    <svg {...ICON_PROPS}>
-      <path d="M3 11.5v1.5a1 1 0 0 0 1 1h2l6 3.5v-12L6 10H4a1 1 0 0 0-1 1.5Z" />
-      <path d="M16 9.5a4 4 0 0 1 0 5" />
-      <path d="M18.5 7a7.5 7.5 0 0 1 0 10" />
-    </svg>
-  );
-}
-
-function Headphones() {
-  return (
-    <svg {...ICON_PROPS}>
-      <path d="M4 14v-2a8 8 0 0 1 16 0v2" />
-      <rect x="2.5" y="13.5" width="4.5" height="7" rx="2.25" />
-      <rect x="17" y="13.5" width="4.5" height="7" rx="2.25" />
-    </svg>
-  );
-}
-
-function Broadcast() {
-  return (
-    <svg {...ICON_PROPS}>
-      <rect x="3" y="8" width="12" height="9" rx="2" />
-      <path d="m15 12 5-3v8l-5-3" />
-      <path d="M6 5.5h.01M9 5.5h.01" />
-    </svg>
-  );
-}
-
-/**
- * The six the services page carries, drawn from the same data so the two can
- * never drift apart. The face shows the discipline and its mark; the back
- * shows the opening line of that discipline, which is the shortest true
- * description of it in the file.
- */
-const MARKS: Record<string, () => React.ReactElement> = {
-  "Branded Content": Pencil,
-  "Presenting & Moderation": Microphone,
-  Editorial: Newspaper,
-  Podcasts: Headphones,
-  "Media Training": Broadcast,
-  "PR & Corporate Communications": Megaphone,
-};
 
 function ArrowUpRight({ className = "" }: { className?: string }) {
   return (
@@ -144,12 +59,12 @@ function ServiceCard({
   title,
   body,
   href,
-  Icon,
+  index,
 }: {
   title: string;
   body: string;
   href: string;
-  Icon: () => React.ReactElement;
+  index: string;
 }) {
   const reduced = useReducedMotion();
   const card = useRef<HTMLAnchorElement>(null);
@@ -235,8 +150,14 @@ function ServiceCard({
           transition: `opacity 260ms ease, transform 500ms ${EASE}`,
         }}
       >
-        <span className="flex h-[68px] w-[68px] items-center justify-center rounded-full bg-oxblood/[0.07] text-card-heading ring-1 ring-oxblood/10">
-          <Icon />
+        {/* the edition mark: the number set in the display face over a short
+            rule, which is what a printed contents page does and what the six
+            drawn icons were standing in for. */}
+        <span className="flex flex-col items-center gap-2">
+          <span className="font-display text-[28px] font-light leading-none text-card-heading/75 xl:text-[34px]">
+            {index}
+          </span>
+          <span aria-hidden="true" className="block h-px w-8 bg-oxblood/25" />
         </span>
 
         <span className="font-display text-[21px] font-semibold uppercase leading-tight text-card-heading xl:text-[26px]">
@@ -293,7 +214,7 @@ export function Capabilities() {
                 title={d.label}
                 body={d.body[0]}
                 href={`/services#${d.slug}`}
-                Icon={MARKS[d.label] ?? Newspaper}
+                index={d.index}
               />
             </li>
           ))}
