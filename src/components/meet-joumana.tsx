@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { yearsIn } from "@/lib/years";
 
 /**
  * Node 45:1267. Soft panel, copy on the left, the cut out portrait on the
@@ -14,9 +15,10 @@ import Image from "next/image";
  * release describes someone, not how someone introduces themselves. The
  * heading above it says Meet Joumana Saad; what follows should be her.
  *
- * The figure is a date rather than a count. "13+ years" sat on the home page
- * against "nineteen years" on the work page and "more than 15 years" in the
- * services design. She began at Forbes in 2007, and a date cannot drift.
+ * The figure is counted from a date rather than written down, in lib/years,
+ * which is the single place the whole site reads it from. Four different ones
+ * used to be live at once: 13+ here, nineteen on the work page, more than 15
+ * in the services design and over 18 in this paragraph.
  */
 /**
  * Joumana's own wording. The three phrases she asked to have stand out are
@@ -29,7 +31,7 @@ const COPY: { text: string; bold?: boolean }[][] = [
     { text: "Communications Specialist, Journalist and Presenter", bold: true },
     {
       text:
-        " with over 18 years of experience across journalism, public relations, media relations and strategic communications. Having worked on both sides of the media industry, I bring a strong editorial understanding of what local, regional and international journalists look for, and how media expectations differ across markets.",
+        ` with over ${yearsIn().toLowerCase()} years of experience across journalism, public relations, media relations and strategic communications. Having worked on both sides of the media industry, I bring a strong editorial understanding of what local, regional and international journalists look for, and how media expectations differ across markets.`,
     },
   ],
   [

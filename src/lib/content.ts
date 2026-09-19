@@ -4,6 +4,8 @@
  * Anything marked CONFIRM should be verified with Joumana before launch.
  */
 
+import { CAREER_START, yearsIn, yearsInDigits } from "@/lib/years";
+
 export const site = {
   name: "Joumana Saad",
   legalName: "Joumana Saad Media",
@@ -21,8 +23,9 @@ export const site = {
   // empty string, not as undefined, and `??` kept it. Every build on the
   // runner then died on `new URL("")` and mailed out a failure.
   url: process.env.NEXT_PUBLIC_SITE_URL || "https://www.joumanasaad.com",
-  // Forbes, New York, June 2007
-  careerStart: 2007,
+  // Al Jazeera in 2006, a year before Forbes. Every figure on the site is
+  // counted from it rather than written down; see lib/years.
+  careerStart: CAREER_START,
   socials: [
     { label: "LinkedIn", href: "https://www.linkedin.com/in/joumana-saad-876b5144/" },
     { label: "Instagram", href: "https://www.instagram.com/joumanasaad_media/" },
@@ -64,7 +67,7 @@ export const outlets = [
 /* ------------------------------------------------------------- positioning */
 
 export const stats = [
-  { value: "19", label: "Years in newsrooms and communications" },
+  { value: String(yearsInDigits()), label: "Years in newsrooms and communications" },
   { value: "03", label: "Working languages: English, Arabic, Spanish" },
   { value: "02", label: "Media markets: New York and Dubai" },
 ] as const;
@@ -517,13 +520,13 @@ export const pageCopy = {
   },
   work: {
     eyebrow: "The Work",
-    title: ["Nineteen years", "of asking better", "questions."],
+    title: [`${yearsIn()} years`, "of asking better", "questions."],
     lede: "Bulletins read on air, features filed on deadline, stages hosted in two languages and reports written for organisations that get read closely. A selection is below.",
   },
   journal: {
     eyebrow: "Journal",
     title: ["Notes from", "the newsroom", "and the stage."],
-    lede: "Short pieces on how stories get made, what makes an audience stay, and what nineteen years either side of the microphone teaches you about saying something clearly.",
+    lede: `Short pieces on how stories get made, what makes an audience stay, and what ${yearsIn().toLowerCase()} years either side of the microphone teaches you about saying something clearly.`,
   },
   contact: {
     eyebrow: "Contact",
@@ -796,12 +799,10 @@ export const servicesPage = {
 
   bring: {
     script: "What I Bring",
-    heading: ["Strategy, storytelling, and a", "voice that"],
+    heading: ["Strategy, storytelling,", "and a voice that"],
     headingAccent: "connects",
-    // CONFIRM: the design says fifteen years. The home page says 13+ and
-    // the Work page says nineteen. One number has to win.
     body: [
-      "With more than 15 years across journalism, media and strategic communications, Joumana works at the intersection of content, communications and public engagement.",
+      `With ${yearsIn().toLowerCase()} years across journalism, media and strategic communications, Joumana works at the intersection of content, communications and public engagement.`,
       "Her experience spans international media, government and business organisations, from editorial and broadcast journalism to corporate communications, international media relations and high-profile content projects.",
     ],
   },
@@ -810,25 +811,6 @@ export const servicesPage = {
     // the design breaks these lines itself
     heading: ["Built around", "what needs to be said", "and how it should", "be heard."],
     body: "Whether the goal is to shape a brand story, create meaningful content, prepare a spokesperson, or bring a conversation to life, each engagement starts with the audience, the message and the purpose behind it.",
-  },
-
-  /**
-   * Four clips under the six disciplines, so the page ends on her doing the
-   * work rather than describing it.
-   *
-   * These play with sound. The same footage runs silent on the home page and
-   * on the work page, and on a services page the voice is a good part of what
-   * is being offered, so here it is the point rather than a decoration.
-   */
-  inAction: {
-    heading: "See It in Practice",
-    lede: "Four short pieces from the reel: to camera, on location, in studio, and in Arabic.",
-    clips: [
-      { slug: "reel-reality-check", shows: "Branded content, to camera" },
-      { slug: "reel-arabic", shows: "Presenting in Arabic" },
-      { slug: "reel-studio", shows: "In studio, with a crew" },
-      { slug: "reel-office", shows: "Presenting on location" },
-    ],
   },
 
   /* Each carries a slug so the home page can send you to this one rather
@@ -840,14 +822,11 @@ export const servicesPage = {
       image: "/images/services/branded-content.webp",
       alt: "Joumana Saad presenting branded content on location",
       index: "01",
-      head: "Make the message matter",
+      head: "Stories that connect brands with people.",
       body: [
-        "The strongest branded content doesn't feel like advertising. It tells a story, offers a point of view and gives an audience a reason to pay attention.",
-        "Joumana brings a journalist's perspective to branded storytelling  combining research, editorial judgement and strategic thinking to turn complex ideas into clear, engaging content.",
-        "From thought leadership and corporate storytelling to digital campaigns and executive communications, the focus is always on finding the story behind the message and shaping it for the right audience.",
+        "From thought leadership and executive interviews to campaign films and digital content, I develop and present branded content that combines strong storytelling with editorial credibility, giving audiences a reason to pay attention.",
       ],
       includes: ["Thought Leadership", "Executive Communications", "Corporate Content", "Digital Content"],
-      cta: "Discuss a Content Project",
     },
     {
       label: "Presenting & Moderation",
@@ -855,14 +834,11 @@ export const servicesPage = {
       image: "/images/services/presenting.webp",
       alt: "Joumana Saad hosting an ESCADA event in Dubai",
       index: "02",
-      head: "The right voice for the room",
+      head: "The right voice for the right conversation.",
       body: [
-        "Great moderation is more than keeping a conversation moving. It is about asking the right questions, understanding the subject and creating space for meaningful discussion.",
-        "With extensive experience across corporate events, conferences, panels, interviews and broadcast, Joumana brings an informed and engaging presence to every stage.",
-        "Her background in journalism allows her to research quickly, understand complex subjects and connect speakers, audiences and ideas naturally.",
+        "From event hosting and panel moderation to interviews and on-camera presenting, I bring journalistic preparation, confident delivery and an understanding of how to keep conversations engaging, relevant and moving forward.",
       ],
       includes: ["Event Hosting", "Panel Moderation", "Interviews", "On-Air Presenting"],
-      cta: "Enquire About Presenting",
     },
     {
       label: "Editorial",
@@ -870,14 +846,11 @@ export const servicesPage = {
       image: "/images/services/editorial.webp",
       alt: "Joumana Saad writing at her desk",
       index: "03",
-      head: "Stories grounded in substance",
+      head: "Finding the story that matters.",
       body: [
-        "Good editorial work starts with curiosity, research and the ability to find the story within the subject.",
-        "Joumana's journalism background spans business, finance, technology, current affairs, interviews, features and special reports.",
-        "Her experience across Forbes, Arabian Radio Network, Argaam and other business publications has shaped an approach that is rigorous without losing the human story.",
+        "With a background spanning international, business and financial journalism, I provide editorial writing, feature development, research and editing that turn complex subjects into clear, credible and engaging stories.",
       ],
       includes: ["Feature Writing", "Business & Finance", "Special Reports", "Editing & Research"],
-      cta: "Explore Editorial Work",
     },
     {
       label: "Podcasts",
@@ -885,13 +858,11 @@ export const servicesPage = {
       image: "/images/services/podcasts.webp",
       alt: "Joumana Saad recording a podcast interview",
       index: "04",
-      head: "Conversations worth staying for",
+      head: "Conversations people want to stay for.",
       body: [
-        "Podcasts create space for deeper conversations — the kind that move beyond headlines and give ideas, people and perspectives room to breathe.",
-        "Joumana brings her journalism and interviewing background to podcast conversations, helping shape thoughtful discussions around people, businesses, ideas and the stories behind them.",
+        "From podcast hosting and interviewing to editorial development and content direction, I help shape thoughtful conversations that bring out stronger stories, sharper perspectives and more meaningful insights.",
       ],
       includes: ["Hosting", "Interviewing", "Editorial Development", "Content Support"],
-      cta: "Discuss a Podcast",
     },
     {
       label: "Media Training",
@@ -899,13 +870,11 @@ export const servicesPage = {
       image: "/images/services/media-training.webp",
       alt: "Joumana Saad presenting in a television studio",
       index: "05",
-      head: "Be ready for the question",
+      head: "Prepare for the questions before they are asked.",
       body: [
-        "Media moments can shape how an organisation, leader or brand is understood. Preparation makes the difference.",
-        "Media training helps executives and spokespeople communicate with clarity, confidence and control — whether preparing for an interview, press conference, broadcast appearance or high-profile media engagement.",
+        "Practical media training for executives, leaders and spokespeople covering interview preparation, key messaging, difficult questions and on-camera delivery, built around an understanding of what journalists are actually looking for.",
       ],
       includes: ["Interview Preparation", "Key Messaging", "Question Handling", "On-Camera Confidence"],
-      cta: "Enquire MORE About IT",
     },
     {
       label: "PR & Strategic Communications",
@@ -915,14 +884,11 @@ export const servicesPage = {
       image: "/images/services/pr-communications.webp",
       alt: "Joumana Saad speaking at a Dubai Chamber podium",
       index: "06",
-      head: "Communication with purpose",
+      head: "Shape the message. Build the reputation.",
       body: [
-        "Reputation is built through every story, statement, conversation and connection.",
-        "Joumana's communications experience spans PR strategy, corporate communications, media relations, editorial content and stakeholder engagement across major organisations in Dubai.",
-        "Her current work at Dubai Department of Economy and Tourism includes communications strategy across international markets, media relations, editorial content and high-profile projects and partnerships.",
+        "From communications strategy and international media relations to corporate communications, executive messaging and PR, I help organisations communicate clearly across local, regional and global audiences, bringing together newsroom judgement and communications experience.",
       ],
       includes: ["Communications Strategy", "Media Relations", "PR & Editorial", "Corporate Communications", "Executive Messaging"],
-      cta: "START A Project",
     },
   ],
 } as const;

@@ -3,7 +3,8 @@ import { Hero } from "@/components/hero";
 import { OutletBand } from "@/components/outlet-band";
 import { MeetJoumana } from "@/components/meet-joumana";
 import { AcrossTheYears } from "@/components/across-the-years";
-import { Capabilities } from "@/components/capabilities";
+import { DisciplinesDeck } from "@/components/disciplines-deck";
+import { servicesPage } from "@/lib/content";
 import { FeaturedArticles } from "@/components/featured-articles";
 import { BroadcastStage } from "@/components/broadcast-stage";
 import { ContactPanel } from "@/components/contact-panel";
@@ -24,7 +25,7 @@ export default function HomePage() {
       <Hero />
       <OutletBand />
       <MeetJoumana />
-      <Capabilities />
+      <DisciplinesDeck items={servicesPage.disciplines} />
       <AcrossTheYears />
       <FeaturedArticles />
       <BroadcastStage />

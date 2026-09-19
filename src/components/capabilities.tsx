@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useReducedMotion } from "motion/react";
 import { servicesPage } from "@/lib/content";
 
@@ -13,10 +13,19 @@ import { servicesPage } from "@/lib/content";
  * so on, generic enough to belong to any site; the photographs already carry
  * the six on the services page, so this one stays typographic.
  *
- * Each card is a link into its own discipline on the services page, not to
- * the top of it: /services#podcasts opens the podcasts card in the deck there.
- * The reveal still happens on approach, so the card reads the same; the click
- * now goes somewhere useful instead of only pinning the reveal open.
+ * This grid and the card deck traded pages: it opened the home page and now
+ * closes the services page, with the deck on the home page in its place.
+ *
+ * So the card no longer links into a discipline on another page, because this
+ * is that page. The hover already gives you what the discipline is; the click
+ * takes you to the one thing left to do about it.
+ *
+ * It is also where the deck on the home page sends you. Each card there
+ * carries a View More that points at /services#branded-content and the like,
+ * and a reader who followed one came here to read that description, not to
+ * find the card and hover it. So a slug in the address pins that card open on
+ * arrival, which is the same thing the hover does, held until you reach for
+ * one yourself.
  */
 
 
@@ -57,14 +66,22 @@ function ArrowUpRight({ className = "" }: { className?: string }) {
  */
 function ServiceCard({
   title,
+  head,
   body,
   href,
   index,
+  slug,
+  pinned,
+  onReach,
 }: {
   title: string;
+  head: string;
   body: string;
   href: string;
   index: string;
+  slug: string;
+  pinned: boolean;
+  onReach: () => void;
 }) {
   const reduced = useReducedMotion();
   const card = useRef<HTMLAnchorElement>(null);
@@ -72,7 +89,7 @@ function ServiceCard({
   const [origin, setOrigin] = useState({ x: 50, y: 50 });
   const [lean, setLean] = useState({ x: 0, y: 0 });
 
-  const showing = open;
+  const showing = open || pinned;
   const EASE = "cubic-bezier(0.22, 1, 0.36, 1)";
 
   /** where the pointer is, as a percentage of the card */
@@ -101,7 +118,9 @@ function ServiceCard({
     <Link
       ref={card}
       href={href}
+      id={slug}
       onPointerEnter={(e) => {
+        onReach();
         setOrigin(at(e));
         setOpen(true);
       }}
@@ -111,11 +130,12 @@ function ServiceCard({
         rest();
       }}
       onFocus={() => {
+        onReach();
         setOrigin({ x: 50, y: 50 });
         setOpen(true);
       }}
       onBlur={rest}
-      className="relative block h-[228px] w-full overflow-hidden rounded-[24px] bg-card text-left will-change-transform xl:h-[252px]"
+      className="relative block h-[252px] w-full scroll-mt-[calc(var(--nav-h)+1rem)] overflow-hidden rounded-[24px] bg-card text-left will-change-transform xl:h-[256px]"
       style={{
         transform: reduced
           ? undefined
@@ -162,8 +182,13 @@ function ServiceCard({
           </span>
         </span>
 
-        <span className="font-display text-[28px] font-light uppercase leading-[1.04] tracking-[0.01em] text-card-heading xl:text-[38px]">
-          {title}
+        <span className="flex flex-col gap-2">
+          <span className="font-display text-[26px] font-light uppercase leading-[1.04] tracking-[0.01em] text-card-heading xl:text-[34px]">
+            {title}
+          </span>
+          <span className="text-[13px] leading-[1.35] text-card-body-soft xl:text-[15px]">
+            {head}
+          </span>
         </span>
       </span>
 
@@ -180,7 +205,7 @@ function ServiceCard({
           {title}
         </span>
         <span
-          className="text-[15px] leading-[1.45] xl:text-[17px]"
+          className="text-[14px] leading-[1.45] xl:text-[16px]"
           style={{
             opacity: showing ? 1 : 0,
             transform: showing || reduced ? "translateY(0)" : "translateY(18px)",
@@ -195,34 +220,67 @@ function ServiceCard({
 }
 
 export function Capabilities() {
+  /* the slug in the address, held open until the reader reaches for a card */
+  const [pinned, setPinned] = useState<string | null>(null);
+  const grid = useRef<HTMLUListElement>(null);
+
+  useEffect(() => {
+    const open = () => {
+      const slug = decodeURIComponent(window.location.hash.slice(1));
+      if (!slug) return;
+      const card = grid.current?.querySelector<HTMLElement>(`#${CSS.escape(slug)}`);
+      if (!card) return;
+      setPinned(slug);
+      /* the three across fit a screen, so bring the heading with them; the
+         column below lg does not, so bring the card itself */
+      const wide = window.matchMedia("(min-width: 1024px)").matches;
+      (wide ? card.closest("section") : card)?.scrollIntoView({
+        behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches
+          ? "auto"
+          : "smooth",
+        block: "start",
+      });
+    };
+    open();
+    window.addEventListener("hashchange", open);
+    return () => window.removeEventListener("hashchange", open);
+  }, []);
+
   return (
-    <section className="flex min-h-[100svh] items-center bg-page py-14 xl:py-20">
+    <section className="flex min-h-[100svh] scroll-mt-[var(--nav-h)] items-center bg-page py-12 xl:py-14">
       <div className="frame flex w-full flex-col items-center gap-7 xl:gap-9">
         <div className="flex flex-col items-center gap-4">
           <h2 className="t-section text-center text-heading">Services</h2>
-          <p className="max-w-[62ch] text-center text-[15px] leading-[1.5] text-body-soft xl:text-[18px]">
+          <p className="max-w-[76ch] text-center text-[15px] leading-[1.5] text-body-soft xl:text-[17px]">
             {servicesPage.hero.lede}
           </p>
         </div>
 
-        <ul className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-3">
+        <ul ref={grid} className="grid w-full gap-4 md:grid-cols-2 lg:grid-cols-3">
           {servicesPage.disciplines.map((d) => (
             <li key={d.label}>
               <ServiceCard
                 title={d.label}
+                head={d.head}
                 body={d.body[0]}
-                href={`/services#${d.slug}`}
+                href="/contact"
                 index={d.index}
+                slug={d.slug}
+                pinned={pinned === d.slug}
+                onReach={() => setPinned(null)}
               />
             </li>
           ))}
         </ul>
 
+        {/* it used to read View the Full Offering and point at this page.
+            The work is the next thing worth looking at from here; the contact
+            panel directly below already asks for the conversation. */}
         <Link
-          href="/services"
+          href="/work"
           className="inline-flex h-14 items-center justify-center gap-3 rounded-full bg-brown px-8 text-[15px] font-semibold text-white transition-opacity duration-300 hover:opacity-90 xl:h-16 xl:text-[18px]"
         >
-          View the Full Offering
+          See the Work
           <span aria-hidden="true">&rarr;</span>
         </Link>
       </div>

@@ -49,7 +49,6 @@ export type Deck = {
   head: string;
   body: readonly string[];
   includes: readonly string[];
-  cta: string;
   slug: string;
   image: string;
   alt: string;
@@ -83,10 +82,9 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
   const row = useRef<HTMLDivElement>(null);
   const hold = useRef<ReturnType<typeof setTimeout> | null>(null);
 
-  /* The home page links into a single discipline, /services#podcasts. Open
-     that one and bring the row to the top, rather than letting the browser
-     jump the card itself to the top of the window and leave the heading
-     above the fold. */
+  /* A link can name a single discipline, /#podcasts. Open that one and bring
+     the row to the top, rather than letting the browser jump the card itself
+     to the top of the window and leave the heading above the fold. */
   useEffect(() => {
     const open = () => {
       const slug = decodeURIComponent(window.location.hash.slice(1));
@@ -146,7 +144,7 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
       <div className="frame w-full">
         <div className="flex flex-col gap-6 lg:gap-[1.6vw]">
           <div className="flex flex-wrap items-baseline justify-between gap-4">
-            <h2 className="s-title text-white">What I Do Best</h2>
+            <h2 className="s-title text-white">Services</h2>
             <p className="s-card-meta text-white/65">
               {String(open + 1).padStart(2, "0")} / {String(items.length).padStart(2, "0")}
             </p>
@@ -269,12 +267,12 @@ export function DisciplinesDeck({ items }: { items: readonly Deck[] }) {
                         </span>,
                         <span key="cta" className="mt-4 block lg:mt-[1vw]">
                           <Link
-                            href="/contact"
+                            href={`/services#${d.slug}`}
                             tabIndex={isOpen ? 0 : -1}
                             onClick={(e) => e.stopPropagation()}
                             className="dk-cta group/pill inline-flex h-[40px] items-center gap-2.5 rounded-full bg-white px-5 text-oxblood transition-opacity duration-300 hover:opacity-90 lg:h-[2.4vw] lg:px-[1.2vw]"
                           >
-                            {d.cta}
+                            View More
                             <ArrowRight />
                           </Link>
                         </span>,

@@ -1,4 +1,22 @@
-import { site } from "@/lib/content";
+/**
+ * How long she has been doing this.
+ *
+ * Counted from the year she started rather than written down, because a
+ * written figure is only right until the end of December, and because four
+ * different ones were live on this site at once before it was tracked to a
+ * date: 13+ on the home page, nineteen on the work page, more than 15 in the
+ * services design and over 18 in her own introduction. Everything that states
+ * a figure now reads it from here, so the site can only ever say one number.
+ *
+ * The count is fixed when the site is built, so it steps forward on the first
+ * deploy of each new year.
+ *
+ * This lives here rather than in content.ts because content.ts reads it. The
+ * dependency has to point one way or the two modules import each other.
+ */
+
+/** Al Jazeera, the first newsroom, which is where the timeline opens. */
+export const CAREER_START = 2006;
 
 const WORDS: Record<number, string> = {
   10: "Ten", 11: "Eleven", 12: "Twelve", 13: "Thirteen", 14: "Fourteen",
@@ -9,19 +27,12 @@ const WORDS: Record<number, string> = {
   29: "Twenty nine", 30: "Thirty",
 };
 
-/**
- * How long she has been doing this, spelled out.
- *
- * Counted from the year she started rather than written down, because a
- * written figure is only right until the end of December. Three different
- * ones were live on this site at once before it was tracked to a date: 13+
- * on the home page, nineteen on the work page and more than 15 in the
- * services design.
- *
- * The count is fixed when the site is built, so it steps forward on the first
- * deploy of each new year.
- */
+export function yearsInDigits(): number {
+  return new Date().getFullYear() - CAREER_START;
+}
+
+/** Spelled out and capitalised: "Twenty". Lowercase it for running prose. */
 export function yearsIn(): string {
-  const n = new Date().getFullYear() - site.careerStart;
+  const n = yearsInDigits();
   return WORDS[n] ?? String(n);
 }

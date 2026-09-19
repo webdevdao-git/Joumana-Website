@@ -2,8 +2,9 @@ import Image from "next/image";
 import Link from "next/link";
 import type { Metadata } from "next";
 import { ContactPanel } from "@/components/contact-panel";
-import { DisciplinesDeck } from "@/components/disciplines-deck";
-import { ServicesInAction } from "@/components/services-in-action";
+import { BringReels } from "@/components/bring-reels";
+import { yearsIn } from "@/lib/years";
+import { Capabilities } from "@/components/capabilities";
 import { Reveal } from "@/components/reveal";
 import { BreadcrumbSchema } from "@/components/schema";
 import { servicesPage } from "@/lib/content";
@@ -23,8 +24,7 @@ import { servicesPage } from "@/lib/content";
  */
 export const metadata: Metadata = {
   title: { absolute: "Services | Content, Communications and Media in Dubai" },
-  description:
-    "Branded content, presenting and moderation, editorial, podcasts, media training and corporate communications, from a Dubai journalist of nineteen years.",
+  description: `Branded content, presenting and moderation, editorial, podcasts, media training and corporate communications, from a Dubai journalist of ${yearsIn().toLowerCase()} years.`,
   alternates: { canonical: "/services" },
   openGraph: {
     title: "Services | Joumana Saad, Dubai",
@@ -60,7 +60,7 @@ function Pill({
 
 
 export default function ServicesPage() {
-  const { hero, bring, approach, disciplines } = servicesPage;
+  const { hero, bring, approach } = servicesPage;
 
   return (
     <>
@@ -155,65 +155,46 @@ export default function ServicesPage() {
         </div>
       </section>
 
-      {/* ------------------------------------------------------- what I bring */}
-      <section className="bg-page py-12 xl:py-[3.4vw]">
-        <div className="frame flex flex-col items-center">
-          <Reveal>
-            <p className="s-script text-center text-white">{bring.script}</p>
-          </Reveal>
-
-          <Reveal delay={0.06}>
-            <h2 className="s-lead mt-3 max-w-[30ch] text-center text-white">
-              <span className="block">{bring.heading[0]}</span>
-              <span className="block">
-                {bring.heading[1]}{" "}
-                <b className="font-semibold">{bring.headingAccent}</b>
-              </span>
-            </h2>
-          </Reveal>
-
-          <div className="mt-10 grid w-full max-w-[1363px] items-end gap-10 lg:grid-cols-[644fr_639fr] xl:mt-[3vw] xl:gap-[5vw]">
-            {/* Two frames, as the design has them: a 600 by 808 plate of the
-                studio, and a 340 by 390 one of the morning papers riding over
-                its lower left corner, a quarter of its width outside it. Both
-                are black and white, so they read as one object rather than
-                two pictures.
-
-                The plate is sized by height rather than width so the section
-                can never grow taller than the screen. At the design's own
-                proportions it is 711 on a 1728 frame, which is 41.15vw; on a
-                short window the viewport cap takes over. 57svh is as far as it
-                goes and still leave the section inside one screen at 1440 by
-                820, which is the shortest window worth designing for. */}
-            <Reveal className="relative ml-auto w-fit">
-              <div className="relative aspect-[600/808] h-[min(41.15vw,57svh)]">
-                <Image
-                  src="/brand/bring-studio.webp"
-                  alt="A television studio set before recording"
-                  fill
-                  sizes="(max-width: 1024px) 80vw, 600px"
-                  className="object-cover"
-                />
-              </div>
-
-              <div className="absolute bottom-[22%] left-[-25%] h-[48%] w-[57%]">
-                <Image
-                  src="/brand/bring-news.webp"
-                  alt="A morning newspaper open on a desk"
-                  fill
-                  sizes="(max-width: 1024px) 45vw, 340px"
-                  className="object-cover"
-                />
-              </div>
+      {/* ------------------------------------------------------- what I bring
+          The phone holds the left column and everything that is words holds
+          the right, ranged left against it. The script and the heading used to
+          run centred across the whole section with only the paragraphs beside
+          the picture, which left the heading answering to nothing. */}
+      <section className="bg-page py-12 lg:flex lg:min-h-svh lg:items-center lg:py-[4vw]">
+        <div className="frame w-full">
+          {/* Both columns are sized by what is in them and the pair is centred,
+              rather than two proportional columns across the frame. Shares of
+              the frame left the phone floating in the middle of a wide column
+              with a gap of dead oxblood between it and the words; this keeps
+              them next to each other at any width. */}
+          <div className="grid items-center gap-10 lg:grid-cols-[auto_auto] lg:justify-center lg:gap-[clamp(2.5rem,4vw,5rem)]">
+            <Reveal>
+              <BringReels />
             </Reveal>
 
-            <Reveal delay={0.08} className="flex flex-col gap-6">
-              {bring.body.map((para) => (
-                <p key={para} className="s-body text-white">
-                  {para}
-                </p>
-              ))}
-            </Reveal>
+            <div className="flex flex-col lg:max-w-[52rem]">
+              <Reveal>
+                <p className="s-script text-white">{bring.script}</p>
+              </Reveal>
+
+              <Reveal delay={0.06}>
+                <h2 className="s-lead mt-4 text-white xl:mt-[1.4vw]">
+                  <span className="block">{bring.heading[0]}</span>
+                  <span className="block">
+                    {bring.heading[1]}{" "}
+                    <b className="font-semibold">{bring.headingAccent}</b>
+                  </span>
+                </h2>
+              </Reveal>
+
+              <Reveal delay={0.12} className="mt-7 flex flex-col gap-5 xl:mt-[2.2vw]">
+                {bring.body.map((para) => (
+                  <p key={para} className="s-body max-w-[52ch] text-white">
+                    {para}
+                  </p>
+                ))}
+              </Reveal>
+            </div>
           </div>
         </div>
       </section>
@@ -293,22 +274,12 @@ export default function ServicesPage() {
       </section>
 
       {/* ------------------------------------------------------ disciplines
-          Spacing read off the frame: a 1037 tall section, 100 of air top and
-          bottom, the label row at y100, the content at y270, a steady 40
-          between every block in the left column, content 1498 wide leaving
-          115 either side, and columns of 818 and 600 with 80 between.
-
-          The motion lives in DisciplinesDeck. */}
-      {/* The six were a pinned stack of full screen sections, one per
-          discipline. They are a deck now: one screen, six cards, the open one
-          holding most of the width. DisciplinesDeck carries the reasoning. */}
-      <DisciplinesDeck items={disciplines} />
+          The two services sections traded places: the deck that used to sit
+          here is on the home page now, and the card grid that used to be on
+          the home page is here. Capabilities carries the reasoning. */}
+      <Capabilities />
 
       {/* the design closes on Tell Me What You're Working On */}
-      {/* the six, then her doing them. White, so the run reads dark, light,
-          cream into the footer rather than two darks meeting. */}
-      <ServicesInAction />
-
       <ContactPanel />
     </>
   );
