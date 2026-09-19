@@ -58,23 +58,17 @@ function Row() {
   );
 }
 
-export function OutletBand({
-  heading = "Newsrooms and Boardrooms",
-}: {
-  heading?: string;
-}) {
+export function OutletBand() {
   return (
+    /* No heading over it. The marks say what they are, and the strip has to
+       stay thin: the Meet portrait below rides up into it, and every line
+       above the logos pushes the band down past her head. It is the section's
+       aria-label and the list underneath that name it now. */
     <section
       aria-label="Publications and organisations Joumana Saad has worked with"
-      className="relative overflow-hidden bg-band py-8 xl:py-10"
+      className="relative overflow-hidden bg-band py-6 xl:py-7"
     >
-      <div className="frame">
-        <h2 className="text-center text-[11px] font-semibold uppercase tracking-[0.22em] text-on-band/60 xl:text-[13px]">
-          {heading}
-        </h2>
-      </div>
-
-      <div className="mt-6 overflow-hidden xl:mt-7">
+      <div className="overflow-hidden">
         <Row />
       </div>
 
