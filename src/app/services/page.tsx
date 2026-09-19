@@ -3,6 +3,7 @@ import Link from "next/link";
 import type { Metadata } from "next";
 import { ContactPanel } from "@/components/contact-panel";
 import { DisciplinesDeck } from "@/components/disciplines-deck";
+import { ServicesInAction } from "@/components/services-in-action";
 import { Reveal } from "@/components/reveal";
 import { BreadcrumbSchema } from "@/components/schema";
 import { servicesPage } from "@/lib/content";
@@ -304,6 +305,10 @@ export default function ServicesPage() {
       <DisciplinesDeck items={disciplines} />
 
       {/* the design closes on Tell Me What You're Working On */}
+      {/* the six, then her doing them. White, so the run reads dark, light,
+          cream into the footer rather than two darks meeting. */}
+      <ServicesInAction />
+
       <ContactPanel />
     </>
   );

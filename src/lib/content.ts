@@ -812,6 +812,25 @@ export const servicesPage = {
     body: "Whether the goal is to shape a brand story, create meaningful content, prepare a spokesperson, or bring a conversation to life, each engagement starts with the audience, the message and the purpose behind it.",
   },
 
+  /**
+   * Four clips under the six disciplines, so the page ends on her doing the
+   * work rather than describing it.
+   *
+   * These play with sound. The same footage runs silent on the home page and
+   * on the work page, and on a services page the voice is a good part of what
+   * is being offered, so here it is the point rather than a decoration.
+   */
+  inAction: {
+    heading: "See It in Practice",
+    lede: "Four short pieces from the reel: to camera, on location, in studio, and in Arabic.",
+    clips: [
+      { slug: "reel-reality-check", shows: "Branded content, to camera" },
+      { slug: "reel-arabic", shows: "Presenting in Arabic" },
+      { slug: "reel-studio", shows: "In studio, with a crew" },
+      { slug: "reel-office", shows: "Presenting on location" },
+    ],
+  },
+
   /* Each carries a slug so the home page can send you to this one rather
      than to the top of the page. The services deck reads it off the hash. */
   disciplines: [
