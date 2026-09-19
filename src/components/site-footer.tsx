@@ -181,11 +181,13 @@ export function SiteFooter() {
         </div>
       </div>
 
-      {/* the brown bar the design closes on. Two lines rather than one now,
-          the copyright at the gutter and the credit opposite it; on a phone
-          they stack and the bar grows to hold them. */}
-      <div className="bg-brown">
-        <div className="frame flex flex-col items-center justify-between gap-1.5 py-4 text-[12px] leading-snug text-white/75 sm:h-[54px] sm:flex-row sm:gap-6 sm:py-0 sm:text-[13px] xl:text-[17px]">
+      {/* The bar the page closes on, in the cream the rest of the site bands
+          with rather than the design's brown, so the last line reads as part
+          of the same two colours and not a third. Two lines: the copyright at
+          the gutter and the credit opposite it; on a phone they stack and the
+          bar grows to hold them. */}
+      <div className="bg-cream">
+        <div className="frame flex flex-col items-center justify-between gap-1.5 py-4 text-[12px] leading-snug text-card-heading/80 sm:h-[54px] sm:flex-row sm:gap-6 sm:py-0 sm:text-[13px] xl:text-[17px]">
           <p>&copy; Copyright {new Date().getFullYear()} Joumana Saad Media</p>
           <p className="text-center sm:text-right">
             Designed and developed by{" "}
@@ -193,7 +195,7 @@ export function SiteFooter() {
               href="https://daomarketing.com"
               target="_blank"
               rel="noreferrer noopener"
-              className="inline-block py-1 underline-offset-4 transition-colors hover:text-white hover:underline"
+              className="inline-block py-1 underline-offset-4 transition-colors hover:text-card-heading hover:underline"
             >
               DAO Marketing Management LLC
             </a>
