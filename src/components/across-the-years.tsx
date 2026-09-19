@@ -38,7 +38,6 @@ const ROLES = [
     image: "/images/years/det.webp",
     alt: "A Dubai delegation meeting international partners",
     body: "Leading public relations and communications strategy across twenty markets in Asia, Africa, Europe, the United States and Latin America.",
-    cta: "View Work",
   },
   {
     year: "2016",
@@ -49,7 +48,6 @@ const ROLES = [
     image: "/images/years/dubai-chamber.webp",
     alt: "Joumana Saad speaking at a Dubai Chamber podium",
     body: "Developing and running the Chamber's public relations programme, media plans and press activity across the UAE and international markets.",
-    cta: "View Work",
   },
   {
     year: "2012",
@@ -60,7 +58,6 @@ const ROLES = [
     image: "/images/years/arn.webp",
     alt: "The Arabian Radio Network studio during a live broadcast",
     body: "Reporting across Dubai Eye 103.8, Dubai 92 and Virgin Radio, filing live from events and producing features for Business Breakfast and Drive Live.",
-    cta: "View Work",
   },
   {
     year: "2007",
@@ -71,7 +68,6 @@ const ROLES = [
     image: "/images/years/forbes.webp",
     alt: "Joumana Saad during her Forbes years in New York",
     body: "Running the magazine's video network day to day, assigning and producing multimedia stories, editing copy for Forbes.com and reporting on air.",
-    cta: "View Work",
   },
   {
     year: "2006",
@@ -84,7 +80,6 @@ const ROLES = [
     image: "/images/years/first-newsroom.webp",
     alt: "A television studio before a broadcast",
     body: "The first newsroom. A year inside an international broadcaster, before the move to Forbes in New York.",
-    cta: "View Work",
   },
 ] as const;
 
@@ -288,20 +283,6 @@ export function AcrossTheYears() {
                             {r.body}
                           </p>
 
-                          <div>
-                            <Link
-                              href="/work"
-                              className="inline-flex h-10 items-center justify-center gap-2.5 rounded-full bg-brown px-5 text-[12px] font-semibold text-white transition-colors duration-300 hover:bg-oxblood xl:h-11 xl:px-6 xl:text-[14px]"
-                            >
-                              {r.cta}
-                              <span
-                                aria-hidden="true"
-                                className="transition-transform duration-300 group-hover:translate-x-0.5"
-                              >
-                                &rarr;
-                              </span>
-                            </Link>
-                          </div>
                         </div>
 
                         {/* the picture, in the room the card was leaving empty.
@@ -324,6 +305,24 @@ export function AcrossTheYears() {
             </div>
           </div>
         </div>
+      </div>
+
+      {/* One way out, under the run. Every card carried the same button to the
+          same page, which is five presses of the same thing stacked down the
+          column and a lot of weight for a link that never changes. */}
+      <div className="frame mt-10 flex justify-center xl:mt-12">
+        <Link
+          href="/work"
+          className="group/cta inline-flex h-12 items-center justify-center gap-3 rounded-full bg-brown px-7 text-[14px] font-semibold text-white transition-colors duration-300 hover:bg-oxblood xl:h-14 xl:px-8 xl:text-[16px]"
+        >
+          View Work
+          <span
+            aria-hidden="true"
+            className="transition-transform duration-300 group-hover/cta:translate-x-1"
+          >
+            &rarr;
+          </span>
+        </Link>
       </div>
     </section>
   );
